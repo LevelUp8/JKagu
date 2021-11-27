@@ -1,0 +1,15 @@
+.root {
+    -fx-font-size: 12px;
+    -fx-font-family: sans-serif;
+}
+
+.header-section {
+    -fx-padding: 5px;
+}
+
+.content-section {
+}
+
+.menu-buttons {
+    -fx-text-fill: white
+}
