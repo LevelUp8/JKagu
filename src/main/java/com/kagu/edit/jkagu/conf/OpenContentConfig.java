@@ -2,7 +2,6 @@ package com.kagu.edit.jkagu.conf;
 
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
@@ -13,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.nio.file.Files;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Stream;
 
@@ -23,17 +23,20 @@ public class OpenContentConfig implements ComponentConf {
     private MenuItem openFile;
     private ListView<String> listView;
     private ObservableList<String> observableList;
+    private List<String> initialList;
 
     public OpenContentConfig(ProgressBar progressBar,
                              Label statusMessage,
                              MenuItem openFile,
                              ListView<String> listView,
-                             ObservableList<String> observableList) {
+                             ObservableList<String> observableList,
+                             List<String> initialList) {
         this.progressBar = progressBar;
         this.statusMessage = statusMessage;
         this.openFile = openFile;
         this.listView = listView;
         this.observableList = observableList;
+        this.initialList = initialList;
     }
 
     @Override
@@ -51,12 +54,12 @@ public class OpenContentConfig implements ComponentConf {
             File fileToLoad = fileChooser.showOpenDialog(null);
             //if file has been chosen, load it using asynchronous method (define later)
             if (fileToLoad != null) {
-                loadFileToTextArea(fileToLoad);
+                loadFile(fileToLoad);
             }
         });
     }
 
-    private void loadFileToTextArea(File fileToLoad) {
+    private void loadFile(File fileToLoad) {
         Task<Boolean> loadTask = fileLoaderTask(fileToLoad);
         progressBar.progressProperty().bind(loadTask.progressProperty());
         loadTask.run();
@@ -80,6 +83,7 @@ public class OpenContentConfig implements ComponentConf {
                 while ((line = reader.readLine()) != null) {
                     //totalFile.append(line);
                     //totalFile.append("\n");
+                    initialList.add(line);
                     observableList.add(line);
                     updateProgress(++linesLoaded, lineCount);
                 }

@@ -9,8 +9,8 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
 
-    public static final double APP_WIDTH = 1300;
-    public static final double APP_HEIGHT = 1000;
+    public static final double APP_WIDTH = 1200;
+    public static final double APP_HEIGHT = 900;
 
     public static final String APP_FXML_FILE_PATH = "hello-view.fxml";
     public static final String APP_CSS_FILE_PATH = "style.css";
@@ -26,7 +26,8 @@ public class HelloApplication extends Application {
 
 
         stage.setTitle(APP_TITLE);
-        stage.setResizable(false);
+        // stage.setResizable(false);
+        // stage.setMaximized(false);
         stage.setScene(scene);
         stage.show();
     }

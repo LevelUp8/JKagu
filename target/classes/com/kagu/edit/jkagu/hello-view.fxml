@@ -16,33 +16,39 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1298.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kagu.edit.jkagu.HelloController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kagu.edit.jkagu.HelloController">
    <children>
-      <VBox prefHeight="1000.0" prefWidth="1298.0" styleClass="root" stylesheets="@style.css">
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="900.0" prefWidth="1198.0" styleClass="root" stylesheets="@style.css">
          <children>
-            <VBox prefHeight="115.0" prefWidth="1298.0">
+            <VBox maxWidth="1.7976931348623157E308" prefHeight="115.0" prefWidth="1198.0">
                <children>
-                  <MenuBar>
-                    <menus>
-                      <Menu mnemonicParsing="false" text="File">
-                        <items>
-                            <MenuItem fx:id="openFile" text="Open" />
-                            <MenuItem fx:id="saveFile" text="Save" />
-                            <MenuItem text="Close" />
-                        </items>
-                      </Menu>
-                      <Menu mnemonicParsing="false" text="Edit">
-                        <items>
-                          <MenuItem mnemonicParsing="false" text="Delete" />
-                        </items>
-                      </Menu>
-                      <Menu mnemonicParsing="false" text="Help">
-                        <items>
-                          <MenuItem mnemonicParsing="false" text="About" />
-                        </items>
-                      </Menu>
-                    </menus>
-                  </MenuBar>
+                  <HBox prefHeight="25.0" prefWidth="1198.0">
+                     <children>
+                        <MenuBar prefHeight="25.0" prefWidth="1198.0" HBox.hgrow="ALWAYS">
+                          <menus>
+                            <Menu mnemonicParsing="false" text="File">
+                              <items>
+                                  <MenuItem fx:id="openFile" text="Open" />
+                                  <MenuItem fx:id="saveFile" text="Save" />
+                                  <MenuItem text="Close" />
+                              </items>
+                            </Menu>
+                            <Menu mnemonicParsing="false" text="Edit">
+                              <items>
+                                  <MenuItem fx:id="copyText" text="Copy" />
+                                  <MenuItem fx:id="pasteText" text="Paste" />
+                                  <MenuItem mnemonicParsing="false" text="Delete" />
+                              </items>
+                            </Menu>
+                            <Menu mnemonicParsing="false" text="Help">
+                              <items>
+                                <MenuItem mnemonicParsing="false" text="About" />
+                              </items>
+                            </Menu>
+                          </menus>
+                        </MenuBar>
+                     </children>
+                  </HBox>
                   <Pane prefHeight="104.0" prefWidth="1298.0">
                      <children>
                         <VBox layoutY="7.0" prefHeight="62.0" prefWidth="1298.0">
@@ -55,7 +61,12 @@
                                        </HBox.margin>
                                     </RadioButton>
                                     <RadioButton fx:id="useSelectedLines" mnemonicParsing="false" style="-fx-padding: 5px;" text="Select lines" />
-                                    <TextField fx:id="searchField" prefHeight="24.0" prefWidth="1034.0" />
+                                    <TextField fx:id="searchField" prefHeight="24.0" prefWidth="844.0" />
+                                    <Button fx:id="searchButton" mnemonicParsing="false" text="Search">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </Button>
                                  </children>
                               </HBox>
                               <HBox prefHeight="38.0" prefWidth="658.0">
@@ -70,14 +81,14 @@
                                           <Insets left="10.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <TextField fx:id="changeFrom" prefHeight="26.0" prefWidth="400.0" styleClass="header-section" />
+                                    <TextField fx:id="changeFrom" prefHeight="26.0" prefWidth="350.0" styleClass="header-section" />
                                     <Label styleClass="header-section" text="Change to:">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <TextField fx:id="changeTo" prefHeight="26.0" prefWidth="400.0" styleClass="header-section" />
-                                    <Button mnemonicParsing="false" text="Refactor">
+                                    <TextField fx:id="changeTo" prefHeight="26.0" prefWidth="350.0" styleClass="header-section" />
+                                    <Button fx:id="buttonRefactor" mnemonicParsing="false" text="Refactor">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>
@@ -92,9 +103,9 @@
                   </Pane>
                </children>
             </VBox>
-            <Pane prefHeight="890.0" prefWidth="1298.0">
+            <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="790.0" prefWidth="1198.0">
                <children>
-                  <ListView fx:id="listView" layoutX="4.0" layoutY="8.0" prefHeight="870.0" prefWidth="1291.0" />
+                  <ListView fx:id="listView" layoutX="4.0" layoutY="8.0" prefHeight="769.0" prefWidth="1191.0" />
                </children>
             </Pane>
          </children>
