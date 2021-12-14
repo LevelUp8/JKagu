@@ -20,7 +20,7 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(APP_FXML_FILE_PATH));
 
-        Scene scene = new Scene(fxmlLoader.load(), APP_WIDTH, APP_HEIGHT);
+        Scene scene = new Scene(fxmlLoader.load());
         String cssFile = this.getClass().getResource(APP_CSS_FILE_PATH).toString();
         scene.getStylesheets().add(cssFile);
 
