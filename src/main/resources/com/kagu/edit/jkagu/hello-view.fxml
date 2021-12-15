@@ -81,7 +81,7 @@
                                           <Insets left="10.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <TextField fx:id="changeFrom" prefHeight="26.0" styleClass="header-section" HBox.hgrow="ALWAYS" />
+                                    <TextField fx:id="changeFrom" minWidth="350.0" prefHeight="26.0" styleClass="header-section" HBox.hgrow="ALWAYS" />
                                     <Label styleClass="header-section" text="Change to:">
                                        <HBox.margin>
                                           <Insets left="10.0" />
