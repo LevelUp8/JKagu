@@ -1,6 +1,5 @@
 package com.kagu.edit.jkagu.conf;
 
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
@@ -11,11 +10,11 @@ import java.util.stream.Collectors;
 
 public class TemplateIncrementConfig implements ComponentConf {
 
-    private TextField templateValue;
-    private TextField initialValue;
-    private TextField increment;
-    private ObservableList<String> observableList;
-    private Button buttonRefactorTemplateInc;
+    private final TextField templateValue;
+    private final TextField initialValue;
+    private final TextField increment;
+    private final ObservableList<String> observableList;
+    private final Button buttonRefactorTemplateInc;
 
     public TemplateIncrementConfig(TextField templateValue,
                                    TextField initialValue,
@@ -33,27 +32,8 @@ public class TemplateIncrementConfig implements ComponentConf {
     @Override
     public void configure() {
 
-        // force the field to be numeric only
-        initialValue.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue,
-                                String newValue) {
-                if (!newValue.matches("\\d*")) {
-                    initialValue.setText(newValue.replaceAll("[^\\d]", ""));
-                }
-            }
-        });
-
-        // force the field to be numeric only
-        increment.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue,
-                                String newValue) {
-                if (!newValue.matches("\\d*")) {
-                    increment.setText(newValue.replaceAll("[^\\d]", ""));
-                }
-            }
-        });
+        setUpOnlyNumbersForTextField(initialValue);
+        setUpOnlyNumbersForTextField(increment);
 
         buttonRefactorTemplateInc.setOnAction(e -> {
 
@@ -77,6 +57,17 @@ public class TemplateIncrementConfig implements ComponentConf {
             observableList.addAll(replacedLinesList);
 
         });
+    }
+
+    private void setUpOnlyNumbersForTextField(final TextField numericTextField) {
+        // force the field to be numeric only
+        numericTextField.textProperty().addListener((ObservableValue<? extends String> o, String oldValue, String newValue) ->
+                {
+                    if (!newValue.matches("\\d*")) {
+                        numericTextField.setText(newValue.replaceAll("[^\\d]", ""));
+                    }
+                }
+        );
     }
 
     private String getString(IntegerContainer container, Integer increment, String l, String template) {

@@ -17,6 +17,7 @@ import java.util.ResourceBundle;
 
 public class HelloController implements Serializable, Initializable {
 
+    //-- Search functionality
     @FXML
     public RadioButton useWholeFile;
 
@@ -30,17 +31,48 @@ public class HelloController implements Serializable, Initializable {
     public TextField searchField;
 
     @FXML
+    public HBox searchBox;
+
+    @FXML
+    public MenuItem search;
+
+    //--- Search functionality from until
+    @FXML
+    public MenuItem searchMultiline;
+
+    @FXML
+    public HBox searchMultilineBox;
+
+    @FXML
+    public RadioButton useWholeFileMultiline;
+
+    @FXML
+    public RadioButton useSelectedLinesMultiline;
+
+    @FXML
+    public TextField searchFieldFrom;
+
+    @FXML
+    public TextField searchFieldUntil;
+
+    @FXML
+    public Button searchButtonMultiline;
+
+    //--- Information functionality
+    @FXML
     public ProgressBar progressBar;
 
     @FXML
     public Label statusMessage;
 
+    //--- File buttons
     @FXML
     public MenuItem openFile;
 
     @FXML
     public MenuItem saveFile;
 
+    //--- Edit buttons
     @FXML
     public MenuItem copyText;
 
@@ -56,9 +88,11 @@ public class HelloController implements Serializable, Initializable {
     @FXML
     public MenuItem templateCounter;
 
+    //--- text place
     @FXML
     public ListView<String> listView;
 
+    //--- replace functionality
     @FXML
     public ChoiceBox<String> replaceWhere;
 
@@ -74,6 +108,7 @@ public class HelloController implements Serializable, Initializable {
     @FXML
     public HBox findReplaceBox;
 
+    //--- placeholder increment functionality
     @FXML
     public HBox templateIncrementBox;
 
@@ -89,6 +124,8 @@ public class HelloController implements Serializable, Initializable {
     @FXML
     public Button buttonRefactorTemplateInc;
 
+
+
     // Use Java Collections to create the List.
     private final List<String> initialList = new ArrayList<>();
 
@@ -102,11 +139,24 @@ public class HelloController implements Serializable, Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
+        SwitchSearchConfig switchSearchConfig = new SwitchSearchConfig(searchBox, searchMultilineBox, search, searchMultiline);
+        switchSearchConfig.configure();
+
         SwitchReplaceTemplateConfig switchReplaceTemplateConfig = new SwitchReplaceTemplateConfig(findReplaceBox,
                                                                                                 templateIncrementBox,
                                                                                                 findAndReplace,
                                                                                                 templateCounter);
         switchReplaceTemplateConfig.configure();
+
+        FilterContentMultilineConfig filterContentMultilineConfig = new FilterContentMultilineConfig(useWholeFileMultiline,
+                                                                                                    useSelectedLinesMultiline,
+                                                                                                    searchButtonMultiline,
+                                                                                                    observableList,
+                                                                                                    initialList,
+                                                                                                    searchFieldFrom,
+                                                                                                    searchFieldUntil,
+                                                                                                    statusMessage);
+        filterContentMultilineConfig.configure();
 
 
         FilterContentConfig filterContentConfig = new FilterContentConfig(useWholeFile,

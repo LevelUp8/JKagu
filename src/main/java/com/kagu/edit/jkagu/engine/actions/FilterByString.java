@@ -2,7 +2,6 @@ package com.kagu.edit.jkagu.engine.actions;
 
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 
 import java.util.List;
 import java.util.stream.Collectors;

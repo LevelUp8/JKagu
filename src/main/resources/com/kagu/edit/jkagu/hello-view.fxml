@@ -39,6 +39,8 @@
                                   <MenuItem fx:id="undo" text="Undo" />
                                   <MenuItem fx:id="copyText" text="Copy" />
                                   <MenuItem fx:id="pasteText" text="Paste" />
+                                  <MenuItem fx:id="search" text="Search" />
+                                  <MenuItem fx:id="searchMultiline" text="Search from until" />
                                   <MenuItem fx:id="findAndReplace" text="Find and Replace" />
                                   <MenuItem fx:id="templateCounter" text="Template counter" />
                               </items>
@@ -56,22 +58,53 @@
                      <children>
                         <VBox layoutY="7.0" prefHeight="62.0" prefWidth="1198.0">
                            <children>
-                              <HBox prefHeight="38.0" prefWidth="658.0" VBox.vgrow="ALWAYS">
+                              <StackPane prefHeight="150.0" prefWidth="200.0">
                                  <children>
-                                    <RadioButton fx:id="useWholeFile" mnemonicParsing="false" style="-fx-padding: 5px;" text="Use All Lines">
-                                       <HBox.margin>
-                                          <Insets left="5.0" />
-                                       </HBox.margin>
-                                    </RadioButton>
-                                    <RadioButton fx:id="useSelectedLines" mnemonicParsing="false" style="-fx-padding: 5px;" text="Select lines" />
-                                    <TextField fx:id="searchField" minWidth="844.0" prefHeight="24.0" HBox.hgrow="ALWAYS" />
-                                    <Button fx:id="searchButton" mnemonicParsing="false" text="Search">
-                                       <HBox.margin>
-                                          <Insets left="20.0" right="10.0" />
-                                       </HBox.margin>
-                                    </Button>
+                                    <HBox  fx:id="searchMultilineBox" prefHeight="38.0" prefWidth="658.0">
+                                       <children>
+                                          <RadioButton fx:id="useWholeFileMultiline" mnemonicParsing="false" style="-fx-padding: 5px;" text="Use All Lines">
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin>
+                                          </RadioButton>
+                                          <RadioButton fx:id="useSelectedLinesMultiline" mnemonicParsing="false" style="-fx-padding: 5px;" text="Select lines" />
+                                          <Label styleClass="header-section" text="From:" />
+                                          <TextField fx:id="searchFieldFrom" minWidth="200.0" prefHeight="24.0" HBox.hgrow="ALWAYS">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="10.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                          <Label styleClass="header-section" text="Until:" />
+                                          <TextField fx:id="searchFieldUntil" minWidth="200.0" prefHeight="24.0" HBox.hgrow="ALWAYS">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                          <Button fx:id="searchButtonMultiline" mnemonicParsing="false" text="Search">
+                                             <HBox.margin>
+                                                <Insets left="20.0" right="10.0" />
+                                             </HBox.margin>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                    <HBox fx:id="searchBox" prefHeight="38.0" prefWidth="658.0">
+                                       <children>
+                                          <RadioButton fx:id="useWholeFile" mnemonicParsing="false" style="-fx-padding: 5px;" text="Use All Lines">
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin>
+                                          </RadioButton>
+                                          <RadioButton fx:id="useSelectedLines" mnemonicParsing="false" style="-fx-padding: 5px;" text="Select lines" />
+                                          <TextField fx:id="searchField" minWidth="844.0" prefHeight="24.0" HBox.hgrow="ALWAYS" />
+                                          <Button fx:id="searchButton" mnemonicParsing="false" text="Search">
+                                             <HBox.margin>
+                                                <Insets left="20.0" right="10.0" />
+                                             </HBox.margin>
+                                          </Button>
+                                       </children>
+                                    </HBox>
                                  </children>
-                              </HBox>
+                              </StackPane>
                               <StackPane prefHeight="150.0" prefWidth="200.0">
                                  <children>
                                     <HBox fx:id="templateIncrementBox" prefHeight="38.0" prefWidth="658.0">
