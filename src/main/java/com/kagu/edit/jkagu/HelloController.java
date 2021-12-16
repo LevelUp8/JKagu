@@ -9,7 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 
-import java.io.*;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -124,6 +124,11 @@ public class HelloController implements Serializable, Initializable {
     @FXML
     public Button buttonRefactorTemplateInc;
 
+    @FXML
+    public Label fromLabel;
+
+    @FXML
+    public Label untilLabel;
 
 
     // Use Java Collections to create the List.
@@ -137,35 +142,36 @@ public class HelloController implements Serializable, Initializable {
 
 
     @Override
-    public void initialize(URL location, ResourceBundle resources)
-    {
+    public void initialize(URL location, ResourceBundle resources) {
         SwitchSearchConfig switchSearchConfig = new SwitchSearchConfig(searchBox, searchMultilineBox, search, searchMultiline);
         switchSearchConfig.configure();
 
         SwitchReplaceTemplateConfig switchReplaceTemplateConfig = new SwitchReplaceTemplateConfig(findReplaceBox,
-                                                                                                templateIncrementBox,
-                                                                                                findAndReplace,
-                                                                                                templateCounter);
+                templateIncrementBox,
+                findAndReplace,
+                templateCounter);
         switchReplaceTemplateConfig.configure();
 
         FilterContentMultilineConfig filterContentMultilineConfig = new FilterContentMultilineConfig(useWholeFileMultiline,
-                                                                                                    useSelectedLinesMultiline,
-                                                                                                    searchButtonMultiline,
-                                                                                                    observableList,
-                                                                                                    initialList,
-                                                                                                    searchFieldFrom,
-                                                                                                    searchFieldUntil,
-                                                                                                    statusMessage);
+                useSelectedLinesMultiline,
+                searchButtonMultiline,
+                observableList,
+                initialList,
+                searchFieldFrom,
+                searchFieldUntil,
+                statusMessage,
+                fromLabel,
+                untilLabel);
         filterContentMultilineConfig.configure();
 
 
         FilterContentConfig filterContentConfig = new FilterContentConfig(useWholeFile,
-                                                                        useSelectedLines,
-                                                                        searchButton,
-                                                                        observableList,
-                                                                        initialList,
-                                                                        searchField,
-                                                                        statusMessage);
+                useSelectedLines,
+                searchButton,
+                observableList,
+                initialList,
+                searchField,
+                statusMessage);
         filterContentConfig.configure();
 
         OpenContentConfig openContentConfig = new OpenContentConfig(progressBar, statusMessage, openFile, listView, observableList, initialList);
@@ -190,6 +196,9 @@ public class HelloController implements Serializable, Initializable {
                 observableList,
                 buttonRefactorTemplateInc);
         templateIncrementConfig.configure();
+
+        UndoConfig undoConfig = new UndoConfig(undo);
+        undoConfig.configure();
     }
 
 

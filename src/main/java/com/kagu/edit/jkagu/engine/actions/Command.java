@@ -14,6 +14,7 @@ public abstract class Command {
     Command(ObservableList<String> observableList) {
         this.observableList = observableList;
         CommandHistory.push(this);
+        backup();
     }
 
     public void backup()
@@ -22,7 +23,7 @@ public abstract class Command {
     }
 
     public void undo() {
-        this.observableList.removeAll();
+        this.observableList.clear();
         this.observableList.setAll(backup);
     }
 

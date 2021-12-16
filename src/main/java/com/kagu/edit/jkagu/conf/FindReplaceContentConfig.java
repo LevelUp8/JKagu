@@ -67,6 +67,7 @@ public class FindReplaceContentConfig implements ComponentConf {
         replaceWhere.setItems(FXCollections.observableArrayList(st));
 
         replaceWhere.setValue(st[0]);
+        currentSelected = st[0];
         // add a listener
         replaceWhere.getSelectionModel().selectedIndexProperty().addListener((ov, value, newValue) ->
         {

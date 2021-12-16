@@ -19,6 +19,8 @@ public class FilterContentMultilineConfig implements ComponentConf {
     private TextField searchFieldFrom;
     private TextField searchFieldUntil;
     private Label statusMessage;
+    private Label fromLabel;
+    private Label untilLabel;
 
 
     public FilterContentMultilineConfig(RadioButton useWholeFile,
@@ -28,7 +30,9 @@ public class FilterContentMultilineConfig implements ComponentConf {
                                         List<String> initialList,
                                         TextField searchFieldFrom,
                                         TextField searchFieldUntil,
-                                        Label statusMessage) {
+                                        Label statusMessage,
+                                        Label fromLabel,
+                                        Label untilLabel) {
 
         useWholeFile.setToggleGroup(toggleGroup);
         useSelectedLines.setToggleGroup(toggleGroup);
@@ -39,6 +43,8 @@ public class FilterContentMultilineConfig implements ComponentConf {
         this.searchFieldUntil = searchFieldUntil;
         this.statusMessage = statusMessage;
         this.useWholeFile = useWholeFile;
+        this.fromLabel = fromLabel;
+        this.untilLabel = untilLabel;
     }
 
 
@@ -55,6 +61,8 @@ public class FilterContentMultilineConfig implements ComponentConf {
                         this.searchFieldFrom.setVisible(true);
                         this.searchFieldUntil.setVisible(true);
                         this.searchButton.setVisible(true);
+                        this.fromLabel.setVisible(true);
+                        this.untilLabel.setVisible(true);
                     }
                     else if("useWholeFileMultiline".equals(rb.getId()))
                     {
@@ -63,6 +71,8 @@ public class FilterContentMultilineConfig implements ComponentConf {
                         this.searchFieldUntil.clear();
                         this.searchFieldUntil.setVisible(false);
                         this.searchButton.setVisible(false);
+                        this.fromLabel.setVisible(false);
+                        this.untilLabel.setVisible(false);
                     }
                     else
                     {

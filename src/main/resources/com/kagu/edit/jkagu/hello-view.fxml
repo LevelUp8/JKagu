@@ -68,13 +68,13 @@
                                              </HBox.margin>
                                           </RadioButton>
                                           <RadioButton fx:id="useSelectedLinesMultiline" mnemonicParsing="false" style="-fx-padding: 5px;" text="Select lines" />
-                                          <Label styleClass="header-section" text="From:" />
+                                          <Label fx:id="fromLabel" styleClass="header-section" text="From:" />
                                           <TextField fx:id="searchFieldFrom" minWidth="200.0" prefHeight="24.0" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets left="10.0" right="10.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <Label styleClass="header-section" text="Until:" />
+                                          <Label fx:id="untilLabel" styleClass="header-section" text="Until:" />
                                           <TextField fx:id="searchFieldUntil" minWidth="200.0" prefHeight="24.0" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets left="10.0" />
