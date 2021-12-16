@@ -9,6 +9,7 @@ import java.util.List;
 
 public class FilterContentConfig implements ComponentConf {
 
+    private final RadioButton useWholeFile;
     private ToggleGroup toggleGroup = new ToggleGroup();
     private Button searchButton;
 
@@ -34,13 +35,34 @@ public class FilterContentConfig implements ComponentConf {
         this.initialList = initialList;
         this.searchField = searchField;
         this.statusMessage = statusMessage;
+        this.useWholeFile = useWholeFile;
     }
 
 
     @Override
     public void configure() {
         toggleGroup.selectedToggleProperty()
-                .addListener((observable, oldVal, newVal) -> System.out.println(newVal + " was selected"));
+                .addListener((observable, oldVal, newVal) -> {
+                    System.out.println(newVal + " was selected");
+
+                    Toggle t =  toggleGroup.getSelectedToggle();
+                    RadioButton rb = (RadioButton) t;
+                    if("useSelectedLines".equals(rb.getId()))
+                    {
+                        this.searchField.setVisible(true);
+                        this.searchButton.setVisible(true);
+                    }
+                    else if("useWholeFile".equals(rb.getId()))
+                    {
+                        this.searchField.clear();
+                        this.searchField.setVisible(false);
+                        this.searchButton.setVisible(false);
+                    }
+                    else
+                    {
+                        throw new UnsupportedOperationException("Not supported logic for: " + rb.getId());
+                    }
+                });
 
         this.searchButton.setOnAction(e -> {
             Toggle t =  toggleGroup.getSelectedToggle();
@@ -69,6 +91,9 @@ public class FilterContentConfig implements ComponentConf {
                 throw new UnsupportedOperationException("Not supported logic for: " + rb.getId());
             }
         });
+
+
+        toggleGroup.selectToggle(useWholeFile);
 
     }
 }

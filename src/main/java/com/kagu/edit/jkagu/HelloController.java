@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 
 import java.io.*;
 import java.net.URL;
@@ -47,6 +48,15 @@ public class HelloController implements Serializable, Initializable {
     public MenuItem pasteText;
 
     @FXML
+    public MenuItem undo;
+
+    @FXML
+    public MenuItem findAndReplace;
+
+    @FXML
+    public MenuItem templateCounter;
+
+    @FXML
     public ListView<String> listView;
 
     @FXML
@@ -61,20 +71,44 @@ public class HelloController implements Serializable, Initializable {
     @FXML
     public Button buttonRefactor;
 
+    @FXML
+    public HBox findReplaceBox;
+
+    @FXML
+    public HBox templateIncrementBox;
+
+    @FXML
+    public TextField templateValue;
+
+    @FXML
+    public TextField initialValue;
+
+    @FXML
+    public TextField increment;
+
+    @FXML
+    public Button buttonRefactorTemplateInc;
 
     // Use Java Collections to create the List.
-    private List<String> initialList = new ArrayList<>();
+    private final List<String> initialList = new ArrayList<>();
 
     // Use Java Collections to create the List.
-    private List<String> list = new ArrayList<>();
+    private final List<String> list = new ArrayList<>();
 
     // Now add observability by wrapping it with ObservableList.
-    private ObservableList<String> observableList = FXCollections.observableList(list);
+    private final ObservableList<String> observableList = FXCollections.observableList(list);
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
+        SwitchReplaceTemplateConfig switchReplaceTemplateConfig = new SwitchReplaceTemplateConfig(findReplaceBox,
+                                                                                                templateIncrementBox,
+                                                                                                findAndReplace,
+                                                                                                templateCounter);
+        switchReplaceTemplateConfig.configure();
+
+
         FilterContentConfig filterContentConfig = new FilterContentConfig(useWholeFile,
                                                                         useSelectedLines,
                                                                         searchButton,
@@ -98,6 +132,14 @@ public class HelloController implements Serializable, Initializable {
 
         FindReplaceContentConfig findReplaceContentConfig = new FindReplaceContentConfig(observableList, replaceWhere, changeFrom, changeTo, buttonRefactor);
         findReplaceContentConfig.configure();
+
+
+        TemplateIncrementConfig templateIncrementConfig = new TemplateIncrementConfig(templateValue,
+                initialValue,
+                increment,
+                observableList,
+                buttonRefactorTemplateInc);
+        templateIncrementConfig.configure();
     }
 
 
