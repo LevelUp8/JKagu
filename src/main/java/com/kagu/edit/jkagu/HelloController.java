@@ -82,6 +82,7 @@ public class HelloController implements Serializable, Initializable {
     @FXML
     public MenuItem undo;
 
+    //-- Tools button
     @FXML
     public MenuItem findAndReplace;
 
@@ -90,6 +91,13 @@ public class HelloController implements Serializable, Initializable {
 
     @FXML
     public MenuItem closeApp;
+
+    //-- View Button
+    @FXML
+    public MenuItem defaultTheme;
+
+    @FXML
+    public MenuItem darkTheme;
 
     //--- text place
     @FXML
@@ -205,6 +213,9 @@ public class HelloController implements Serializable, Initializable {
 
         CloseAppConfig closeAppConfig = new CloseAppConfig(closeApp);
         closeAppConfig.configure();
+
+        ViewThemeConfig viewThemeConfig = new ViewThemeConfig(defaultTheme, darkTheme);
+        viewThemeConfig.configure();
     }
 
 

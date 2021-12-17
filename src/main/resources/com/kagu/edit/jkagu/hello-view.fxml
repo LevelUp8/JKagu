@@ -39,12 +39,22 @@
                                   <MenuItem fx:id="undo" text="Undo" />
                                   <MenuItem fx:id="copyText" text="Copy" />
                                   <MenuItem fx:id="pasteText" text="Paste" />
-                                  <MenuItem fx:id="search" text="Search" />
-                                  <MenuItem fx:id="searchMultiline" text="Search from until" />
-                                  <MenuItem fx:id="findAndReplace" text="Find and Replace" />
-                                  <MenuItem fx:id="templateCounter" text="Template counter" />
                               </items>
                             </Menu>
+                             <Menu mnemonicParsing="false" text="Tools">
+                                <items>
+                                   <MenuItem fx:id="search" text="Search" />
+                                   <MenuItem fx:id="searchMultiline" text="Search from until" />
+                                   <MenuItem fx:id="findAndReplace" text="Find and Replace" />
+                                   <MenuItem fx:id="templateCounter" text="Template counter" />
+                                </items>
+                             </Menu>
+                             <Menu mnemonicParsing="false" text="View">
+                                <items>
+                                   <MenuItem fx:id="defaultTheme" text="Default Theme" />
+                                   <MenuItem fx:id="darkTheme" text="Dark Theme" />
+                                </items>
+                             </Menu>
                             <Menu mnemonicParsing="false" text="Help">
                               <items>
                                 <MenuItem mnemonicParsing="false" text="About" />
