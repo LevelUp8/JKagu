@@ -3,6 +3,7 @@ package com.kagu.edit.jkagu;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -29,6 +30,7 @@ public class HelloApplication extends Application {
         // stage.setResizable(false);
         // stage.setMaximized(false);
         stage.setScene(scene);
+        stage.getIcons().add(new Image(HelloApplication.class.getResourceAsStream("icon.png")));
         stage.show();
     }
 
