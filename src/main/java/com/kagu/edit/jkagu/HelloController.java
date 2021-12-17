@@ -88,6 +88,9 @@ public class HelloController implements Serializable, Initializable {
     @FXML
     public MenuItem templateCounter;
 
+    @FXML
+    public MenuItem closeApp;
+
     //--- text place
     @FXML
     public ListView<String> listView;
@@ -199,6 +202,9 @@ public class HelloController implements Serializable, Initializable {
 
         UndoConfig undoConfig = new UndoConfig(undo);
         undoConfig.configure();
+
+        CloseAppConfig closeAppConfig = new CloseAppConfig(closeApp);
+        closeAppConfig.configure();
     }
 
 

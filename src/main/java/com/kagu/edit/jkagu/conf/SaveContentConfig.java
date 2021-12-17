@@ -2,6 +2,7 @@ package com.kagu.edit.jkagu.conf;
 
 import javafx.collections.ObservableList;
 import javafx.scene.control.MenuItem;
+import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -23,15 +24,32 @@ public class SaveContentConfig implements ComponentConf {
     public void configure() {
         this.saveFile.setOnAction((e) ->
         {
-            try {
-                File file = new File(System.getProperty("user.home") + "/out.txt");
-                FileWriter myWriter = new FileWriter(file);
-                myWriter.write(observableList.stream().collect(Collectors.joining("\n")));
-                myWriter.close();
-            } catch (IOException err) {
-                err.printStackTrace();
+            FileChooser fileChooser = new FileChooser();
+            //only allow text files to be selected using chooser
+            fileChooser.getExtensionFilters().add(
+                    new FileChooser.ExtensionFilter("Text files (*.txt)", "*.txt")
+            );
+            //set initial directory somewhere user will recognise
+            fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+            //let user select file
+            File file = fileChooser.showSaveDialog(null);
+
+            String text = observableList.stream().collect(Collectors.joining("\n"));
+            if (file != null) {
+                saveTextToFile(text, file);
             }
         });
     }
+
+    private void saveTextToFile(String content, File file) {
+        try {
+            FileWriter myWriter = new FileWriter(file);
+            myWriter.write(content);
+            myWriter.close();
+        } catch (IOException err) {
+            err.printStackTrace();
+        }
+    }
+
 
 }

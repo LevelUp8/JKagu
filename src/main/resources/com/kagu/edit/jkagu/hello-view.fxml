@@ -31,7 +31,7 @@
                               <items>
                                   <MenuItem fx:id="openFile" text="Open" />
                                   <MenuItem fx:id="saveFile" text="Save" />
-                                  <MenuItem text="Close" />
+                                  <MenuItem fx:id="closeApp" text="Close" />
                               </items>
                             </Menu>
                             <Menu mnemonicParsing="false" text="Edit">
