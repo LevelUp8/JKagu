@@ -28,12 +28,13 @@ public class CopyContentConfig implements  ComponentConf{
     public void configure() {
         copyText.setOnAction( e -> {
 
-            System.out.println("Copy");
             final Clipboard clipboard = Clipboard.getSystemClipboard();
             final ClipboardContent content = new ClipboardContent();
             String text = observableList.stream().collect(Collectors.joining(System.lineSeparator()));
             content.putString(text);
             clipboard.setContent(content);
+
+            this.statusMessage.setText("Visible Content copied!");
 
         });
     }

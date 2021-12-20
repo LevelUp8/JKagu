@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.util.HashMap;
@@ -29,21 +30,22 @@ public class FindReplaceContentConfig implements ComponentConf {
     private Button buttonRefactor;
     private ObservableList<String> observableList;
     private String currentSelected;
+    private Label statusMessage = null;
 
     private Map<String, BiFunction<String, String, Boolean>> selectionActionMap = new HashMap<>();
     {
         selectionActionMap.put(ALL_OCCURRENCES, (target, replacement) -> {
-            ReplaceAll replace = new ReplaceAll(this.observableList, target, replacement);
+            ReplaceAll replace = new ReplaceAll(this.observableList, target, replacement, statusMessage);
             return replace.execute();
         });
 
         selectionActionMap.put(FIRST_OCCURRENCE, (target, replacement) -> {
-            ReplaceFirst replace = new ReplaceFirst(this.observableList, target, replacement);
+            ReplaceFirst replace = new ReplaceFirst(this.observableList, target, replacement, statusMessage);
             return replace.execute();
         });
 
         selectionActionMap.put(LAST_OCCURRENCE, (target, replacement) -> {
-            ReplaceLast replace = new ReplaceLast(this.observableList, target, replacement);
+            ReplaceLast replace = new ReplaceLast(this.observableList, target, replacement, statusMessage);
             return replace.execute();
         });
     }
@@ -53,13 +55,15 @@ public class FindReplaceContentConfig implements ComponentConf {
                                     ChoiceBox<String> replaceWhere,
                                     TextField changeFrom,
                                     TextField changeTo,
-                                    Button buttonRefactor)
+                                    Button buttonRefactor,
+                                    Label statusMessage)
     {
         this.replaceWhere = replaceWhere;
         this.changeFrom = changeFrom;
         this.changeTo = changeTo;
         this.buttonRefactor = buttonRefactor;
         this.observableList = observableList;
+        this.statusMessage = statusMessage;
     }
 
     @Override

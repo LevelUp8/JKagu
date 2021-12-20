@@ -20,7 +20,7 @@ public class RestoreAllText extends Command {
     public boolean execute() {
         observableList.clear();
         observableList.addAll(this.initialList);
-        this.statusMessage.setText("Initial text loaded!");
+        statusMessage.setText("Initial text loaded!");
         return true;
     }
 }

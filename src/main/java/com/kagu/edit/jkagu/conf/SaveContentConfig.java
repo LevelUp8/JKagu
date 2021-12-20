@@ -1,6 +1,7 @@
 package com.kagu.edit.jkagu.conf;
 
 import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.stage.FileChooser;
 
@@ -13,11 +14,13 @@ public class SaveContentConfig implements ComponentConf {
 
     private ObservableList<String> observableList;
     private MenuItem saveFile;
+    private Label statusMessage;
 
-    public SaveContentConfig(ObservableList<String> observableList, MenuItem saveFile)
+    public SaveContentConfig(ObservableList<String> observableList, MenuItem saveFile, Label statusMessage)
     {
         this.observableList = observableList;
         this.saveFile = saveFile;
+        this.statusMessage = statusMessage;
     }
 
     @Override
@@ -38,6 +41,10 @@ public class SaveContentConfig implements ComponentConf {
             if (file != null) {
                 saveTextToFile(text, file);
             }
+            else
+            {
+                statusMessage.setText("Text is empty! There is nothing for saving");
+            }
         });
     }
 
@@ -46,8 +53,10 @@ public class SaveContentConfig implements ComponentConf {
             FileWriter myWriter = new FileWriter(file);
             myWriter.write(content);
             myWriter.close();
+            statusMessage.setText("Text successfully saved!");
         } catch (IOException err) {
             err.printStackTrace();
+            statusMessage.setText("Internal error while saving");
         }
     }
 

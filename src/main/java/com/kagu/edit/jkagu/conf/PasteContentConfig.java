@@ -32,8 +32,6 @@ public class PasteContentConfig implements  ComponentConf{
     @Override
     public void configure() {
         pasteText.setOnAction( e -> {
-
-            System.out.println("Paste");
             final Clipboard clipboard = Clipboard.getSystemClipboard();
             final String text = clipboard.getString();
 
@@ -47,6 +45,8 @@ public class PasteContentConfig implements  ComponentConf{
             }
 
             listView.setItems(observableList);
+
+            statusMessage.setText("Paste successfully done!");
         });
     }
 

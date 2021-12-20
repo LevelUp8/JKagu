@@ -24,7 +24,7 @@ public class FilterByString extends Command {
                                             .collect(Collectors.toList());
         observableList.clear();
         observableList.addAll(filteredList);
-        statusMessage.setText("Performing search");
+        statusMessage.setText("Performing search by string");
         return true;
     }
 }

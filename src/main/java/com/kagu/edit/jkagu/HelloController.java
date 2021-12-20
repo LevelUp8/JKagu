@@ -154,13 +154,14 @@ public class HelloController implements Serializable, Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        SwitchSearchConfig switchSearchConfig = new SwitchSearchConfig(searchBox, searchMultilineBox, search, searchMultiline);
+        SwitchSearchConfig switchSearchConfig = new SwitchSearchConfig(searchBox, searchMultilineBox, search, searchMultiline, statusMessage);
         switchSearchConfig.configure();
 
         SwitchReplaceTemplateConfig switchReplaceTemplateConfig = new SwitchReplaceTemplateConfig(findReplaceBox,
                 templateIncrementBox,
                 findAndReplace,
-                templateCounter);
+                templateCounter,
+                statusMessage);
         switchReplaceTemplateConfig.configure();
 
         FilterContentMultilineConfig filterContentMultilineConfig = new FilterContentMultilineConfig(useWholeFileMultiline,
@@ -188,7 +189,7 @@ public class HelloController implements Serializable, Initializable {
         OpenContentConfig openContentConfig = new OpenContentConfig(progressBar, statusMessage, openFile, listView, observableList, initialList);
         openContentConfig.configure();
 
-        SaveContentConfig saveContentConfig = new SaveContentConfig(observableList, saveFile);
+        SaveContentConfig saveContentConfig = new SaveContentConfig(observableList, saveFile, statusMessage);
         saveContentConfig.configure();
 
         PasteContentConfig pasteContentConfig = new PasteContentConfig(pasteText, observableList, statusMessage, initialList, listView);
@@ -197,7 +198,7 @@ public class HelloController implements Serializable, Initializable {
         CopyContentConfig copyContentConfig = new CopyContentConfig(copyText, observableList, statusMessage);
         copyContentConfig.configure();
 
-        FindReplaceContentConfig findReplaceContentConfig = new FindReplaceContentConfig(observableList, replaceWhere, changeFrom, changeTo, buttonRefactor);
+        FindReplaceContentConfig findReplaceContentConfig = new FindReplaceContentConfig(observableList, replaceWhere, changeFrom, changeTo, buttonRefactor, statusMessage);
         findReplaceContentConfig.configure();
 
 
@@ -205,16 +206,17 @@ public class HelloController implements Serializable, Initializable {
                 initialValue,
                 increment,
                 observableList,
-                buttonRefactorTemplateInc);
+                buttonRefactorTemplateInc,
+                statusMessage);
         templateIncrementConfig.configure();
 
-        UndoConfig undoConfig = new UndoConfig(undo);
+        UndoConfig undoConfig = new UndoConfig(undo, statusMessage);
         undoConfig.configure();
 
         CloseAppConfig closeAppConfig = new CloseAppConfig(closeApp);
         closeAppConfig.configure();
 
-        ViewThemeConfig viewThemeConfig = new ViewThemeConfig(defaultTheme, darkTheme);
+        ViewThemeConfig viewThemeConfig = new ViewThemeConfig(defaultTheme, darkTheme, statusMessage);
         viewThemeConfig.configure();
     }
 

@@ -2,6 +2,7 @@ package com.kagu.edit.jkagu.engine.actions;
 
 import com.kagu.edit.jkagu.Utils;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
 
 import java.util.List;
 
@@ -9,11 +10,13 @@ public class ReplaceLast extends Command {
 
     private String target;
     private String replacement;
+    private Label statusMessage;
 
-    public ReplaceLast(ObservableList<String> observableList, String target, String replacement) {
+    public ReplaceLast(ObservableList<String> observableList, String target, String replacement, Label statusMessage) {
         super(observableList);
         this.target = target;
         this.replacement = replacement;
+        this.statusMessage = statusMessage;
     }
 
     @Override
@@ -27,6 +30,7 @@ public class ReplaceLast extends Command {
 
         observableList.clear();
         observableList.addAll(replaced);
+        statusMessage.setText("Replace last occurrence of element on every row executed!");
         return true;
     }
 

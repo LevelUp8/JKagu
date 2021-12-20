@@ -3,6 +3,7 @@ package com.kagu.edit.jkagu.conf;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.util.List;
@@ -15,18 +16,21 @@ public class TemplateIncrementConfig implements ComponentConf {
     private final TextField increment;
     private final ObservableList<String> observableList;
     private final Button buttonRefactorTemplateInc;
+    private final Label statusMessage;
 
     public TemplateIncrementConfig(TextField templateValue,
                                    TextField initialValue,
                                    TextField increment,
                                    ObservableList<String> observableList,
-                                   Button buttonRefactorTemplateInc)
+                                   Button buttonRefactorTemplateInc,
+                                   Label statusMessage)
     {
         this.templateValue = templateValue;
         this.initialValue = initialValue;
         this.increment = increment;
         this.observableList = observableList;
         this.buttonRefactorTemplateInc = buttonRefactorTemplateInc;
+        this.statusMessage = statusMessage;
     }
 
     @Override
@@ -55,7 +59,7 @@ public class TemplateIncrementConfig implements ComponentConf {
 
             observableList.clear();
             observableList.addAll(replacedLinesList);
-
+            statusMessage.setText("Template string is replaced by incremented number!");
         });
     }
 
