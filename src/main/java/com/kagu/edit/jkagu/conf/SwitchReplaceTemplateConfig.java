@@ -4,26 +4,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.HBox;
 
-public class SwitchReplaceTemplateConfig implements ComponentConf {
-
-    private final HBox findReplaceBox;
-    private final HBox templateIncrementBox;
-    private final MenuItem findAndReplace;
-    private final MenuItem templateCounter;
-    private final Label statusMessage;
-
-    public SwitchReplaceTemplateConfig(HBox findReplaceBox,
-                                       HBox templateIncrementBox,
-                                       MenuItem findAndReplace,
-                                       MenuItem templateCounter,
-                                       Label statusMessage)
-    {
-        this.findReplaceBox = findReplaceBox;
-        this.templateIncrementBox = templateIncrementBox;
-        this.findAndReplace = findAndReplace;
-        this.templateCounter = templateCounter;
-        this.statusMessage = statusMessage;
-    }
+public record SwitchReplaceTemplateConfig(HBox findReplaceBox,
+                                          HBox templateIncrementBox,
+                                          MenuItem findAndReplace,
+                                          MenuItem templateCounter,
+                                          Label statusMessage) implements ComponentConf {
 
     @Override
     public void configure() {

@@ -10,14 +10,14 @@ import java.util.List;
 public class FilterContentConfig implements ComponentConf {
 
     private final RadioButton useWholeFile;
-    private ToggleGroup toggleGroup = new ToggleGroup();
-    private Button searchButton;
+    private final ToggleGroup toggleGroup = new ToggleGroup();
+    private final Button searchButton;
 
-    private ObservableList<String> observableList;
-    private List<String> initialList;
-    private TextField searchField;
+    private final ObservableList<String> observableList;
+    private final List<String> initialList;
+    private final TextField searchField;
 
-    private Label statusMessage;
+    private final Label statusMessage;
 
 
     public FilterContentConfig(RadioButton useWholeFile,

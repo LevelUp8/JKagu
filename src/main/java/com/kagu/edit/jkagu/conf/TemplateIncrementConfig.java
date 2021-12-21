@@ -9,29 +9,12 @@ import javafx.scene.control.TextField;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TemplateIncrementConfig implements ComponentConf {
-
-    private final TextField templateValue;
-    private final TextField initialValue;
-    private final TextField increment;
-    private final ObservableList<String> observableList;
-    private final Button buttonRefactorTemplateInc;
-    private final Label statusMessage;
-
-    public TemplateIncrementConfig(TextField templateValue,
-                                   TextField initialValue,
-                                   TextField increment,
-                                   ObservableList<String> observableList,
-                                   Button buttonRefactorTemplateInc,
-                                   Label statusMessage)
-    {
-        this.templateValue = templateValue;
-        this.initialValue = initialValue;
-        this.increment = increment;
-        this.observableList = observableList;
-        this.buttonRefactorTemplateInc = buttonRefactorTemplateInc;
-        this.statusMessage = statusMessage;
-    }
+public record TemplateIncrementConfig(TextField templateValue,
+                                      TextField initialValue,
+                                      TextField increment,
+                                      ObservableList<String> observableList,
+                                      Button buttonRefactorTemplateInc,
+                                      Label statusMessage) implements ComponentConf {
 
     @Override
     public void configure() {
@@ -76,8 +59,7 @@ public class TemplateIncrementConfig implements ComponentConf {
 
     private String getString(IntegerContainer container, Integer increment, String l, String template) {
         int index = l.indexOf(template);
-        if(index != -1)
-        {
+        if (index != -1) {
             String firstPart = l.substring(0, index);
             String lastPart = l.substring(index + template.length());
             StringBuilder sb = new StringBuilder(firstPart);
@@ -86,9 +68,7 @@ public class TemplateIncrementConfig implements ComponentConf {
             sb.append(lastPart);
 
             return getString(container, increment, sb.toString(), template);
-        }
-        else
-        {
+        } else {
             return l;
         }
     }

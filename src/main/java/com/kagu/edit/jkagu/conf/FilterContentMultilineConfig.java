@@ -1,7 +1,6 @@
 package com.kagu.edit.jkagu.conf;
 
 import com.kagu.edit.jkagu.engine.actions.FilterByFromUntilString;
-import com.kagu.edit.jkagu.engine.actions.FilterByString;
 import com.kagu.edit.jkagu.engine.actions.RestoreAllText;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
@@ -11,16 +10,16 @@ import java.util.List;
 public class FilterContentMultilineConfig implements ComponentConf {
 
     private final RadioButton useWholeFile;
-    private ToggleGroup toggleGroup = new ToggleGroup();
-    private Button searchButton;
 
-    private ObservableList<String> observableList;
-    private List<String> initialList;
-    private TextField searchFieldFrom;
-    private TextField searchFieldUntil;
-    private Label statusMessage;
-    private Label fromLabel;
-    private Label untilLabel;
+    private final ToggleGroup toggleGroup = new ToggleGroup();
+    private final Button searchButton;
+    private final ObservableList<String> observableList;
+    private final List<String> initialList;
+    private final TextField searchFieldFrom;
+    private final TextField searchFieldUntil;
+    private final Label statusMessage;
+    private final Label fromLabel;
+    private final Label untilLabel;
 
 
     public FilterContentMultilineConfig(RadioButton useWholeFile,

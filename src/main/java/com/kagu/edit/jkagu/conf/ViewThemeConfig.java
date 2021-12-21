@@ -5,18 +5,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 
-public class ViewThemeConfig implements ComponentConf {
-
-    private MenuItem defaultTheme;
-    private MenuItem darkTheme;
-    private Label statusMessage;
-
-    public ViewThemeConfig(MenuItem defaultTheme, MenuItem darkTheme, Label statusMessage)
-    {
-        this.defaultTheme = defaultTheme;
-        this.darkTheme = darkTheme;
-        this.statusMessage = statusMessage;
-    }
+public record ViewThemeConfig(MenuItem defaultTheme, MenuItem darkTheme,
+                              Label statusMessage) implements ComponentConf {
 
     @Override
     public void configure() {

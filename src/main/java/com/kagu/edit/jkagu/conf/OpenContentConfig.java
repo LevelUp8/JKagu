@@ -16,28 +16,11 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Stream;
 
-public class OpenContentConfig implements ComponentConf {
-
-    private ProgressBar progressBar;
-    private Label statusMessage;
-    private MenuItem openFile;
-    private ListView<String> listView;
-    private ObservableList<String> observableList;
-    private List<String> initialList;
-
-    public OpenContentConfig(ProgressBar progressBar,
-                             Label statusMessage,
-                             MenuItem openFile,
-                             ListView<String> listView,
-                             ObservableList<String> observableList,
-                             List<String> initialList) {
-        this.progressBar = progressBar;
-        this.statusMessage = statusMessage;
-        this.openFile = openFile;
-        this.listView = listView;
-        this.observableList = observableList;
-        this.initialList = initialList;
-    }
+public record OpenContentConfig(ProgressBar progressBar, Label statusMessage,
+                                MenuItem openFile,
+                                ListView<String> listView,
+                                ObservableList<String> observableList,
+                                List<String> initialList) implements ComponentConf {
 
     @Override
     public void configure() {
@@ -93,13 +76,12 @@ public class OpenContentConfig implements ComponentConf {
         //If successful, update the text area, display a success message and store the loaded file reference
         loadFileTask.setOnSucceeded(workerStateEvent -> {
             try {
-                if(loadFileTask.get())
-                {
+                if (loadFileTask.get()) {
                     listView.setItems(observableList);
                 }
 
                 statusMessage.setText("File loaded: " + fileToLoad.getName());
-            } catch (InterruptedException  | ExecutionException e) {
+            } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
                 statusMessage.setText("Error!! ");
                 // listView.setText("Could not load file from:\n " + fileToLoad.getAbsolutePath());

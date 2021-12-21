@@ -10,18 +10,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
-public class SaveContentConfig implements ComponentConf {
-
-    private ObservableList<String> observableList;
-    private MenuItem saveFile;
-    private Label statusMessage;
-
-    public SaveContentConfig(ObservableList<String> observableList, MenuItem saveFile, Label statusMessage)
-    {
-        this.observableList = observableList;
-        this.saveFile = saveFile;
-        this.statusMessage = statusMessage;
-    }
+public record SaveContentConfig(ObservableList<String> observableList,
+                                MenuItem saveFile,
+                                Label statusMessage) implements ComponentConf {
 
     @Override
     public void configure() {
@@ -40,9 +31,7 @@ public class SaveContentConfig implements ComponentConf {
             String text = observableList.stream().collect(Collectors.joining("\n"));
             if (file != null) {
                 saveTextToFile(text, file);
-            }
-            else
-            {
+            } else {
                 statusMessage.setText("Text is empty! There is nothing for saving");
             }
         });

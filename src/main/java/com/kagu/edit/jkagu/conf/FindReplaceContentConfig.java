@@ -22,12 +22,13 @@ public class FindReplaceContentConfig implements ComponentConf {
     public static final String FIRST_OCCURRENCE = "First occurrence";
     public static final String LAST_OCCURRENCE = "Last occurrence";
     // string array
-    String st[] = {ALL_OCCURRENCES, FIRST_OCCURRENCE, LAST_OCCURRENCE};
+    private static final String st[] = {ALL_OCCURRENCES, FIRST_OCCURRENCE, LAST_OCCURRENCE};
 
-    private ChoiceBox<String> replaceWhere;
-    private TextField changeFrom;
-    private TextField changeTo;
-    private Button buttonRefactor;
+    private final ChoiceBox<String> replaceWhere;
+    private final TextField changeFrom;
+    private final TextField changeTo;
+    private final Button buttonRefactor;
+
     private ObservableList<String> observableList;
     private String currentSelected;
     private Label statusMessage = null;

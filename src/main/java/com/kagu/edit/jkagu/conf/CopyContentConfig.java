@@ -8,25 +8,14 @@ import javafx.scene.input.ClipboardContent;
 
 import java.util.stream.Collectors;
 
-public class CopyContentConfig implements  ComponentConf{
+public record CopyContentConfig(MenuItem copyText,
+                                ObservableList<String> observableList,
+                                Label statusMessage) implements ComponentConf {
 
-
-    private MenuItem copyText;
-    private ObservableList<String> observableList;
-    private Label statusMessage;
-
-    public CopyContentConfig(MenuItem copyText,
-                             ObservableList<String> observableList,
-                             Label statusMessage) {
-
-        this.copyText = copyText;
-        this.observableList = observableList;
-        this.statusMessage = statusMessage;
-    }
 
     @Override
     public void configure() {
-        copyText.setOnAction( e -> {
+        copyText.setOnAction(e -> {
 
             final Clipboard clipboard = Clipboard.getSystemClipboard();
             final ClipboardContent content = new ClipboardContent();

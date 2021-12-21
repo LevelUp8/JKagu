@@ -4,26 +4,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.HBox;
 
-public class SwitchSearchConfig implements ComponentConf {
-
-    private final HBox searchMultilineBox;
-    private final HBox searchBox;
-    private final MenuItem search;
-    private final MenuItem searchMultiline;
-    private final Label statusMessage;
-
-    public SwitchSearchConfig(HBox searchBox,
-                              HBox searchMultilineBox,
-                              MenuItem search,
-                              MenuItem searchMultiline,
-                              Label statusMessage)
-    {
-        this.searchBox = searchBox;
-        this.searchMultilineBox = searchMultilineBox;
-        this.search = search;
-        this.searchMultiline = searchMultiline;
-        this.statusMessage = statusMessage;
-    }
+public record SwitchSearchConfig(HBox searchBox, HBox searchMultilineBox,
+                                 MenuItem search, MenuItem searchMultiline,
+                                 Label statusMessage) implements ComponentConf {
 
     @Override
     public void configure() {
