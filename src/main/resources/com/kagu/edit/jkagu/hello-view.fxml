@@ -27,21 +27,21 @@
                      <children>
                         <MenuBar prefHeight="25.0" HBox.hgrow="ALWAYS">
                           <menus>
-                            <Menu mnemonicParsing="false" text="File">
+                            <Menu fx:id="file" text="File">
                               <items>
                                   <MenuItem fx:id="openFile" text="Open" />
                                   <MenuItem fx:id="saveFile" text="Save" />
                                   <MenuItem fx:id="closeApp" text="Close" />
                               </items>
                             </Menu>
-                            <Menu mnemonicParsing="false" text="Edit">
+                            <Menu text="Edit">
                               <items>
                                   <MenuItem fx:id="undo" text="Undo" />
                                   <MenuItem fx:id="copyText" text="Copy" />
                                   <MenuItem fx:id="pasteText" text="Paste" />
                               </items>
                             </Menu>
-                             <Menu mnemonicParsing="false" text="Tools">
+                             <Menu text="Tools">
                                 <items>
                                    <MenuItem fx:id="search" text="Search" />
                                    <MenuItem fx:id="searchMultiline" text="Search from until" />
@@ -49,15 +49,15 @@
                                    <MenuItem fx:id="templateCounter" text="Template counter" />
                                 </items>
                              </Menu>
-                             <Menu mnemonicParsing="false" text="View">
+                             <Menu text="View">
                                 <items>
                                    <MenuItem fx:id="defaultTheme" text="Default Theme" />
                                    <MenuItem fx:id="darkTheme" text="Dark Theme" />
                                 </items>
                              </Menu>
-                            <Menu mnemonicParsing="false" text="Help">
+                            <Menu text="Help">
                               <items>
-                                <MenuItem mnemonicParsing="false" text="About" />
+                                <MenuItem text="About" />
                               </items>
                             </Menu>
                           </menus>
@@ -72,12 +72,12 @@
                                  <children>
                                     <HBox  fx:id="searchMultilineBox" prefHeight="38.0" prefWidth="658.0">
                                        <children>
-                                          <RadioButton fx:id="useWholeFileMultiline" mnemonicParsing="false" style="-fx-padding: 5px;" text="Use All Lines">
+                                          <RadioButton fx:id="useWholeFileMultiline" style="-fx-padding: 5px;" text="Use All Lines">
                                              <HBox.margin>
                                                 <Insets left="5.0" />
                                              </HBox.margin>
                                           </RadioButton>
-                                          <RadioButton fx:id="useSelectedLinesMultiline" mnemonicParsing="false" style="-fx-padding: 5px;" text="Select lines" />
+                                          <RadioButton fx:id="useSelectedLinesMultiline" style="-fx-padding: 5px;" text="Select lines" />
                                           <Label fx:id="fromLabel" styleClass="header-section" text="From:" />
                                           <TextField fx:id="searchFieldFrom" minWidth="200.0" prefHeight="24.0" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
@@ -90,7 +90,7 @@
                                                 <Insets left="10.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <Button fx:id="searchButtonMultiline" mnemonicParsing="false" text="Search">
+                                          <Button fx:id="searchButtonMultiline" text="Search">
                                              <HBox.margin>
                                                 <Insets left="20.0" right="10.0" />
                                              </HBox.margin>
@@ -99,14 +99,14 @@
                                     </HBox>
                                     <HBox fx:id="searchBox" prefHeight="38.0" prefWidth="658.0">
                                        <children>
-                                          <RadioButton fx:id="useWholeFile" mnemonicParsing="false" style="-fx-padding: 5px;" text="Use All Lines">
+                                          <RadioButton fx:id="useWholeFile" style="-fx-padding: 5px;" text="Use All Lines">
                                              <HBox.margin>
                                                 <Insets left="5.0" />
                                              </HBox.margin>
                                           </RadioButton>
-                                          <RadioButton fx:id="useSelectedLines" mnemonicParsing="false" style="-fx-padding: 5px;" text="Select lines" />
+                                          <RadioButton fx:id="useSelectedLines" style="-fx-padding: 5px;" text="Select lines" />
                                           <TextField fx:id="searchField" minWidth="844.0" prefHeight="24.0" HBox.hgrow="ALWAYS" />
-                                          <Button fx:id="searchButton" mnemonicParsing="false" text="Search">
+                                          <Button fx:id="searchButton" text="Search">
                                              <HBox.margin>
                                                 <Insets left="20.0" right="10.0" />
                                              </HBox.margin>
@@ -133,7 +133,7 @@
                                           <TextField fx:id="initialValue" minWidth="250.0" prefHeight="26.0" styleClass="header-section" HBox.hgrow="ALWAYS" />
                                           <Label styleClass="header-section" text="Increment:" />
                                           <TextField fx:id="increment" minWidth="250.0" prefHeight="26.0" styleClass="header-section" />
-                                          <Button fx:id="buttonRefactorTemplateInc" mnemonicParsing="false" text="Refactor">
+                                          <Button fx:id="buttonRefactorTemplateInc" text="Refactor">
                                              <HBox.margin>
                                                 <Insets left="10.0" right="10.0" />
                                              </HBox.margin>
@@ -159,7 +159,7 @@
                                              </HBox.margin>
                                           </Label>
                                           <TextField fx:id="changeTo" minWidth="350.0" prefHeight="26.0" styleClass="header-section" HBox.hgrow="ALWAYS" />
-                                          <Button fx:id="buttonRefactor" mnemonicParsing="false" text="Refactor">
+                                          <Button fx:id="buttonRefactor" text="Refactor">
                                              <HBox.margin>
                                                 <Insets left="10.0" right="10.0" />
                                              </HBox.margin>

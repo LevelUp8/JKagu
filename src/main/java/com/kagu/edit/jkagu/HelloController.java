@@ -1,7 +1,7 @@
 package com.kagu.edit.jkagu;
 
 import com.kagu.edit.jkagu.conf.*;
-import com.kagu.edit.jkagu.conf.model.Row;
+import com.kagu.edit.jkagu.conf.model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,6 +18,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class HelloController implements Serializable, Initializable {
+
+    @FXML
+    private Menu file;
 
     //-- Search functionality
     @FXML
@@ -231,6 +234,14 @@ public class HelloController implements Serializable, Initializable {
 
 
     public void configureScene(Scene scene) {
-        // TODO add shortcut keys to to scene
+
+        RefactorButtons refactorButtons = new RefactorButtons(buttonRefactor, buttonRefactorTemplateInc, findAndReplace, templateCounter);
+        InputOutputButtons inputOutputButtons = new InputOutputButtons(file, openFile, saveFile, copyText, pasteText);
+        SearchButtons searchButtons = new SearchButtons(searchButton, search, searchButtonMultiline, searchMultiline);
+        ThemeButtons themeButtons = new ThemeButtons(defaultTheme, darkTheme);
+
+        SceneConfigurator sceneConfigurator = new SceneConfigurator(scene, refactorButtons, inputOutputButtons, searchButtons, themeButtons, undo, closeApp);
+        sceneConfigurator.configure();
+
     }
 }

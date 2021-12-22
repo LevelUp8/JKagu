@@ -1,2 +1,5 @@
-package com.kagu.edit.jkagu.conf.model;public record ThemeButtons() {
-}
+package com.kagu.edit.jkagu.conf.model;
+
+import javafx.scene.control.MenuItem;
+
+public record ThemeButtons(MenuItem defaultTheme, MenuItem darkTheme) {}

@@ -29,6 +29,10 @@ public class HelloApplication extends Application {
         stage.setTitle(APP_TITLE);
         // stage.setResizable(false);
         // stage.setMaximized(false);
+
+        HelloController controller = (HelloController) fxmlLoader.getController();
+        controller.configureScene(scene);
+
         stage.setScene(scene);
         stage.getIcons().add(new Image(HelloApplication.class.getResourceAsStream("icon.png")));
         stage.show();
