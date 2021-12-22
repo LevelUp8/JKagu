@@ -29,7 +29,7 @@
                           <menus>
                             <Menu fx:id="file" text="File">
                               <items>
-                                  <MenuItem fx:id="openFile" text="Open" />
+                                  <MenuItem fx:id="appendFile" text="Append" />
                                   <MenuItem fx:id="saveFile" text="Save" />
                                   <MenuItem fx:id="closeApp" text="Close" />
                               </items>

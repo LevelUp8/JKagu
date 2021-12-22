@@ -39,7 +39,7 @@ public class SceneConfigurator implements ComponentConf {
     @Override
     public void configure() {
         {
-            KeyCombination kc = new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN);
+            KeyCombination kc = new KeyCodeCombination(KeyCode.A, KeyCombination.CONTROL_DOWN);
             inputOutputButtons.openFile().setAccelerator(kc);
         }
         {
@@ -56,14 +56,14 @@ public class SceneConfigurator implements ComponentConf {
         }
 
 
-        {
+        /*{
             KeyCombination kc = new KeyCodeCombination(KeyCode.W, KeyCombination.CONTROL_DOWN);
             themeButtons.defaultTheme().setAccelerator(kc);
         }
         {
             KeyCombination kc = new KeyCodeCombination(KeyCode.D, KeyCombination.CONTROL_DOWN);
             themeButtons.darkTheme().setAccelerator(kc);
-        }
+        }*/
 
 
         {

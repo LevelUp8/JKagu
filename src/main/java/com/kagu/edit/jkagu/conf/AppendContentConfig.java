@@ -17,15 +17,15 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Stream;
 
-public record OpenContentConfig(ProgressBar progressBar, Label statusMessage,
-                                MenuItem openFile,
-                                ListView<Row> listView,
-                                ObservableList<Row> observableList,
-                                List<Row> initialList) implements ComponentConf {
+public record AppendContentConfig(ProgressBar progressBar, Label statusMessage,
+                                  MenuItem appendFile,
+                                  ListView<Row> listView,
+                                  ObservableList<Row> observableList,
+                                  List<Row> initialList) implements ComponentConf {
 
     @Override
     public void configure() {
-        openFile.setOnAction((e) ->
+        appendFile.setOnAction((e) ->
         {
             FileChooser fileChooser = new FileChooser();
             //only allow text files to be selected using chooser
@@ -64,7 +64,7 @@ public record OpenContentConfig(ProgressBar progressBar, Label statusMessage,
                 String line;
                 //StringBuilder totalFile = new StringBuilder();
                 long linesLoaded = 0;
-                long rowNumber = 0;
+                long rowNumber = observableList.size();
                 while ((line = reader.readLine()) != null) {
                     rowNumber++;
                     //totalFile.append(line);

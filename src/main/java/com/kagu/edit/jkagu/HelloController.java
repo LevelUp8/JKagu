@@ -72,7 +72,7 @@ public class HelloController implements Serializable, Initializable {
 
     //--- File buttons
     @FXML
-    public MenuItem openFile;
+    public MenuItem appendFile;
 
     @FXML
     public MenuItem saveFile;
@@ -191,7 +191,7 @@ public class HelloController implements Serializable, Initializable {
                 statusMessage);
         filterContentConfig.configure();
 
-        OpenContentConfig openContentConfig = new OpenContentConfig(progressBar, statusMessage, openFile, listView, observableList, initialList);
+        AppendContentConfig openContentConfig = new AppendContentConfig(progressBar, statusMessage, appendFile, listView, observableList, initialList);
         openContentConfig.configure();
 
         SaveContentConfig saveContentConfig = new SaveContentConfig(observableList, saveFile, statusMessage);
@@ -236,7 +236,7 @@ public class HelloController implements Serializable, Initializable {
     public void configureScene(Scene scene) {
 
         RefactorButtons refactorButtons = new RefactorButtons(buttonRefactor, buttonRefactorTemplateInc, findAndReplace, templateCounter);
-        InputOutputButtons inputOutputButtons = new InputOutputButtons(file, openFile, saveFile, copyText, pasteText);
+        InputOutputButtons inputOutputButtons = new InputOutputButtons(file, appendFile, saveFile, copyText, pasteText);
         SearchButtons searchButtons = new SearchButtons(searchButton, search, searchButtonMultiline, searchMultiline);
         ThemeButtons themeButtons = new ThemeButtons(defaultTheme, darkTheme);
 
