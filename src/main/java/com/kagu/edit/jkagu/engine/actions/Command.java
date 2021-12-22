@@ -1,5 +1,6 @@
 package com.kagu.edit.jkagu.engine.actions;
 
+import com.kagu.edit.jkagu.conf.model.Row;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -8,10 +9,10 @@ import java.util.List;
 
 public abstract class Command {
 
-    private List<String> backup;
-    protected ObservableList<String> observableList;
+    private List<Row> backup;
+    protected ObservableList<Row> observableList;
 
-    Command(ObservableList<String> observableList) {
+    Command(ObservableList<Row> observableList) {
         this.observableList = observableList;
         CommandHistory.push(this);
         backup();
@@ -29,7 +30,7 @@ public abstract class Command {
 
     public abstract boolean execute();
 
-    public ObservableList<String> getObservableList() {
+    public ObservableList<Row> getObservableList() {
         return observableList;
     }
 }

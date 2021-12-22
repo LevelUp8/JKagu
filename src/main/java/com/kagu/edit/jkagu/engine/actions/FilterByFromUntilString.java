@@ -1,5 +1,6 @@
 package com.kagu.edit.jkagu.engine.actions;
 
+import com.kagu.edit.jkagu.conf.model.Row;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 
@@ -15,7 +16,7 @@ public class FilterByFromUntilString extends Command {
     private final String from;
     private final Label statusMessage;
 
-    public FilterByFromUntilString(ObservableList<String> observableList, String from, String until, Label statusMessage) {
+    public FilterByFromUntilString(ObservableList<Row> observableList, String from, String until, Label statusMessage) {
         super(observableList);
         this.from = from;
         this.until = until;
@@ -24,19 +25,19 @@ public class FilterByFromUntilString extends Command {
 
     @Override
     public boolean execute() {
-        List<String> rows = new ArrayList<>();
+        List<Row> rows = new ArrayList<>();
 
         int counter = 0;
-        for(String row : observableList)
+        for(Row row : observableList)
         {
-            int startUntil = row.indexOf(until);
-            int startFrom = row.indexOf(from);
+            int startUntil = row.content().indexOf(until);
+            int startFrom = row.content().indexOf(from);
             if(startFrom != -1)
             {
                 counter++;
                 if(counter == 1)
                 {
-                    String contentFrom = row.substring(startFrom);
+                    String contentFrom = row.content().substring(startFrom);
                     int startUntilOnSameRow = contentFrom.indexOf(until);
 
                     if(startUntilOnSameRow != -1)
@@ -44,7 +45,7 @@ public class FilterByFromUntilString extends Command {
                         contentFrom = contentFrom.substring(0, startUntilOnSameRow + until.length());
                         counter--;
                     }
-                    rows.add(contentFrom);
+                    rows.add(new Row(row.rowNumber(), contentFrom));
                 }
                 else
                 {
@@ -65,8 +66,8 @@ public class FilterByFromUntilString extends Command {
 
                 if(counter == 0)
                 {
-                   String endContentUntil = row.substring(0, startUntil + until.length());
-                   rows.add(endContentUntil);
+                   String endContentUntil = row.content().substring(0, startUntil + until.length());
+                   rows.add(new Row(row.rowNumber(),endContentUntil));
                 }
             }
             else

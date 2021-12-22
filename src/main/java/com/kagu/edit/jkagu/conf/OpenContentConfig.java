@@ -1,5 +1,6 @@
 package com.kagu.edit.jkagu.conf;
 
+import com.kagu.edit.jkagu.conf.model.Row;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.scene.control.Label;
@@ -18,9 +19,9 @@ import java.util.stream.Stream;
 
 public record OpenContentConfig(ProgressBar progressBar, Label statusMessage,
                                 MenuItem openFile,
-                                ListView<String> listView,
-                                ObservableList<String> observableList,
-                                List<String> initialList) implements ComponentConf {
+                                ListView<Row> listView,
+                                ObservableList<Row> observableList,
+                                List<Row> initialList) implements ComponentConf {
 
     @Override
     public void configure() {
@@ -63,11 +64,14 @@ public record OpenContentConfig(ProgressBar progressBar, Label statusMessage,
                 String line;
                 //StringBuilder totalFile = new StringBuilder();
                 long linesLoaded = 0;
+                long rowNumber = 0;
                 while ((line = reader.readLine()) != null) {
+                    rowNumber++;
                     //totalFile.append(line);
                     //totalFile.append("\n");
-                    initialList.add(line);
-                    observableList.add(line);
+                    Row row = new Row(rowNumber, line);
+                    initialList.add(row);
+                    observableList.add(row);
                     updateProgress(++linesLoaded, lineCount);
                 }
                 return Boolean.TRUE;

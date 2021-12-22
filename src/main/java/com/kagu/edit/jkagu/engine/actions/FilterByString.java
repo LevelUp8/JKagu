@@ -1,5 +1,6 @@
 package com.kagu.edit.jkagu.engine.actions;
 
+import com.kagu.edit.jkagu.conf.model.Row;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 
@@ -11,7 +12,7 @@ public class FilterByString extends Command {
     private String filter;
     private Label statusMessage;
 
-    public FilterByString(ObservableList<String> observableList, String filter, Label statusMessage) {
+    public FilterByString(ObservableList<Row> observableList, String filter, Label statusMessage) {
         super(observableList);
         this.filter = filter;
         this.statusMessage = statusMessage;
@@ -19,8 +20,8 @@ public class FilterByString extends Command {
 
     @Override
     public boolean execute() {
-        List<String> filteredList = observableList.stream()
-                                        .filter(s -> s.contains(this.filter))
+        List<Row> filteredList = observableList.stream()
+                                        .filter(r -> r.content().contains(this.filter))
                                             .collect(Collectors.toList());
         observableList.clear();
         observableList.addAll(filteredList);

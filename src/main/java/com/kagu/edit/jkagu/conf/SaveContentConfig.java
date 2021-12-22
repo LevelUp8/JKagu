@@ -1,5 +1,6 @@
 package com.kagu.edit.jkagu.conf;
 
+import com.kagu.edit.jkagu.conf.model.Row;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -10,7 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
-public record SaveContentConfig(ObservableList<String> observableList,
+public record SaveContentConfig(ObservableList<Row> observableList,
                                 MenuItem saveFile,
                                 Label statusMessage) implements ComponentConf {
 
@@ -28,7 +29,7 @@ public record SaveContentConfig(ObservableList<String> observableList,
             //let user select file
             File file = fileChooser.showSaveDialog(null);
 
-            String text = observableList.stream().collect(Collectors.joining("\n"));
+            String text = observableList.stream().map(row -> row.content()).collect(Collectors.joining("\n"));
             if (file != null) {
                 saveTextToFile(text, file);
             } else {

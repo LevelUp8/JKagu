@@ -1,5 +1,6 @@
 package com.kagu.edit.jkagu.conf;
 
+import com.kagu.edit.jkagu.conf.model.Row;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
@@ -12,7 +13,7 @@ import java.util.stream.Collectors;
 public record TemplateIncrementConfig(TextField templateValue,
                                       TextField initialValue,
                                       TextField increment,
-                                      ObservableList<String> observableList,
+                                      ObservableList<Row> observableList,
                                       Button buttonRefactorTemplateInc,
                                       Label statusMessage) implements ComponentConf {
 
@@ -31,12 +32,13 @@ public record TemplateIncrementConfig(TextField templateValue,
             IntegerContainer container = new IntegerContainer(initialValue);
             Integer increment = Integer.valueOf(incrementString);
 
-            List<String> replacedLinesList = observableList.stream().map(l -> {
+            List<Row> replacedLinesList = observableList.stream().map(row -> {
 
                 String template = templateValue.getText();
 
-                return getString(container, increment, l, template);
+                String newContent = getString(container, increment, row.content(), template);
 
+                return new Row(row.rowNumber(), newContent);
 
             }).collect(Collectors.toList());
 

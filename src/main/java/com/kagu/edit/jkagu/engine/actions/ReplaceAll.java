@@ -1,5 +1,6 @@
 package com.kagu.edit.jkagu.engine.actions;
 
+import com.kagu.edit.jkagu.conf.model.Row;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 
@@ -11,7 +12,7 @@ public class ReplaceAll extends Command {
     private String replacement;
     private Label statusMessage;
 
-    public ReplaceAll(ObservableList<String> observableList, String target, String replacement, Label statusMessage) {
+    public ReplaceAll(ObservableList<Row> observableList, String target, String replacement, Label statusMessage) {
         super(observableList);
         this.target = target;
         this.replacement = replacement;
@@ -20,8 +21,11 @@ public class ReplaceAll extends Command {
 
     @Override
     public boolean execute() {
-       List<String> replaced = observableList.stream()
-                                    .map(s -> s.replace(this.target, this.replacement)).toList();
+       List<Row> replaced = observableList.stream()
+                                    .map(row -> {
+                                       String newContent = row.content().replace(this.target, this.replacement);
+                                       return new Row(row.rowNumber(), newContent);
+                                    }).toList();
 
         observableList.clear();
         observableList.addAll(replaced);

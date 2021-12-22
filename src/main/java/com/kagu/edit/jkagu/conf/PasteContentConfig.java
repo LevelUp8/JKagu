@@ -1,5 +1,6 @@
 package com.kagu.edit.jkagu.conf;
 
+import com.kagu.edit.jkagu.conf.model.Row;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -9,9 +10,9 @@ import javafx.scene.input.Clipboard;
 import java.util.List;
 
 public record PasteContentConfig(MenuItem pasteText,
-                                 ObservableList<String> observableList,
-                                 Label statusMessage, List<String> initialList,
-                                 ListView<String> listView) implements ComponentConf {
+                                 ObservableList<Row> observableList,
+                                 Label statusMessage, List<Row> initialList,
+                                 ListView<Row> listView) implements ComponentConf {
 
     @Override
     public void configure() {
@@ -22,9 +23,12 @@ public record PasteContentConfig(MenuItem pasteText,
             initialList.clear();
             observableList.clear();
             String[] lines = text.split("\\r?\\n");
+            long rowNumber = 0;
             for (String line : lines) {
-                observableList.add(line);
-                initialList.add(line);
+                rowNumber++;
+                Row row = new Row(rowNumber, line);
+                observableList.add(row);
+                initialList.add(row);
             }
 
             listView.setItems(observableList);

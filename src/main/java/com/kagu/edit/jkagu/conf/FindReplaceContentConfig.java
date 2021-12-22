@@ -1,5 +1,6 @@
 package com.kagu.edit.jkagu.conf;
 
+import com.kagu.edit.jkagu.conf.model.Row;
 import com.kagu.edit.jkagu.engine.actions.ReplaceAll;
 import com.kagu.edit.jkagu.engine.actions.ReplaceFirst;
 import com.kagu.edit.jkagu.engine.actions.ReplaceLast;
@@ -29,7 +30,7 @@ public class FindReplaceContentConfig implements ComponentConf {
     private final TextField changeTo;
     private final Button buttonRefactor;
 
-    private ObservableList<String> observableList;
+    private ObservableList<Row> observableList;
     private String currentSelected;
     private Label statusMessage = null;
 
@@ -52,7 +53,7 @@ public class FindReplaceContentConfig implements ComponentConf {
     }
 
 
-    public FindReplaceContentConfig(ObservableList<String> observableList,
+    public FindReplaceContentConfig(ObservableList<Row> observableList,
                                     ChoiceBox<String> replaceWhere,
                                     TextField changeFrom,
                                     TextField changeTo,

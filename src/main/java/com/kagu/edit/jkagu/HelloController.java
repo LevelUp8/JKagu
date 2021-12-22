@@ -1,6 +1,7 @@
 package com.kagu.edit.jkagu;
 
 import com.kagu.edit.jkagu.conf.*;
+import com.kagu.edit.jkagu.conf.model.Row;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.util.Callback;
 
 import java.io.Serializable;
 import java.net.URL;
@@ -101,7 +103,7 @@ public class HelloController implements Serializable, Initializable {
 
     //--- text place
     @FXML
-    public ListView<String> listView;
+    public ListView<Row> listView;
 
     //--- replace functionality
     @FXML
@@ -143,13 +145,13 @@ public class HelloController implements Serializable, Initializable {
 
 
     // Use Java Collections to create the List.
-    private final List<String> initialList = new ArrayList<>();
+    private final List<Row> initialList = new ArrayList<>();
 
     // Use Java Collections to create the List.
-    private final List<String> list = new ArrayList<>();
+    private final List<Row> list = new ArrayList<>();
 
     // Now add observability by wrapping it with ObservableList.
-    private final ObservableList<String> observableList = FXCollections.observableList(list);
+    private final ObservableList<Row> observableList = FXCollections.observableList(list);
 
 
     @Override
@@ -218,6 +220,13 @@ public class HelloController implements Serializable, Initializable {
 
         ViewThemeConfig viewThemeConfig = new ViewThemeConfig(defaultTheme, darkTheme, statusMessage);
         viewThemeConfig.configure();
+
+        listView.setCellFactory(new Callback<ListView<Row>, ListCell<Row>>() {
+            @Override
+            public ListCell<Row> call(ListView<Row> studentListView) {
+                return new RowListViewCell();
+            }
+        });
     }
 
 

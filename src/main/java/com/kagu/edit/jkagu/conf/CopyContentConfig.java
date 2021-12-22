@@ -1,5 +1,6 @@
 package com.kagu.edit.jkagu.conf;
 
+import com.kagu.edit.jkagu.conf.model.Row;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -9,7 +10,7 @@ import javafx.scene.input.ClipboardContent;
 import java.util.stream.Collectors;
 
 public record CopyContentConfig(MenuItem copyText,
-                                ObservableList<String> observableList,
+                                ObservableList<Row> observableList,
                                 Label statusMessage) implements ComponentConf {
 
 
@@ -19,7 +20,7 @@ public record CopyContentConfig(MenuItem copyText,
 
             final Clipboard clipboard = Clipboard.getSystemClipboard();
             final ClipboardContent content = new ClipboardContent();
-            String text = observableList.stream().collect(Collectors.joining(System.lineSeparator()));
+            String text = observableList.stream().map(row -> row.content()).collect(Collectors.joining(System.lineSeparator()));
             content.putString(text);
             clipboard.setContent(content);
 
