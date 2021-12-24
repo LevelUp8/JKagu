@@ -29,9 +29,9 @@
                           <menus>
                             <Menu fx:id="file" text="File">
                               <items>
-                                  <MenuItem fx:id="appendFile" text="Append" />
-                                  <MenuItem fx:id="saveFile" text="Save" />
-                                  <MenuItem fx:id="closeApp" text="Close" />
+                                  <MenuItem fx:id="appendFile" text="Append (Open) file" />
+                                  <MenuItem fx:id="saveFile" text="Save file" />
+                                  <MenuItem fx:id="closeApp" text="Close program" />
                               </items>
                             </Menu>
                             <Menu text="Edit">

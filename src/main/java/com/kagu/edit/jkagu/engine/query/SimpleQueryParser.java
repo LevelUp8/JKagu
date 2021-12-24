@@ -1,19 +1,25 @@
 package com.kagu.edit.jkagu.engine.query;
 
+import javafx.scene.control.Label;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class SimpleQueryParser implements  QueryParser {
 
+    public static final String WHERE = "where";
+    public static final String SELECT = "select";
     private Integer additionalRowCounter = 0;
     private List<String> keyWords;
     private Integer selectedAdditionalRows;
+    private Label statusMessage;
 
-    public SimpleQueryParser(String query)
+    public SimpleQueryParser(String query, Label statusMessage)
     {
         this.keyWords = parseQuery(query);
         this.selectedAdditionalRows = selectPartParser(query);
+        this.statusMessage = statusMessage;
     }
 
     public Optional<String> execute(String row)
@@ -39,18 +45,19 @@ public class SimpleQueryParser implements  QueryParser {
     }
 
     private List<String> parseQuery(String query) {
-        int indexOfWhere = query.indexOf("where");
+        int indexOfWhere = query.indexOf(WHERE);
         if(indexOfWhere == -1)
         {
             throw new IllegalStateException("the query must have Where clause");
         }
         String selectQueryPart = query.substring(0, indexOfWhere);
-        if(!selectQueryPart.startsWith("select"))
+        if(!selectQueryPart.startsWith(SELECT))
         {
-            throw new IllegalStateException("the query must start with Select");
+            this.statusMessage.setText("the query must start with select");
+            throw new IllegalStateException("the query must start with select");
         }
 
-        String whereQueryPart = query.substring(indexOfWhere + "where".length());
+        String whereQueryPart = query.substring(indexOfWhere + WHERE.length());
 
 
         int firstRowIndex = whereQueryPart.indexOf("row");
@@ -58,6 +65,7 @@ public class SimpleQueryParser implements  QueryParser {
 
         if(firstRowIndex == -1 || firstHasIndex == -1)
         {
+            this.statusMessage.setText("where clause must has: row has");
             throw new IllegalStateException("where clause must has: row has");
         }
 
@@ -69,6 +77,7 @@ public class SimpleQueryParser implements  QueryParser {
 
             if(firstRowIndex > firstHasIndex)
             {
+                this.statusMessage.setText("where clause must has: row has");
                 throw new IllegalStateException("where clause must has: row has");
             }
 
@@ -84,13 +93,14 @@ public class SimpleQueryParser implements  QueryParser {
     }
 
     private Integer selectPartParser(String query) {
-        int indexOfWhere = query.indexOf("where");
+        int indexOfWhere = query.indexOf(WHERE);
         String selectQueryPart = query.substring(0, indexOfWhere);
         Integer selectedAdditionalRows = 0;
-        String selected = selectQueryPart.substring("select".length());
+        String selected = selectQueryPart.substring(SELECT.length());
 
         if(selected.indexOf("row") == -1)
         {
+            this.statusMessage.setText("In the select clause must have row");
             throw new IllegalStateException("In the select clause must have row");
         }
 

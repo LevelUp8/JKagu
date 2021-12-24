@@ -28,7 +28,7 @@ public class FilterByQuery extends Command {
         observableList.clear();
         observableList.addAll(initialList);
 
-        QueryParser parser = new SimpleQueryParser(query);
+        QueryParser parser = new SimpleQueryParser(query, this.statusMessage);
         List<Row> filteredList = observableList.stream()
                                         .filter(r -> parser.execute(r.content()).isPresent())
                                             .collect(Collectors.toList());
