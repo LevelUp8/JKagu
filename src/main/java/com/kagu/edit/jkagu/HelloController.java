@@ -30,6 +30,9 @@ public class HelloController implements Serializable, Initializable {
     public RadioButton useSelectedLines;
 
     @FXML
+    public RadioButton useAdvancedSelect;
+
+    @FXML
     public Button searchButton;
 
     @FXML
@@ -184,6 +187,7 @@ public class HelloController implements Serializable, Initializable {
 
         FilterContentConfig filterContentConfig = new FilterContentConfig(useWholeFile,
                 useSelectedLines,
+                useAdvancedSelect,
                 searchButton,
                 observableList,
                 initialList,

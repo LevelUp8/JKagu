@@ -1,6 +1,7 @@
 package com.kagu.edit.jkagu.conf;
 
 import com.kagu.edit.jkagu.conf.model.Row;
+import com.kagu.edit.jkagu.engine.actions.FilterByQuery;
 import com.kagu.edit.jkagu.engine.actions.FilterByString;
 import com.kagu.edit.jkagu.engine.actions.RestoreAllText;
 import javafx.collections.ObservableList;
@@ -21,8 +22,10 @@ public class FilterContentConfig implements ComponentConf {
     private final Label statusMessage;
 
 
+
     public FilterContentConfig(RadioButton useWholeFile,
                                RadioButton useSelectedLines,
+                               RadioButton useAdvancedSelect,
                                Button searchButton,
                                ObservableList<Row> observableList,
                                List<Row> initialList,
@@ -31,6 +34,7 @@ public class FilterContentConfig implements ComponentConf {
 
         useWholeFile.setToggleGroup(toggleGroup);
         useSelectedLines.setToggleGroup(toggleGroup);
+        useAdvancedSelect.setToggleGroup(toggleGroup);
         this.searchButton = searchButton;
         this.observableList = observableList;
         this.initialList = initialList;
@@ -58,6 +62,13 @@ public class FilterContentConfig implements ComponentConf {
                         this.searchField.clear();
                         this.searchField.setVisible(false);
                         this.searchButton.setVisible(false);
+                        RestoreAllText restoreAllText = new RestoreAllText(this.observableList, this.initialList, this.statusMessage);
+                        restoreAllText.execute();
+                    }
+                    else if("useAdvancedSelect".equals(rb.getId()))
+                    {
+                        this.searchField.setVisible(true);
+                        this.searchButton.setVisible(true);
                     }
                     else
                     {
@@ -73,7 +84,7 @@ public class FilterContentConfig implements ComponentConf {
                 String text = searchField.getText();
                 if(text != null && !text.trim().isEmpty())
                 {
-                    FilterByString filterByString = new FilterByString(this.observableList, text, this.statusMessage);
+                    FilterByString filterByString = new FilterByString(this.observableList, this.initialList, text, this.statusMessage);
                     filterByString.execute();
                 }
                 else
@@ -81,6 +92,19 @@ public class FilterContentConfig implements ComponentConf {
                     this.statusMessage.setText("The search field is empty. Search will not be performed!");
                 }
 
+            }
+            else if("useAdvancedSelect".equals(rb.getId()))
+            {
+                String query = searchField.getText();
+                if(query != null && !query.trim().isEmpty())
+                {
+                    FilterByQuery filterByQuery = new FilterByQuery(this.observableList, this.initialList, query, this.statusMessage);
+                    filterByQuery.execute();
+                }
+                else
+                {
+                    this.statusMessage.setText("The search field is empty. Search will not be performed!");
+                }
             }
             else if("useWholeFile".equals(rb.getId()))
             {

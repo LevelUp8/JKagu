@@ -15,9 +15,11 @@ public class FilterByFromUntilString extends Command {
     private final String until;
     private final String from;
     private final Label statusMessage;
+    private final List<Row> initialList;
 
-    public FilterByFromUntilString(ObservableList<Row> observableList, String from, String until, Label statusMessage) {
+    public FilterByFromUntilString(ObservableList<Row> observableList, List<Row> initialList, String from, String until, Label statusMessage) {
         super(observableList);
+        this.initialList = initialList;
         this.from = from;
         this.until = until;
         this.statusMessage = statusMessage;
@@ -25,6 +27,9 @@ public class FilterByFromUntilString extends Command {
 
     @Override
     public boolean execute() {
+        observableList.clear();
+        observableList.addAll(initialList);
+
         List<Row> rows = new ArrayList<>();
 
         int counter = 0;

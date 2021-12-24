@@ -73,6 +73,8 @@ public class FilterContentMultilineConfig implements ComponentConf {
                         this.searchButton.setVisible(false);
                         this.fromLabel.setVisible(false);
                         this.untilLabel.setVisible(false);
+                        RestoreAllText restoreAllText = new RestoreAllText(this.observableList, this.initialList, this.statusMessage);
+                        restoreAllText.execute();
                     }
                     else
                     {
@@ -90,7 +92,7 @@ public class FilterContentMultilineConfig implements ComponentConf {
                 if(fromText != null && !fromText.trim().isEmpty()
                 && untilText != null && !untilText.trim().isEmpty())
                 {
-                    FilterByFromUntilString filterByFromUntilString = new FilterByFromUntilString(this.observableList, fromText, untilText, this.statusMessage);
+                    FilterByFromUntilString filterByFromUntilString = new FilterByFromUntilString(this.observableList, this.initialList, fromText, untilText, this.statusMessage);
                     filterByFromUntilString.execute();
                 }
                 else
