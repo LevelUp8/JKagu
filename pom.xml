@@ -69,7 +69,6 @@
                     <mainClass>com.kagu.edit.jkagu/com.kagu.edit.jkagu.HelloApplication</mainClass>
                     <launcher>start</launcher>
                     <compress>2</compress>
-                    <jlinkZipName>JKagu</jlinkZipName>
                     <jlinkImageName>JKagu</jlinkImageName>
                     <noManPages>true</noManPages>
                     <noHeaderFiles>true</noHeaderFiles>
