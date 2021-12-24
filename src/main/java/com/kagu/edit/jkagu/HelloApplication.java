@@ -33,6 +33,8 @@ public class HelloApplication extends Application {
         HelloController controller = (HelloController) fxmlLoader.getController();
         controller.configureScene(scene);
 
+        controller.configureStage(stage);
+
         stage.setScene(scene);
         stage.getIcons().add(new Image(HelloApplication.class.getResourceAsStream("icon.png")));
         stage.show();

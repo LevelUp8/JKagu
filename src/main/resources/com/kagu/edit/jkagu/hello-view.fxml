@@ -57,7 +57,7 @@
                              </Menu>
                             <Menu text="Help">
                               <items>
-                                <MenuItem text="About" />
+                                <MenuItem fx:id="about" text="About" />
                               </items>
                             </Menu>
                           </menus>

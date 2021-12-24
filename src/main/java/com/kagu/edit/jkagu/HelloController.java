@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.io.Serializable;
@@ -149,6 +150,9 @@ public class HelloController implements Serializable, Initializable {
     @FXML
     public Label untilLabel;
 
+    @FXML
+    public MenuItem about;
+
 
     // Use Java Collections to create the List.
     private final List<Row> initialList = new ArrayList<>();
@@ -247,5 +251,11 @@ public class HelloController implements Serializable, Initializable {
         SceneConfigurator sceneConfigurator = new SceneConfigurator(scene, refactorButtons, inputOutputButtons, searchButtons, themeButtons, undo, closeApp);
         sceneConfigurator.configure();
 
+    }
+
+    public void configureStage(Stage stage) {
+
+        HelpConfig helpConfig = new HelpConfig(about, stage);
+        helpConfig.configure();
     }
 }
