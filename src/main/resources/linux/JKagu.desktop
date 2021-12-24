@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=JKagu
+Comment=JKagu Application
+Exec=change_path/start
+Icon=change_path/icon.png
+Categories=Application;Development;Text;Find;Replace
+Type=Application
+Terminal=0
