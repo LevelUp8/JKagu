@@ -15,3 +15,6 @@ JKagu is a software which maybe will help you when you need to search and replac
 2. Find each first occurnace of the word for replacement on the row and replace it
 3. Find each last occurnace of the word for replacement nt the row and replace it
 4. Find a word which you will replace with an incrementing number. Also you have to set here the incrmentation step and the begginign number
+
+
+The program is created with Java and Java FX and for the building it was used Amazon Correto 17
