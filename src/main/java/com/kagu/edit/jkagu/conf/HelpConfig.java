@@ -38,17 +38,13 @@ public class HelpConfig implements ComponentConf {
                     scene.getStylesheets().add(cssFile);
 
                     String selectedTheme = ViewThemeConfig.getSelectedTheme();
-                    if("DARK".equals(selectedTheme))
-                    {
+                    if ("DARK".equals(selectedTheme)) {
                         String cssFileTheme = HelloApplication.class.getResource("dark-theme.css").toString();
                         scene.getStylesheets().add(cssFileTheme);
-                    }
-                    else if("DEFAULT".equals(selectedTheme))
-                    {
+                    } else if ("DEFAULT".equals(selectedTheme)) {
                         String cssFileTheme = HelloApplication.class.getResource("dark-theme.css").toString();
                         scene.getStylesheets().remove(cssFileTheme);
-                    }
-                    else {
+                    } else {
                         throw new IllegalStateException("The theme is not recognized: " + selectedTheme);
                     }
 

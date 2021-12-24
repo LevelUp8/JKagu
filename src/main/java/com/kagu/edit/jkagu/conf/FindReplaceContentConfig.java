@@ -35,6 +35,7 @@ public class FindReplaceContentConfig implements ComponentConf {
     private Label statusMessage = null;
 
     private Map<String, BiFunction<String, String, Boolean>> selectionActionMap = new HashMap<>();
+
     {
         selectionActionMap.put(ALL_OCCURRENCES, (target, replacement) -> {
             ReplaceAll replace = new ReplaceAll(this.observableList, target, replacement, statusMessage);
@@ -58,8 +59,7 @@ public class FindReplaceContentConfig implements ComponentConf {
                                     TextField changeFrom,
                                     TextField changeTo,
                                     Button buttonRefactor,
-                                    Label statusMessage)
-    {
+                                    Label statusMessage) {
         this.replaceWhere = replaceWhere;
         this.changeFrom = changeFrom;
         this.changeTo = changeTo;
@@ -85,20 +85,18 @@ public class FindReplaceContentConfig implements ComponentConf {
         });
 
         buttonRefactor.setOnAction((ActionEvent e) -> {
-                String target = this.changeFrom.getText();
-                String replacement = this.changeTo.getText();
+                    String target = this.changeFrom.getText();
+                    String replacement = this.changeTo.getText();
 
-                BiFunction<String, String, Boolean> currentAction = selectionActionMap.get(currentSelected);
+                    BiFunction<String, String, Boolean> currentAction = selectionActionMap.get(currentSelected);
 
-                if(currentAction != null)
-                {
-                    currentAction.apply(target, replacement);
+                    if (currentAction != null) {
+                        currentAction.apply(target, replacement);
+                    } else {
+                        throw new UnsupportedOperationException("Does not support currentSelected: " + currentSelected);
+                    }
+
                 }
-                else {
-                    throw new UnsupportedOperationException("Does not support currentSelected: " + currentSelected);
-                }
-
-            }
         );
     }
 }

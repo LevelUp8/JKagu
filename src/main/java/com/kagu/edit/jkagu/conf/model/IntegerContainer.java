@@ -1,9 +1,10 @@
-package com.kagu.edit.jkagu.conf;
+package com.kagu.edit.jkagu.conf.model;
 
 public class IntegerContainer {
 
     private Integer num;
-    public IntegerContainer(Integer num){
+
+    public IntegerContainer(Integer num) {
         this.num = num;
     }
 
@@ -15,8 +16,7 @@ public class IntegerContainer {
         return num;
     }
 
-    public void addToCurrentNum(Integer add)
-    {
+    public void addToCurrentNum(Integer add) {
         num = num + add;
     }
 }

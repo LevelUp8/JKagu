@@ -29,8 +29,7 @@ public record ViewThemeConfig(MenuItem defaultTheme, MenuItem darkTheme,
         });
     }
 
-    public static String getSelectedTheme()
-    {
+    public static String getSelectedTheme() {
         return selectedTheme;
     }
 }

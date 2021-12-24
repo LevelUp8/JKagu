@@ -232,12 +232,7 @@ public class HelloController implements Serializable, Initializable {
         ViewThemeConfig viewThemeConfig = new ViewThemeConfig(defaultTheme, darkTheme, statusMessage);
         viewThemeConfig.configure();
 
-        listView.setCellFactory(new Callback<ListView<Row>, ListCell<Row>>() {
-            @Override
-            public ListCell<Row> call(ListView<Row> studentListView) {
-                return new RowListViewCell();
-            }
-        });
+        listView.setCellFactory(studentListView -> new RowListViewCell());
     }
 
 

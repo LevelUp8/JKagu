@@ -3,12 +3,11 @@ package com.kagu.edit.jkagu.conf;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 
-public class CloseAppConfig  implements ComponentConf {
+public class CloseAppConfig implements ComponentConf {
 
     private MenuItem closeApp;
 
-    public CloseAppConfig(MenuItem closeApp)
-    {
+    public CloseAppConfig(MenuItem closeApp) {
         this.closeApp = closeApp;
     }
 

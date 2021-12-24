@@ -55,17 +55,6 @@ public class SceneConfigurator implements ComponentConf {
             inputOutputButtons.pasteText().setAccelerator(kc);
         }
 
-
-        /*{
-            KeyCombination kc = new KeyCodeCombination(KeyCode.W, KeyCombination.CONTROL_DOWN);
-            themeButtons.defaultTheme().setAccelerator(kc);
-        }
-        {
-            KeyCombination kc = new KeyCodeCombination(KeyCode.D, KeyCombination.CONTROL_DOWN);
-            themeButtons.darkTheme().setAccelerator(kc);
-        }*/
-
-
         {
             KeyCombination kc = new KeyCodeCombination(KeyCode.DIGIT1, KeyCombination.CONTROL_DOWN);
             searchButtons.search().setAccelerator(kc);

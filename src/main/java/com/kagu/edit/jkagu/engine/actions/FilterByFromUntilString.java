@@ -33,52 +33,38 @@ public class FilterByFromUntilString extends Command {
         List<Row> rows = new ArrayList<>();
 
         int counter = 0;
-        for(Row row : observableList)
-        {
+        for (Row row : observableList) {
             int startUntil = row.content().indexOf(until);
             int startFrom = row.content().indexOf(from);
-            if(startFrom != -1)
-            {
+            if (startFrom != -1) {
                 counter++;
-                if(counter == 1)
-                {
+                if (counter == 1) {
                     String contentFrom = row.content().substring(startFrom);
                     int startUntilOnSameRow = contentFrom.indexOf(until);
 
-                    if(startUntilOnSameRow != -1)
-                    {
+                    if (startUntilOnSameRow != -1) {
                         contentFrom = contentFrom.substring(0, startUntilOnSameRow + until.length());
                         counter--;
                     }
                     rows.add(new Row(row.rowNumber(), contentFrom));
-                }
-                else
-                {
-                    if(counter > 0)
-                    {
+                } else {
+                    if (counter > 0) {
                         rows.add(row);
                     }
                 }
-            }
-            else if(startUntil != -1)
-            {
+            } else if (startUntil != -1) {
                 counter--;
 
-                if(counter > 0)
-                {
+                if (counter > 0) {
                     rows.add(row);
                 }
 
-                if(counter == 0)
-                {
-                   String endContentUntil = row.content().substring(0, startUntil + until.length());
-                   rows.add(new Row(row.rowNumber(),endContentUntil));
+                if (counter == 0) {
+                    String endContentUntil = row.content().substring(0, startUntil + until.length());
+                    rows.add(new Row(row.rowNumber(), endContentUntil));
                 }
-            }
-            else
-            {
-                if (counter > 0)
-                {
+            } else {
+                if (counter > 0) {
                     rows.add(row);
                 }
             }

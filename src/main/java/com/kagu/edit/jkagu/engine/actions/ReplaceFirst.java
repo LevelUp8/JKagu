@@ -22,12 +22,12 @@ public class ReplaceFirst extends Command {
 
     @Override
     public boolean execute() {
-       List<Row> replaced = observableList.stream()
-                                    .map(row -> {
-                                         int firstOccurrenceIndex = row.content().indexOf(target);
-                                         final String result = Utils.getReplacedString(row.content(), firstOccurrenceIndex, target, replacement);
-                                         return new Row(row.rowNumber(), result);
-                                    }).toList();
+        List<Row> replaced = observableList.stream()
+                .map(row -> {
+                    int firstOccurrenceIndex = row.content().indexOf(target);
+                    final String result = Utils.getReplacedString(row.content(), firstOccurrenceIndex, target, replacement);
+                    return new Row(row.rowNumber(), result);
+                }).toList();
 
         observableList.clear();
         observableList.addAll(replaced);

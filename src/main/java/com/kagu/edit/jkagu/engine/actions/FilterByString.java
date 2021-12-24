@@ -27,8 +27,8 @@ public class FilterByString extends Command {
         observableList.addAll(initialList);
 
         List<Row> filteredList = observableList.stream()
-                                        .filter(r -> r.content().contains(this.filter))
-                                            .collect(Collectors.toList());
+                .filter(r -> r.content().contains(this.filter))
+                .collect(Collectors.toList());
         observableList.clear();
         observableList.addAll(filteredList);
         statusMessage.setText("Performing search by string");

@@ -21,11 +21,11 @@ public class ReplaceAll extends Command {
 
     @Override
     public boolean execute() {
-       List<Row> replaced = observableList.stream()
-                                    .map(row -> {
-                                       String newContent = row.content().replace(this.target, this.replacement);
-                                       return new Row(row.rowNumber(), newContent);
-                                    }).toList();
+        List<Row> replaced = observableList.stream()
+                .map(row -> {
+                    String newContent = row.content().replace(this.target, this.replacement);
+                    return new Row(row.rowNumber(), newContent);
+                }).toList();
 
         observableList.clear();
         observableList.addAll(replaced);

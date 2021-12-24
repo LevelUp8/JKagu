@@ -13,5 +13,7 @@ public class CommandHistory {
         return history.pop();
     }
 
-    public static boolean isEmpty() { return history.isEmpty(); }
+    public static boolean isEmpty() {
+        return history.isEmpty();
+    }
 }

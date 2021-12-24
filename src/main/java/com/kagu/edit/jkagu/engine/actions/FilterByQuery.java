@@ -30,8 +30,8 @@ public class FilterByQuery extends Command {
 
         QueryParser parser = new SimpleQueryParser(query, this.statusMessage);
         List<Row> filteredList = observableList.stream()
-                                        .filter(r -> parser.execute(r.content()).isPresent())
-                                            .collect(Collectors.toList());
+                .filter(r -> parser.execute(r.content()).isPresent())
+                .collect(Collectors.toList());
         observableList.clear();
         observableList.addAll(filteredList);
         statusMessage.setText("Performing search by query");

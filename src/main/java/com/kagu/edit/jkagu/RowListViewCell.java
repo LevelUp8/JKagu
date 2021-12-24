@@ -26,7 +26,7 @@ public class RowListViewCell extends ListCell<Row> {
     protected void updateItem(Row row, boolean empty) {
         super.updateItem(row, empty);
 
-        if(empty || row == null) {
+        if (empty || row == null) {
 
             setText(null);
             setGraphic(null);

@@ -1,5 +1,6 @@
 package com.kagu.edit.jkagu.conf;
 
+import com.kagu.edit.jkagu.conf.model.IntegerContainer;
 import com.kagu.edit.jkagu.conf.model.Row;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;

@@ -18,8 +18,7 @@ public abstract class Command {
         backup();
     }
 
-    public void backup()
-    {
+    public void backup() {
         backup = new ArrayList<>(observableList);
     }
 

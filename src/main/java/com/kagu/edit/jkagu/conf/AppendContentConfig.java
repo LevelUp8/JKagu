@@ -30,7 +30,7 @@ public record AppendContentConfig(ProgressBar progressBar, Label statusMessage,
             FileChooser fileChooser = new FileChooser();
             //only allow text files to be selected using chooser
             fileChooser.getExtensionFilters().add(
-                    new FileChooser.ExtensionFilter("Text files (*.txt)", "*.txt")
+                    new FileChooser.ExtensionFilter("Text files", "*")
             );
             //set initial directory somewhere user will recognise
             fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
@@ -62,13 +62,10 @@ public record AppendContentConfig(ProgressBar progressBar, Label statusMessage,
                 }
                 //Load in all lines one by one into a StringBuilder separated by "\n" - compatible with TextArea
                 String line;
-                //StringBuilder totalFile = new StringBuilder();
                 long linesLoaded = 0;
                 long rowNumber = observableList.size();
                 while ((line = reader.readLine()) != null) {
                     rowNumber++;
-                    //totalFile.append(line);
-                    //totalFile.append("\n");
                     Row row = new Row(rowNumber, line);
                     initialList.add(row);
                     observableList.add(row);

@@ -22,7 +22,6 @@ public class FilterContentConfig implements ComponentConf {
     private final Label statusMessage;
 
 
-
     public FilterContentConfig(RadioButton useWholeFile,
                                RadioButton useSelectedLines,
                                RadioButton useAdvancedSelect,
@@ -50,69 +49,49 @@ public class FilterContentConfig implements ComponentConf {
                 .addListener((observable, oldVal, newVal) -> {
                     System.out.println(newVal + " was selected");
 
-                    Toggle t =  toggleGroup.getSelectedToggle();
+                    Toggle t = toggleGroup.getSelectedToggle();
                     RadioButton rb = (RadioButton) t;
-                    if("useSelectedLines".equals(rb.getId()))
-                    {
+                    if ("useSelectedLines".equals(rb.getId())) {
                         this.searchField.setVisible(true);
                         this.searchButton.setVisible(true);
-                    }
-                    else if("useWholeFile".equals(rb.getId()))
-                    {
+                    } else if ("useWholeFile".equals(rb.getId())) {
                         this.searchField.clear();
                         this.searchField.setVisible(false);
                         this.searchButton.setVisible(false);
                         RestoreAllText restoreAllText = new RestoreAllText(this.observableList, this.initialList, this.statusMessage);
                         restoreAllText.execute();
-                    }
-                    else if("useAdvancedSelect".equals(rb.getId()))
-                    {
+                    } else if ("useAdvancedSelect".equals(rb.getId())) {
                         this.searchField.setVisible(true);
                         this.searchButton.setVisible(true);
-                    }
-                    else
-                    {
+                    } else {
                         throw new UnsupportedOperationException("Not supported logic for: " + rb.getId());
                     }
                 });
 
         this.searchButton.setOnAction(e -> {
-            Toggle t =  toggleGroup.getSelectedToggle();
+            Toggle t = toggleGroup.getSelectedToggle();
             RadioButton rb = (RadioButton) t;
-            if("useSelectedLines".equals(rb.getId()))
-            {
+            if ("useSelectedLines".equals(rb.getId())) {
                 String text = searchField.getText();
-                if(text != null && !text.trim().isEmpty())
-                {
+                if (text != null && !text.trim().isEmpty()) {
                     FilterByString filterByString = new FilterByString(this.observableList, this.initialList, text, this.statusMessage);
                     filterByString.execute();
-                }
-                else
-                {
+                } else {
                     this.statusMessage.setText("The search field is empty. Search will not be performed!");
                 }
 
-            }
-            else if("useAdvancedSelect".equals(rb.getId()))
-            {
+            } else if ("useAdvancedSelect".equals(rb.getId())) {
                 String query = searchField.getText();
-                if(query != null && !query.trim().isEmpty())
-                {
+                if (query != null && !query.trim().isEmpty()) {
                     FilterByQuery filterByQuery = new FilterByQuery(this.observableList, this.initialList, query, this.statusMessage);
                     filterByQuery.execute();
-                }
-                else
-                {
+                } else {
                     this.statusMessage.setText("The search field is empty. Search will not be performed!");
                 }
-            }
-            else if("useWholeFile".equals(rb.getId()))
-            {
+            } else if ("useWholeFile".equals(rb.getId())) {
                 RestoreAllText restoreAllText = new RestoreAllText(this.observableList, this.initialList, this.statusMessage);
                 restoreAllText.execute();
-            }
-            else
-            {
+            } else {
                 throw new UnsupportedOperationException("Not supported logic for: " + rb.getId());
             }
         });

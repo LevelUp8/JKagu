@@ -54,18 +54,15 @@ public class FilterContentMultilineConfig implements ComponentConf {
                 .addListener((observable, oldVal, newVal) -> {
                     System.out.println(newVal + " was selected");
 
-                    Toggle t =  toggleGroup.getSelectedToggle();
+                    Toggle t = toggleGroup.getSelectedToggle();
                     RadioButton rb = (RadioButton) t;
-                    if("useSelectedLinesMultiline".equals(rb.getId()))
-                    {
+                    if ("useSelectedLinesMultiline".equals(rb.getId())) {
                         this.searchFieldFrom.setVisible(true);
                         this.searchFieldUntil.setVisible(true);
                         this.searchButton.setVisible(true);
                         this.fromLabel.setVisible(true);
                         this.untilLabel.setVisible(true);
-                    }
-                    else if("useWholeFileMultiline".equals(rb.getId()))
-                    {
+                    } else if ("useWholeFileMultiline".equals(rb.getId())) {
                         this.searchFieldFrom.clear();
                         this.searchFieldFrom.setVisible(false);
                         this.searchFieldUntil.clear();
@@ -75,39 +72,29 @@ public class FilterContentMultilineConfig implements ComponentConf {
                         this.untilLabel.setVisible(false);
                         RestoreAllText restoreAllText = new RestoreAllText(this.observableList, this.initialList, this.statusMessage);
                         restoreAllText.execute();
-                    }
-                    else
-                    {
+                    } else {
                         throw new UnsupportedOperationException("Not supported logic for: " + rb.getId());
                     }
                 });
 
         this.searchButton.setOnAction(e -> {
-            Toggle t =  toggleGroup.getSelectedToggle();
+            Toggle t = toggleGroup.getSelectedToggle();
             RadioButton rb = (RadioButton) t;
-            if("useSelectedLinesMultiline".equals(rb.getId()))
-            {
+            if ("useSelectedLinesMultiline".equals(rb.getId())) {
                 String fromText = searchFieldFrom.getText();
                 String untilText = searchFieldUntil.getText();
-                if(fromText != null && !fromText.trim().isEmpty()
-                && untilText != null && !untilText.trim().isEmpty())
-                {
+                if (fromText != null && !fromText.trim().isEmpty()
+                        && untilText != null && !untilText.trim().isEmpty()) {
                     FilterByFromUntilString filterByFromUntilString = new FilterByFromUntilString(this.observableList, this.initialList, fromText, untilText, this.statusMessage);
                     filterByFromUntilString.execute();
-                }
-                else
-                {
+                } else {
                     this.statusMessage.setText("The search field is empty. Search will not be performed!");
                 }
 
-            }
-            else if("useWholeFileMultiline".equals(rb.getId()))
-            {
+            } else if ("useWholeFileMultiline".equals(rb.getId())) {
                 RestoreAllText restoreAllText = new RestoreAllText(this.observableList, this.initialList, this.statusMessage);
                 restoreAllText.execute();
-            }
-            else
-            {
+            } else {
                 throw new UnsupportedOperationException("Not supported logic for: " + rb.getId());
             }
         });

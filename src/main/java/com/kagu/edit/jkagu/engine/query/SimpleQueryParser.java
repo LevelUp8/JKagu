@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class SimpleQueryParser implements  QueryParser {
+public class SimpleQueryParser implements QueryParser {
 
     public static final String WHERE = "where";
     public static final String SELECT = "select";
@@ -15,27 +15,22 @@ public class SimpleQueryParser implements  QueryParser {
     private Integer selectedAdditionalRows;
     private Label statusMessage;
 
-    public SimpleQueryParser(String query, Label statusMessage)
-    {
+    public SimpleQueryParser(String query, Label statusMessage) {
         this.keyWords = parseQuery(query);
         this.selectedAdditionalRows = selectPartParser(query);
         this.statusMessage = statusMessage;
     }
 
-    public Optional<String> execute(String row)
-    {
-        if(additionalRowCounter > 0)
-        {
+    public Optional<String> execute(String row) {
+        if (additionalRowCounter > 0) {
             additionalRowCounter--;
             return Optional.of(row);
         }
 
         Optional<String> keyWordNotFoundOnRow = keyWords.stream().filter(w -> !row.contains(w)).findFirst();
 
-        if(keyWordNotFoundOnRow.isEmpty())
-        {
-            if(additionalRowCounter < selectedAdditionalRows)
-            {
+        if (keyWordNotFoundOnRow.isEmpty()) {
+            if (additionalRowCounter < selectedAdditionalRows) {
                 additionalRowCounter = selectedAdditionalRows;
             }
             return Optional.of(row);
@@ -46,13 +41,11 @@ public class SimpleQueryParser implements  QueryParser {
 
     private List<String> parseQuery(String query) {
         int indexOfWhere = query.indexOf(WHERE);
-        if(indexOfWhere == -1)
-        {
+        if (indexOfWhere == -1) {
             throw new IllegalStateException("the query must have Where clause");
         }
         String selectQueryPart = query.substring(0, indexOfWhere);
-        if(!selectQueryPart.startsWith(SELECT))
-        {
+        if (!selectQueryPart.startsWith(SELECT)) {
             this.statusMessage.setText("the query must start with select");
             throw new IllegalStateException("the query must start with select");
         }
@@ -63,30 +56,27 @@ public class SimpleQueryParser implements  QueryParser {
         int firstRowIndex = whereQueryPart.indexOf("row");
         int firstHasIndex = whereQueryPart.indexOf("has");
 
-        if(firstRowIndex == -1 || firstHasIndex == -1)
-        {
+        if (firstRowIndex == -1 || firstHasIndex == -1) {
             this.statusMessage.setText("where clause must has: row has");
             throw new IllegalStateException("where clause must has: row has");
         }
 
         List<String> keyWords = new ArrayList<>();
 
-        while(whereQueryPart.contains("'"))
-        {
+        while (whereQueryPart.contains("'")) {
             int startOfQuotesIndex = whereQueryPart.indexOf("'");
 
-            if(firstRowIndex > firstHasIndex)
-            {
+            if (firstRowIndex > firstHasIndex) {
                 this.statusMessage.setText("where clause must has: row has");
                 throw new IllegalStateException("where clause must has: row has");
             }
 
-            int endOfQuotesIndex = whereQueryPart.indexOf("'", startOfQuotesIndex+1);
+            int endOfQuotesIndex = whereQueryPart.indexOf("'", startOfQuotesIndex + 1);
 
-            String searchKeyword = whereQueryPart.substring(startOfQuotesIndex+1, endOfQuotesIndex);
+            String searchKeyword = whereQueryPart.substring(startOfQuotesIndex + 1, endOfQuotesIndex);
             keyWords.add(searchKeyword);
 
-            whereQueryPart = whereQueryPart.substring(endOfQuotesIndex+1);
+            whereQueryPart = whereQueryPart.substring(endOfQuotesIndex + 1);
         }
 
         return keyWords;
@@ -98,15 +88,13 @@ public class SimpleQueryParser implements  QueryParser {
         Integer selectedAdditionalRows = 0;
         String selected = selectQueryPart.substring(SELECT.length());
 
-        if(selected.indexOf("row") == -1)
-        {
+        if (selected.indexOf("row") == -1) {
             this.statusMessage.setText("In the select clause must have row");
             throw new IllegalStateException("In the select clause must have row");
         }
 
         int plus = selected.indexOf("+");
-        if(plus != -1)
-        {
+        if (plus != -1) {
             String numberOfAdditionalRows = selected.substring(plus);
             selectedAdditionalRows = Integer.valueOf(numberOfAdditionalRows.strip());
         }
