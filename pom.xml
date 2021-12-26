@@ -91,12 +91,13 @@
                             <outputDirectory>${basedir}/target/JKagu/bin</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${basedir}/src/main/resources/linux</directory>
+                                    <directory>${basedir}/src/main/resources/distribute</directory>
                                     <includes>
                                         <include>create_shortcut.sh</include>
                                         <include>JKagu.desktop</include>
                                         <include>icon.png</include>
                                         <include>Readme.txt</include>
+                                        <include>start_jkagu.vbs</include>
                                     </includes>
                                 </resource>
                             </resources>
