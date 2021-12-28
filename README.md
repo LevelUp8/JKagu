@@ -42,6 +42,7 @@ the background
 </p>
 
 <h2>Support</h2>
+<p>If you decede to support me:</p>
 <p>
 Ethereum wallet:  0x8e55A7B6670461d927F49C94df19d94516E26829
 </p> 
