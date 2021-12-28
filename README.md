@@ -20,3 +20,31 @@ JKagu is a software which maybe will help you when you need to search and replac
   <li>Find a word which you will replace with an incrementing number. Also you have to set here the incrementation step and the beginning number</li>
 </ul>
 The program was created with Java and Java FX and for the building it was used Amazon Correto 17
+
+
+<h3>
+==================================================================================================
+------------------------- For Ubuntu 20.04 -------------------------------------------------------
+==================================================================================================
+</h3>
+<p>
+To start it please use JKagu/bin/start
+This file must have permission to be executed as program
+
+If you want you can create shortcut with JKagu/bin/create_shortcut.sh
+This file also must have permission to be executed as program.
+It will get the current folder of JKagu and it will change it in JKagu/bin/JKagu.desktop
+After that it will copy JKagu/bin/JKagu.desktop to ~/.local/share/applications/JKagu.desktop
+</p>
+
+<h3> 
+==================================================================================================
+------------------------- For Windows 11 ---------------------------------------------------------
+==================================================================================================
+</h3>
+<p>
+To start it please use JKagu/bin/start_jkagu.vbs
+
+You also can start it if you use JKagu/bin/start.bat file but then it will start with the cmd in
+the background
+</p>
