@@ -19,7 +19,7 @@ JKagu is a software which maybe will help you when you need to search and replac
   <li>Find each last occurrence of the word for replacement on the row and replace it</li>
   <li>Find a word which you will replace with an incrementing number. Also you have to set here the incrementation step and the beginning number</li>
 </ul>
-The program was created with Java and Java FX and for the building it was used Amazon Correto 17
+The program was created with Java and Java FX and for the building it was used Amazon Correto 17 and Open JDK 17
 
 
 <h2>For Ubuntu 20.04:</h2>
