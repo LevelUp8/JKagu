@@ -22,21 +22,21 @@ JKagu is a software which maybe will help you when you need to search and replac
 The program was created with Java and Java FX and for the building it was used Amazon Correto 17
 
 
-<h3>For Ubuntu 20.04 </h3>
+<h2>For Ubuntu 20.04:</h2>
 <p>
-To start it please use JKagu/bin/start
+ To start it please use <b>JKagu/bin/start</b>
 This file must have permission to be executed as program
 
-If you want you can create shortcut with JKagu/bin/create_shortcut.sh
+ If you want you can create shortcut with <b>JKagu/bin/create_shortcut.sh</b>
 This file also must have permission to be executed as program.
-It will get the current folder of JKagu and it will change it in JKagu/bin/JKagu.desktop
-After that it will copy JKagu/bin/JKagu.desktop to ~/.local/share/applications/JKagu.desktop
+ It will get the current folder of JKagu and it will change it in <b>JKagu/bin/JKagu.desktop</b>
+ After that it will copy JKagu/bin/JKagu.desktop to <b>~/.local/share/applications/JKagu.desktop</b>
 </p>
 
-<h3>For Windows 11</h3>
+<h2>For Windows 11:</h2>
 <p>
-To start it please use JKagu/bin/start_jkagu.vbs
+ To start it please use <b>JKagu/bin/start_jkagu.vbs</b>
 
-You also can start it if you use JKagu/bin/start.bat file but then it will start with the cmd in
+ You also can start it if you use <b>JKagu/bin/start.bat</b> file but then it will start with the cmd in
 the background
 </p>
