@@ -44,10 +44,8 @@ the background
 <h2>Support</h2>
 <p>If you decede to support me:</p>
 <p>
-Ethereum wallet:</hr>
-0x8e55A7B6670461d927F49C94df19d94516E26829
+Ethereum wallet: 0x8e55A7B6670461d927F49C94df19d94516E26829
 </p> 
 <p>
-Ethereum classic wallet:</hr>
-0xE25979E075ec23d2E1c7257e4153e8E205Cd290b
+Ethereum classic wallet: 0xE25979E075ec23d2E1c7257e4153e8E205Cd290b
 </p>
