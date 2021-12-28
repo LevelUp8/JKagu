@@ -40,3 +40,11 @@ This file also must have permission to be executed as program.
  You also can start it if you use <b>JKagu/bin/start.bat</b> file but then it will start with the cmd in
 the background
 </p>
+
+<h2>Support</h2>
+<p>
+Ethereum wallet:  0x8e55A7B6670461d927F49C94df19d94516E26829
+</p> 
+<p>
+Ethereum classic wallet: 0xE25979E075ec23d2E1c7257e4153e8E205Cd290b
+</p>
