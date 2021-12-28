@@ -21,8 +21,14 @@ JKagu is a software which maybe will help you when you need to search and replac
 </ul>
 The program was created with Java and Java FX and for the building it was used Amazon Correto 17 and Open JDK 17
 
-
-<h2>For Ubuntu 20.04:</h2>
+<h2>
+ Website:
+</h2>
+<p>
+ For more information you can visit <a href="jkagu.tk">jkagu.tk</a> 
+</p>
+ 
+<h2>Set up for Ubuntu 20.04:</h2>
 <p>
  To start it please use <b>JKagu/bin/start</b>
 This file must have permission to be executed as program
@@ -33,7 +39,7 @@ This file also must have permission to be executed as program.
  After that it will copy JKagu/bin/JKagu.desktop to <b>~/.local/share/applications/JKagu.desktop</b>
 </p>
 
-<h2>For Windows 11:</h2>
+<h2>Set up for Windows 11:</h2>
 <p>
  To start it please use <b>JKagu/bin/start_jkagu.vbs</b>
 
