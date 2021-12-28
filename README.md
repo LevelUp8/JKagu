@@ -25,7 +25,7 @@ The program was created with Java and Java FX and for the building it was used A
  Website:
 </h2>
 <p>
- For more information you can visit <a href="jkagu.tk">jkagu.tk</a> 
+ For more information you can visit <a href="http://www.jkagu.tk/#/home">jkagu.tk</a> 
 </p>
  
 <h2>Set up for Ubuntu 20.04:</h2>
