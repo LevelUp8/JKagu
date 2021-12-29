@@ -31,11 +31,11 @@ The program was created with Java and Java FX and for the building it was used A
 <h2>Set up for Ubuntu 20.04:</h2>
 <p>
  To start it please use <b>JKagu/bin/start</b>
-This file must have permission to be executed as program
+This file must have permission to be executed as a program
 
- If you want you can create shortcut with <b>JKagu/bin/create_shortcut.sh</b>
-This file also must have permission to be executed as program.
- It will get the current folder of JKagu and it will change it in <b>JKagu/bin/JKagu.desktop</b>
+ If you want, you can create a shortcut with <b>JKagu/bin/create_shortcut.sh</b>
+This file also must have permission to be executed as a program.
+ It will get the current folder of JKagu and it will change it into <b>JKagu/bin/JKagu.desktop</b>
  After that it will copy JKagu/bin/JKagu.desktop to <b>~/.local/share/applications/JKagu.desktop</b>
 </p>
 
@@ -43,12 +43,12 @@ This file also must have permission to be executed as program.
 <p>
  To start it please use <b>JKagu/bin/start_jkagu.vbs</b>
 
- You also can start it if you use <b>JKagu/bin/start.bat</b> file but then it will start with the cmd in
+ You also can start it if you use <b>JKagu/bin/start.bat</b> file, but then it will start with the cmd in
 the background
 </p>
 
 <h2>Support</h2>
-<p>If you decede to support me:</p>
+<p>If you decide to support me:</p>
 <p>
 Ethereum wallet: 0x8e55A7B6670461d927F49C94df19d94516E26829
 </p> 
