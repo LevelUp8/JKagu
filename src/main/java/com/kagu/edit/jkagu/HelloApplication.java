@@ -15,7 +15,7 @@ public class HelloApplication extends Application {
 
     public static final String APP_FXML_FILE_PATH = "hello-view.fxml";
     public static final String APP_CSS_FILE_PATH = "style.css";
-    public static final String APP_TITLE = "JKagu v1.0";
+    public static final String APP_TITLE = "JKagu v2.0";
 
     @Override
     public void start(Stage stage) throws IOException {
