@@ -1,9 +1,7 @@
 package com.kagu.edit.jkagu.conf;
 
 import com.kagu.edit.jkagu.conf.model.Row;
-import com.kagu.edit.jkagu.engine.actions.ReplaceAll;
-import com.kagu.edit.jkagu.engine.actions.ReplaceFirst;
-import com.kagu.edit.jkagu.engine.actions.ReplaceLast;
+import com.kagu.edit.jkagu.engine.actions.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,8 +20,20 @@ public class FindReplaceContentConfig implements ComponentConf {
     public static final String ALL_OCCURRENCES = "All occurrences";
     public static final String FIRST_OCCURRENCE = "First occurrence";
     public static final String LAST_OCCURRENCE = "Last occurrence";
+    public static final String WHOLE_ROW_WITH_OCCURRENCES = "Whole row containing";
+    public static final String WITH_NEW_LINE = "With new line";
+    public static final String NEW_LINE_WITH_ELEMENT = "New line with element";
+    public static final String ADD_TO_BEGINNING_OF_THE_ROW = "Add to start";
+    public static final String ADD_TO_END_OF_THE_ROW = "Add to end";
     // string array
-    private static final String st[] = {ALL_OCCURRENCES, FIRST_OCCURRENCE, LAST_OCCURRENCE};
+    private static final String st[] = { ALL_OCCURRENCES,
+            FIRST_OCCURRENCE,
+            LAST_OCCURRENCE,
+            WHOLE_ROW_WITH_OCCURRENCES,
+            WITH_NEW_LINE,
+            NEW_LINE_WITH_ELEMENT,
+            ADD_TO_BEGINNING_OF_THE_ROW,
+            ADD_TO_END_OF_THE_ROW };
 
     private final ChoiceBox<String> replaceWhere;
     private final TextField changeFrom;
@@ -51,6 +61,33 @@ public class FindReplaceContentConfig implements ComponentConf {
             ReplaceLast replace = new ReplaceLast(this.observableList, target, replacement, statusMessage);
             return replace.execute();
         });
+
+        selectionActionMap.put(WHOLE_ROW_WITH_OCCURRENCES, (target, replacement) -> {
+            ReplaceLineContainingElement replace = new ReplaceLineContainingElement(this.observableList, target, replacement, statusMessage);
+            return replace.execute();
+        });
+
+
+        selectionActionMap.put(WITH_NEW_LINE, (target, replacement) -> {
+            ReplaceWithNewLine replace = new ReplaceWithNewLine(this.observableList, target, replacement, statusMessage);
+            return replace.execute();
+        });
+
+        selectionActionMap.put(NEW_LINE_WITH_ELEMENT, (target, replacement) -> {
+            ReplaceLineWithElement replace = new ReplaceLineWithElement(this.observableList, replacement, statusMessage);
+            return replace.execute();
+        });
+
+        selectionActionMap.put(ADD_TO_BEGINNING_OF_THE_ROW, (target, replacement) -> {
+            AddBeginningOfTheRow replace = new AddBeginningOfTheRow(this.observableList, replacement, statusMessage);
+            return replace.execute();
+        });
+
+        selectionActionMap.put(ADD_TO_END_OF_THE_ROW, (target, replacement) -> {
+            AddEndOfTheRow replace = new AddEndOfTheRow(this.observableList, replacement, statusMessage);
+            return replace.execute();
+        });
+
     }
 
 
@@ -81,7 +118,15 @@ public class FindReplaceContentConfig implements ComponentConf {
             // set the text for the label to the selected item
             //l1.setText(st[new_value.intValue()] + " selected");
             currentSelected = st[newValue.intValue()];
-            System.out.println(st[newValue.intValue()]);
+            //System.out.println(st[newValue.intValue()]);
+            if(currentSelected.equals(NEW_LINE_WITH_ELEMENT) || currentSelected.equals(ADD_TO_BEGINNING_OF_THE_ROW) || currentSelected.equals(ADD_TO_END_OF_THE_ROW))
+            {
+                changeFrom.setDisable(true);
+            }
+            else
+            {
+                changeFrom.setDisable(false);
+            }
         });
 
         buttonRefactor.setOnAction((ActionEvent e) -> {

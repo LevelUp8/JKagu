@@ -10,15 +10,18 @@ public class SimpleQueryParser implements QueryParser {
 
     public static final String WHERE = "where";
     public static final String SELECT = "select";
+    public static final String REMOVE = "remove";
     private Integer additionalRowCounter = 0;
     private List<String> keyWords;
     private Integer selectedAdditionalRows;
     private Label statusMessage;
+    private String originalQuery;
 
     public SimpleQueryParser(String query, Label statusMessage) {
         this.keyWords = parseQuery(query);
         this.selectedAdditionalRows = selectPartParser(query);
         this.statusMessage = statusMessage;
+        originalQuery = query;
     }
 
     public Optional<String> execute(String row) {
@@ -27,14 +30,33 @@ public class SimpleQueryParser implements QueryParser {
             return Optional.of(row);
         }
 
-        Optional<String> keyWordNotFoundOnRow = keyWords.stream().filter(w -> !row.contains(w)).findFirst();
+        if(originalQuery.startsWith(SELECT))
+        {
+            Optional<String> keyWordNotFoundOnRow = keyWords.stream().filter(w -> !row.contains(w)).findFirst();
 
-        if (keyWordNotFoundOnRow.isEmpty()) {
-            if (additionalRowCounter < selectedAdditionalRows) {
-                additionalRowCounter = selectedAdditionalRows;
+            if (keyWordNotFoundOnRow.isEmpty()) {
+                if (additionalRowCounter < selectedAdditionalRows) {
+                    additionalRowCounter = selectedAdditionalRows;
+                }
+                return Optional.of(row);
             }
-            return Optional.of(row);
         }
+        else if(originalQuery.startsWith(REMOVE))
+        {
+            Optional<String> keyWordFoundOnRow = keyWords.stream().filter(w -> row.contains(w)).findFirst();
+
+            if (keyWordFoundOnRow.isEmpty()) {
+                if (additionalRowCounter < selectedAdditionalRows) {
+                    additionalRowCounter = selectedAdditionalRows;
+                }
+                return Optional.of(row);
+            }
+        }
+        else
+        {
+            throw new UnsupportedOperationException("query: " + originalQuery);
+        }
+
 
         return Optional.empty();
     }
@@ -45,9 +67,9 @@ public class SimpleQueryParser implements QueryParser {
             throw new IllegalStateException("the query must have Where clause");
         }
         String selectQueryPart = query.substring(0, indexOfWhere);
-        if (!selectQueryPart.startsWith(SELECT)) {
-            this.statusMessage.setText("the query must start with select");
-            throw new IllegalStateException("the query must start with select");
+        if (!selectQueryPart.startsWith(SELECT) && !selectQueryPart.startsWith(REMOVE)) {
+            this.statusMessage.setText("the query must start with select or remove");
+            throw new IllegalStateException("the query must start with select or remove");
         }
 
         String whereQueryPart = query.substring(indexOfWhere + WHERE.length());
@@ -86,7 +108,22 @@ public class SimpleQueryParser implements QueryParser {
         int indexOfWhere = query.indexOf(WHERE);
         String selectQueryPart = query.substring(0, indexOfWhere);
         Integer selectedAdditionalRows = 0;
-        String selected = selectQueryPart.substring(SELECT.length());
+
+        String selected;
+        if(selectQueryPart.startsWith(SELECT))
+        {
+            selected = selectQueryPart.substring(SELECT.length());
+        }
+        else if(selectQueryPart.startsWith(REMOVE))
+        {
+            selected = selectQueryPart.substring(REMOVE.length());
+        }
+        else
+        {
+            this.statusMessage.setText("Query must start with select of remove");
+            throw new IllegalStateException("Query must start with select of remove");
+        }
+
 
         if (selected.indexOf("row") == -1) {
             this.statusMessage.setText("In the select clause must have row");
