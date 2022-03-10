@@ -50,8 +50,33 @@ the background
 <h2>Support</h2>
 <p>If you decide to support me:</p>
 <p>
+ Bitcoin wallet: bc1qn0daympte79p7c7ywmh85ld2h2dga98l2mqxr3
+</p>
+
+<p>
 Ethereum wallet: 0x8e55A7B6670461d927F49C94df19d94516E26829
-</p> 
+</p>
+
+<p>
+ Litecoin wallet: LfQQapffwUcTXyqYhHP5UD5872fqiRjzEp
+</p>
+
+<p>
+ Ripple wallet: rsAcDcHPk8wtkwQ4gLMMPdXAE2ZobjmkbG
+</p>
+
 <p>
 Ethereum classic wallet: 0xE25979E075ec23d2E1c7257e4153e8E205Cd290b
+</p>
+
+<p>
+ Monero wallet: 468yAPyy5u3Arb8X2xXipzD1ThhfKtTeM1tyyRVV969h57Cpf27TXymJXAr37LTERUFiVrNePVkTZU7pxGSrrwugHKuZS4Y
+</p>
+ 
+<p>
+ Dash wallet: XfkmoEBhpUt8uNni2Lp45WGiF4smErNaZV
+</p>
+
+<p>
+ Raven coin wallet: RCtvaCVm4XqPhZKKSF4gJfYse7rzMLG1Ci
 </p>
