@@ -47,6 +47,7 @@ public class RowListViewCell extends ListCell<Row> {
 
             number.setText(String.valueOf(row.rowNumber()));
             contentRow.setText(row.content());
+            contentRow.setWrapText(true);
 
             setText(null);
             setGraphic(rowContainer);
