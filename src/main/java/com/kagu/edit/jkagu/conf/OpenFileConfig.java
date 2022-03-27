@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.input.Dragboard;
 import javafx.stage.FileChooser;
 
 import java.io.BufferedReader;
@@ -17,11 +18,11 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Stream;
 
-public record AppendContentConfig(ProgressBar progressBar, Label statusMessage,
-                                  MenuItem appendFile,
-                                  ListView<Row> listView,
-                                  ObservableList<Row> observableList,
-                                  List<Row> initialList) implements ComponentConf {
+public record OpenFileConfig(ProgressBar progressBar, Label statusMessage,
+                             MenuItem appendFile,
+                             ListView<Row> listView,
+                             ObservableList<Row> observableList,
+                             List<Row> initialList) implements ComponentConf {
 
     @Override
     public void configure() {
@@ -38,6 +39,15 @@ public record AppendContentConfig(ProgressBar progressBar, Label statusMessage,
             File fileToLoad = fileChooser.showOpenDialog(null);
             //if file has been chosen, load it using asynchronous method (define later)
             if (fileToLoad != null) {
+                loadFile(fileToLoad);
+            }
+        });
+
+        listView.setOnDragDropped(event -> {
+            System.out.println("Drad event!!");
+            Dragboard db = event.getDragboard();
+            if(event.getDragboard().hasFiles()){
+                File fileToLoad = db.getFiles().get(0); //get files from dragboard
                 loadFile(fileToLoad);
             }
         });

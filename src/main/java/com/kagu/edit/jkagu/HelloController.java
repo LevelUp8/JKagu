@@ -11,7 +11,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 import java.io.Serializable;
 import java.net.URL;
@@ -214,7 +213,7 @@ public class HelloController implements Serializable, Initializable {
                                                     statusMessage,
                                                     caseSensitiveSearch));
 
-        configurationList.add(new AppendContentConfig(progressBar, statusMessage, appendFile, listView, observableList, initialList));
+        configurationList.add(new OpenFileConfig(progressBar, statusMessage, appendFile, listView, observableList, initialList));
 
         configurationList.add(new SaveContentConfig(observableList, saveFile, statusMessage));
 
