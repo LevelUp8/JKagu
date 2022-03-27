@@ -21,6 +21,7 @@ public class FilterContentMultilineConfig implements ComponentConf {
     private final Label statusMessage;
     private final Label fromLabel;
     private final Label untilLabel;
+    private final CheckBox caseSensitiveSearch;
 
 
     public FilterContentMultilineConfig(RadioButton useWholeFile,
@@ -32,7 +33,8 @@ public class FilterContentMultilineConfig implements ComponentConf {
                                         TextField searchFieldUntil,
                                         Label statusMessage,
                                         Label fromLabel,
-                                        Label untilLabel) {
+                                        Label untilLabel,
+                                        CheckBox caseSensitiveSearch) {
 
         useWholeFile.setToggleGroup(toggleGroup);
         useSelectedLines.setToggleGroup(toggleGroup);
@@ -45,6 +47,7 @@ public class FilterContentMultilineConfig implements ComponentConf {
         this.useWholeFile = useWholeFile;
         this.fromLabel = fromLabel;
         this.untilLabel = untilLabel;
+        this.caseSensitiveSearch = caseSensitiveSearch;
     }
 
 
@@ -57,12 +60,16 @@ public class FilterContentMultilineConfig implements ComponentConf {
                     Toggle t = toggleGroup.getSelectedToggle();
                     RadioButton rb = (RadioButton) t;
                     if ("useSelectedLinesMultiline".equals(rb.getId())) {
+                        this.caseSensitiveSearch.setDisable(true);
+                        this.caseSensitiveSearch.setSelected(true);
                         this.searchFieldFrom.setVisible(true);
                         this.searchFieldUntil.setVisible(true);
                         this.searchButton.setVisible(true);
                         this.fromLabel.setVisible(true);
                         this.untilLabel.setVisible(true);
                     } else if ("useWholeFileMultiline".equals(rb.getId())) {
+                        this.caseSensitiveSearch.setDisable(true);
+                        this.caseSensitiveSearch.setSelected(true);
                         this.searchFieldFrom.clear();
                         this.searchFieldFrom.setVisible(false);
                         this.searchFieldUntil.clear();

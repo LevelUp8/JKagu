@@ -145,7 +145,7 @@ public class FindReplaceContentConfig implements ComponentConf {
             else
             {
                 caseSensitive.setDisable(true);
-                caseSensitive.setSelected(false);
+                caseSensitive.setSelected(true);
             }
 
             //System.out.println(st[newValue.intValue()]);

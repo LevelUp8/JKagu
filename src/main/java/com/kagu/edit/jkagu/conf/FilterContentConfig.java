@@ -20,6 +20,7 @@ public class FilterContentConfig implements ComponentConf {
     private final TextField searchField;
 
     private final Label statusMessage;
+    private final CheckBox caseSensitiveSearch;
 
 
     public FilterContentConfig(RadioButton useWholeFile,
@@ -29,7 +30,8 @@ public class FilterContentConfig implements ComponentConf {
                                ObservableList<Row> observableList,
                                List<Row> initialList,
                                TextField searchField,
-                               Label statusMessage) {
+                               Label statusMessage,
+                               CheckBox caseSensitiveSearch) {
 
         useWholeFile.setToggleGroup(toggleGroup);
         useSelectedLines.setToggleGroup(toggleGroup);
@@ -40,6 +42,7 @@ public class FilterContentConfig implements ComponentConf {
         this.searchField = searchField;
         this.statusMessage = statusMessage;
         this.useWholeFile = useWholeFile;
+        this.caseSensitiveSearch = caseSensitiveSearch;
     }
 
 
@@ -52,15 +55,20 @@ public class FilterContentConfig implements ComponentConf {
                     Toggle t = toggleGroup.getSelectedToggle();
                     RadioButton rb = (RadioButton) t;
                     if ("useSelectedLines".equals(rb.getId())) {
+                        this.caseSensitiveSearch.setDisable(false);
                         this.searchField.setVisible(true);
                         this.searchButton.setVisible(true);
                     } else if ("useWholeFile".equals(rb.getId())) {
+                        this.caseSensitiveSearch.setDisable(true);
+                        this.caseSensitiveSearch.setSelected(true);
                         this.searchField.clear();
                         this.searchField.setVisible(false);
                         this.searchButton.setVisible(false);
                         RestoreAllText restoreAllText = new RestoreAllText(this.observableList, this.initialList, this.statusMessage);
                         restoreAllText.execute();
                     } else if ("useAdvancedSelect".equals(rb.getId())) {
+                        this.caseSensitiveSearch.setDisable(true);
+                        this.caseSensitiveSearch.setSelected(true);
                         this.searchField.setVisible(true);
                         this.searchButton.setVisible(true);
                     } else {
@@ -74,7 +82,7 @@ public class FilterContentConfig implements ComponentConf {
             if ("useSelectedLines".equals(rb.getId())) {
                 String text = searchField.getText();
                 if (text != null && !text.trim().isEmpty()) {
-                    FilterByString filterByString = new FilterByString(this.observableList, this.initialList, text, this.statusMessage);
+                    FilterByString filterByString = new FilterByString(this.observableList, this.initialList, text, this.statusMessage, this.caseSensitiveSearch);
                     filterByString.execute();
                 } else {
                     this.statusMessage.setText("The search field is empty. Search will not be performed!");

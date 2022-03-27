@@ -36,7 +36,7 @@ public record SwitchReplaceTemplateConfig(HBox findReplaceBox,
 
             statusMessage.setText("Find replace functionality");
             caseSensitive.setDisable(true);
-            caseSensitive.setSelected(false);
+            caseSensitive.setSelected(true);
         });
 
     }

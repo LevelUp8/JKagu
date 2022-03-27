@@ -69,7 +69,7 @@
                         </MenuBar>
                      </children>
                   </HBox>
-                  <Pane prefHeight="104.0" prefWidth="1198.0" VBox.vgrow="ALWAYS">
+                  <Pane prefHeight="110.0" prefWidth="1214.0" VBox.vgrow="ALWAYS">
                      <children>
                         <VBox layoutY="7.0" prefHeight="62.0" prefWidth="1198.0">
                            <children>
@@ -82,7 +82,7 @@
                                                 <Insets left="5.0" />
                                              </HBox.margin>
                                           </RadioButton>
-                                          <RadioButton fx:id="useSelectedLinesMultiline" prefHeight="27.0" prefWidth="139.0" style="-fx-padding: 5px;" text="Select Lines" />
+                                          <RadioButton fx:id="useSelectedLinesMultiline" prefHeight="27.0" prefWidth="132.0" style="-fx-padding: 5px;" text="Select Lines" />
                                           <Label fx:id="fromLabel" prefHeight="26.0" prefWidth="62.0" styleClass="header-section" text="From:" />
                                           <TextField fx:id="searchFieldFrom" minWidth="200.0" prefHeight="24.0" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
@@ -104,7 +104,7 @@
                                     </HBox>
                                     <HBox fx:id="searchBox" prefHeight="38.0" prefWidth="658.0">
                                        <children>
-                                          <RadioButton fx:id="useWholeFile" prefHeight="27.0" prefWidth="106.0" style="-fx-padding: 5px;" text="All Lines">
+                                          <RadioButton fx:id="useWholeFile" prefHeight="27.0" prefWidth="110.0" style="-fx-padding: 5px;" text="All Lines">
                                              <HBox.margin>
                                                 <Insets left="5.0" />
                                              </HBox.margin>
@@ -121,7 +121,10 @@
                                     </HBox>
                                  </children>
                               </StackPane>
-                              <Separator prefWidth="200.0" />
+                              <Separator prefWidth="200.0">
+                                 <VBox.margin>
+                                    <Insets left="10.0" />
+                                 </VBox.margin></Separator>
                               <StackPane prefHeight="150.0" prefWidth="200.0">
                                  <children>
                                     <HBox fx:id="templateIncrementBox" prefHeight="38.0" prefWidth="658.0">
@@ -142,7 +145,7 @@
                                              <HBox.margin>
                                                 <Insets left="10.0" />
                                              </HBox.margin></Label>
-                                          <TextField fx:id="increment" minWidth="241.0" prefHeight="26.0" prefWidth="241.0" styleClass="header-section" />
+                                          <TextField fx:id="increment" minWidth="250.0" prefHeight="26.0" prefWidth="241.0" styleClass="header-section" />
                                           <Button fx:id="buttonRefactorTemplateInc" prefHeight="24.0" prefWidth="98.0" text="Refactor">
                                              <HBox.margin>
                                                 <Insets left="10.0" right="10.0" />
@@ -177,12 +180,44 @@
                                        </children>
                                     </HBox>
                                  </children>
+                                 <VBox.margin>
+                                    <Insets bottom="3.0" top="2.0" />
+                                 </VBox.margin>
                               </StackPane>
+                              <Separator prefWidth="200.0">
+                                 <VBox.margin>
+                                    <Insets left="10.0" />
+                                 </VBox.margin>
+                              </Separator>
+                              <HBox prefHeight="30.0" prefWidth="1198.0">
+                                 <children>
+                                    <ProgressBar fx:id="progressBar" prefWidth="100.0" progress="0.0">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="10.0" right="10.0" top="5.0" />
+                                       </HBox.margin>
+                                    </ProgressBar>
+                                    <CheckBox fx:id="caseSensitiveSearch" mnemonicParsing="false" prefHeight="18.0" prefWidth="220.0" text="Case Sensitive Search">
+                                       <HBox.margin>
+                                          <Insets right="10.0" top="5.0" />
+                                       </HBox.margin>
+                                    </CheckBox>
+                                    <CheckBox fx:id="caseSensitive" mnemonicParsing="false" prefHeight="18.0" prefWidth="214.0" selected="true" text="Case Sensitive Replace">
+                                       <HBox.margin>
+                                          <Insets right="10.0" top="5.0" />
+                                       </HBox.margin>
+                                    </CheckBox>
+                                    <Label fx:id="statusMessage" prefHeight="16.0" prefWidth="666.0" text="Status message">
+                                       <HBox.margin>
+                                          <Insets top="5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
                            </children>
                         </VBox>
-                        <ProgressBar fx:id="progressBar" layoutX="14.0" layoutY="71.0" prefWidth="100.0" progress="0.0" />
-                        <CheckBox fx:id="caseSensitive" layoutX="121.0" layoutY="72.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="138.0" selected="true" text="Case Sensitive" />
-                        <Label fx:id="statusMessage" layoutX="275.0" layoutY="73.0" prefHeight="16.0" prefWidth="914.0" text="Status message" />
                      </children>
                   </Pane>
                </children>

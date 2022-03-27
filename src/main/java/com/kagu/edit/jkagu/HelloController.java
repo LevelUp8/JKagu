@@ -167,6 +167,9 @@ public class HelloController implements Serializable, Initializable {
     public CheckBox caseSensitive;
 
     @FXML
+    public CheckBox caseSensitiveSearch;
+
+    @FXML
     public AnchorPane rootContainer;
 
 
@@ -198,7 +201,8 @@ public class HelloController implements Serializable, Initializable {
                                                                 searchFieldUntil,
                                                                 statusMessage,
                                                                 fromLabel,
-                                                                untilLabel));
+                                                                untilLabel,
+                                                                caseSensitiveSearch));
 
         configurationList.add(new FilterContentConfig(useWholeFile,
                                                     useSelectedLines,
@@ -207,7 +211,8 @@ public class HelloController implements Serializable, Initializable {
                                                     observableList,
                                                     initialList,
                                                     searchField,
-                                                    statusMessage));
+                                                    statusMessage,
+                                                    caseSensitiveSearch));
 
         configurationList.add(new AppendContentConfig(progressBar, statusMessage, appendFile, listView, observableList, initialList));
 
