@@ -22,6 +22,9 @@ public class RowListViewCell extends ListCell<Row> {
     @FXML
     private HBox rowContainer;
 
+    @FXML
+    private HBox rowTextContainer;
+
     @Override
     protected void updateItem(Row row, boolean empty) {
         super.updateItem(row, empty);
@@ -55,4 +58,8 @@ public class RowListViewCell extends ListCell<Row> {
 
     }
 
+    public HBox getMainContainer()
+    {
+        return rowContainer;
+    }
 }

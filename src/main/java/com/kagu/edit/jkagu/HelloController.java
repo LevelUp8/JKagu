@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -86,6 +87,9 @@ public class HelloController implements Serializable, Initializable {
     public MenuItem copyText;
 
     @FXML
+    public MenuItem copySelectedText;
+
+    @FXML
     public MenuItem pasteText;
 
     @FXML
@@ -107,6 +111,12 @@ public class HelloController implements Serializable, Initializable {
 
     @FXML
     public MenuItem darkTheme;
+
+    @FXML
+    public MenuItem defaultTextSize;
+
+    @FXML
+    public MenuItem bigTextSize;
 
     //--- text place
     @FXML
@@ -155,6 +165,9 @@ public class HelloController implements Serializable, Initializable {
 
     @FXML
     public CheckBox caseSensitive;
+
+    @FXML
+    public AnchorPane rootContainer;
 
 
     // Use Java Collections to create the List.
@@ -214,6 +227,9 @@ public class HelloController implements Serializable, Initializable {
         CopyContentConfig copyContentConfig = new CopyContentConfig(copyText, observableList, statusMessage);
         copyContentConfig.configure();
 
+        CopySelectedTextContentConfig copySelectedTextContentConfig = new CopySelectedTextContentConfig(copySelectedText, statusMessage, listView);
+        copySelectedTextContentConfig.configure();
+
         FindReplaceContentConfig findReplaceContentConfig = new FindReplaceContentConfig(observableList, replaceWhere, changeFrom, changeTo, buttonRefactor, statusMessage, caseSensitive);
         findReplaceContentConfig.configure();
 
@@ -235,7 +251,11 @@ public class HelloController implements Serializable, Initializable {
         ViewThemeConfig viewThemeConfig = new ViewThemeConfig(defaultTheme, darkTheme, statusMessage);
         viewThemeConfig.configure();
 
-        listView.setCellFactory(studentListView -> new RowListViewCell());
+        ViewTextSizeConfig ViewTextSizeConfig = new ViewTextSizeConfig(defaultTextSize, bigTextSize, statusMessage);
+        ViewTextSizeConfig.configure();
+
+        CustomCellFactoryConfig customCellFactoryConfig = new CustomCellFactoryConfig(listView, rootContainer, observableList);
+        customCellFactoryConfig.configure();
     }
 
 

@@ -15,6 +15,7 @@ public class HelloApplication extends Application {
 
     public static final String APP_FXML_FILE_PATH = "hello-view.fxml";
     public static final String APP_CSS_FILE_PATH = "style.css";
+    public static final String APP_CSS_DEFAULT_TEXT_FILE_PATH = "default-text.css";
     public static final String APP_TITLE = "JKagu v2.0";
 
     @Override
@@ -24,6 +25,9 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         String cssFile = this.getClass().getResource(APP_CSS_FILE_PATH).toString();
         scene.getStylesheets().add(cssFile);
+
+        String cssTextDefaultFile = this.getClass().getResource(APP_CSS_DEFAULT_TEXT_FILE_PATH).toString();
+        scene.getStylesheets().add(cssTextDefaultFile);
 
 
         stage.setTitle(APP_TITLE);

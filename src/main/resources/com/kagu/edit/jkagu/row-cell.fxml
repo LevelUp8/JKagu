@@ -15,7 +15,7 @@
             </Label>
          </children>
       </HBox>
-      <HBox alignment="CENTER_LEFT" prefWidth="1090.0" HBox.hgrow="ALWAYS">
+      <HBox fx:id="rowTextContainer" alignment="CENTER_LEFT" prefWidth="1090.0" HBox.hgrow="ALWAYS">
          <children>
             <Label fx:id="contentRow" text="RowText">
             </Label>

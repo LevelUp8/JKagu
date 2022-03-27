@@ -11,6 +11,7 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -18,7 +19,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kagu.edit.jkagu.HelloController">
+<AnchorPane fx:id="rootContainer" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kagu.edit.jkagu.HelloController">
    <children>
       <VBox styleClass="root" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -39,6 +40,7 @@
                               <items>
                                   <MenuItem fx:id="undo" text="Undo" />
                                   <MenuItem fx:id="copyText" text="Copy" />
+                                  <MenuItem fx:id="copySelectedText" text="Copy Selected" />
                                   <MenuItem fx:id="pasteText" text="Paste" />
                               </items>
                             </Menu>
@@ -54,6 +56,8 @@
                                 <items>
                                    <MenuItem fx:id="defaultTheme" text="Default Theme" />
                                    <MenuItem fx:id="darkTheme" text="Dark Theme" />
+                                   <MenuItem fx:id="defaultTextSize" text="Default text size" />
+                                   <MenuItem fx:id="bigTextSize" text="Big text size" />
                                 </items>
                              </Menu>
                             <Menu text="Help">
@@ -73,25 +77,25 @@
                                  <children>
                                     <HBox fx:id="searchMultilineBox" prefHeight="38.0" prefWidth="658.0">
                                        <children>
-                                          <RadioButton fx:id="useWholeFileMultiline" style="-fx-padding: 5px;" text="All Lines">
+                                          <RadioButton fx:id="useWholeFileMultiline" prefHeight="27.0" prefWidth="110.0" style="-fx-padding: 5px;" text="All Lines">
                                              <HBox.margin>
                                                 <Insets left="5.0" />
                                              </HBox.margin>
                                           </RadioButton>
-                                          <RadioButton fx:id="useSelectedLinesMultiline" style="-fx-padding: 5px;" text="Select Lines" />
-                                          <Label fx:id="fromLabel" styleClass="header-section" text="From:" />
+                                          <RadioButton fx:id="useSelectedLinesMultiline" prefHeight="27.0" prefWidth="139.0" style="-fx-padding: 5px;" text="Select Lines" />
+                                          <Label fx:id="fromLabel" prefHeight="26.0" prefWidth="62.0" styleClass="header-section" text="From:" />
                                           <TextField fx:id="searchFieldFrom" minWidth="200.0" prefHeight="24.0" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets left="10.0" right="10.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <Label fx:id="untilLabel" styleClass="header-section" text="Until:" />
+                                          <Label fx:id="untilLabel" prefHeight="26.0" prefWidth="55.0" styleClass="header-section" text="Until:" />
                                           <TextField fx:id="searchFieldUntil" minWidth="200.0" prefHeight="24.0" HBox.hgrow="ALWAYS">
                                              <HBox.margin>
                                                 <Insets left="10.0" />
                                              </HBox.margin>
                                           </TextField>
-                                          <Button fx:id="searchButtonMultiline" text="Search">
+                                          <Button fx:id="searchButtonMultiline" prefHeight="24.0" prefWidth="74.0" text="Search">
                                              <HBox.margin>
                                                 <Insets left="20.0" right="10.0" />
                                              </HBox.margin>
@@ -100,15 +104,15 @@
                                     </HBox>
                                     <HBox fx:id="searchBox" prefHeight="38.0" prefWidth="658.0">
                                        <children>
-                                          <RadioButton fx:id="useWholeFile" style="-fx-padding: 5px;" text="All Lines">
+                                          <RadioButton fx:id="useWholeFile" prefHeight="27.0" prefWidth="106.0" style="-fx-padding: 5px;" text="All Lines">
                                              <HBox.margin>
                                                 <Insets left="5.0" />
                                              </HBox.margin>
                                           </RadioButton>
-                                          <RadioButton fx:id="useSelectedLines" style="-fx-padding: 5px;" text="Select Lines" />
-                                          <RadioButton fx:id="useAdvancedSelect" style="-fx-padding: 5px;" text="Advanced Select" />
-                                          <TextField fx:id="searchField" minWidth="716.0" prefHeight="24.0" prefWidth="716.0" HBox.hgrow="ALWAYS" />
-                                          <Button fx:id="searchButton" text="Search">
+                                          <RadioButton fx:id="useSelectedLines" prefHeight="27.0" prefWidth="132.0" style="-fx-padding: 5px;" text="Select Lines" />
+                                          <RadioButton fx:id="useAdvancedSelect" prefHeight="27.0" prefWidth="165.0" style="-fx-padding: 5px;" text="Advanced Select" />
+                                          <TextField fx:id="searchField" minWidth="678.0" prefHeight="24.0" prefWidth="678.0" HBox.hgrow="ALWAYS" />
+                                          <Button fx:id="searchButton" prefHeight="24.0" prefWidth="74.0" text="Search">
                                              <HBox.margin>
                                                 <Insets left="20.0" right="10.0" />
                                              </HBox.margin>
@@ -117,51 +121,55 @@
                                     </HBox>
                                  </children>
                               </StackPane>
+                              <Separator prefWidth="200.0" />
                               <StackPane prefHeight="150.0" prefWidth="200.0">
                                  <children>
                                     <HBox fx:id="templateIncrementBox" prefHeight="38.0" prefWidth="658.0">
                                        <children>
-                                          <Label styleClass="header-section" text="Change from:">
+                                          <Label prefHeight="26.0" prefWidth="129.0" styleClass="header-section" text="Change from:">
                                              <HBox.margin>
                                                 <Insets left="10.0" />
                                              </HBox.margin>
                                           </Label>
-                                          <TextField fx:id="templateValue" minWidth="250.0" prefHeight="26.0" styleClass="header-section" HBox.hgrow="ALWAYS" />
-                                          <Label styleClass="header-section" text="Initial value:">
+                                          <TextField fx:id="templateValue" minWidth="242.0" prefHeight="26.0" prefWidth="242.0" styleClass="header-section" HBox.hgrow="ALWAYS" />
+                                          <Label prefHeight="26.0" prefWidth="118.0" styleClass="header-section" text="Initial value:">
                                              <HBox.margin>
                                                 <Insets left="10.0" />
                                              </HBox.margin>
                                           </Label>
-                                          <TextField fx:id="initialValue" minWidth="250.0" prefHeight="26.0" styleClass="header-section" HBox.hgrow="ALWAYS" />
-                                          <Label styleClass="header-section" text="Increment:" />
-                                          <TextField fx:id="increment" minWidth="250.0" prefHeight="26.0" styleClass="header-section" />
-                                          <Button fx:id="buttonRefactorTemplateInc" text="Refactor">
+                                          <TextField fx:id="initialValue" minWidth="243.0" prefHeight="26.0" prefWidth="243.0" styleClass="header-section" HBox.hgrow="ALWAYS" />
+                                          <Label prefHeight="26.0" prefWidth="112.0" styleClass="header-section" text="Increment:">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin></Label>
+                                          <TextField fx:id="increment" minWidth="241.0" prefHeight="26.0" prefWidth="241.0" styleClass="header-section" />
+                                          <Button fx:id="buttonRefactorTemplateInc" prefHeight="24.0" prefWidth="98.0" text="Refactor">
                                              <HBox.margin>
                                                 <Insets left="10.0" right="10.0" />
                                              </HBox.margin>
                                           </Button>
                                        </children>
                                     </HBox>
-                                    <HBox fx:id="findReplaceBox" prefHeight="38.0" prefWidth="658.0">
+                                    <HBox fx:id="findReplaceBox" prefHeight="38.0" prefWidth="658.0" visible="false">
                                        <children>
-                                          <ChoiceBox fx:id="replaceWhere" prefWidth="160.0">
+                                          <ChoiceBox fx:id="replaceWhere" prefHeight="24.0" prefWidth="205.0">
                                              <HBox.margin>
                                                 <Insets left="10.0" />
                                              </HBox.margin>
                                           </ChoiceBox>
-                                          <Label styleClass="header-section" text="Change from:">
+                                          <Label prefHeight="26.0" prefWidth="120.0" styleClass="header-section" text="Change from:">
                                              <HBox.margin>
                                                 <Insets left="10.0" />
                                              </HBox.margin>
                                           </Label>
-                                          <TextField fx:id="changeFrom" minWidth="350.0" prefHeight="26.0" styleClass="header-section" HBox.hgrow="ALWAYS" />
-                                          <Label styleClass="header-section" text="Change to:">
+                                          <TextField fx:id="changeFrom" minWidth="320.0" prefHeight="26.0" prefWidth="320.0" styleClass="header-section" HBox.hgrow="ALWAYS" />
+                                          <Label prefHeight="26.0" prefWidth="42.0" styleClass="header-section" text=" to:">
                                              <HBox.margin>
                                                 <Insets left="10.0" />
                                              </HBox.margin>
                                           </Label>
-                                          <TextField fx:id="changeTo" minWidth="350.0" prefHeight="26.0" styleClass="header-section" HBox.hgrow="ALWAYS" />
-                                          <Button fx:id="buttonRefactor" text="Refactor">
+                                          <TextField fx:id="changeTo" minWidth="336.0" prefHeight="26.0" prefWidth="336.0" styleClass="header-section" HBox.hgrow="ALWAYS" />
+                                          <Button fx:id="buttonRefactor" prefHeight="24.0" prefWidth="88.0" text="Refactor">
                                              <HBox.margin>
                                                 <Insets left="10.0" right="10.0" />
                                              </HBox.margin>
@@ -173,8 +181,8 @@
                            </children>
                         </VBox>
                         <ProgressBar fx:id="progressBar" layoutX="14.0" layoutY="71.0" prefWidth="100.0" progress="0.0" />
-                        <CheckBox selected="true" fx:id="caseSensitive" layoutX="121.0" layoutY="72.0" mnemonicParsing="false" text="Case Sensitive" />
-                        <Label fx:id="statusMessage" layoutX="261.0" layoutY="73.0" prefHeight="15.0" prefWidth="928.0" text="Status message" />
+                        <CheckBox fx:id="caseSensitive" layoutX="121.0" layoutY="72.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="138.0" selected="true" text="Case Sensitive" />
+                        <Label fx:id="statusMessage" layoutX="275.0" layoutY="73.0" prefHeight="16.0" prefWidth="914.0" text="Status message" />
                      </children>
                   </Pane>
                </children>

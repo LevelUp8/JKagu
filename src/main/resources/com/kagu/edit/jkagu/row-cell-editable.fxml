@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextField?>
+
+<HBox fx:id="rowContainerTextField" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity"  prefWidth="1150.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <TextField fx:id="rowTextField" minWidth="900.0" prefHeight="24.0" HBox.hgrow="ALWAYS">
+            <HBox.margin>
+                <Insets left="10.0" right="10.0" />
+            </HBox.margin>
+        </TextField>
+    </children>
+</HBox>
