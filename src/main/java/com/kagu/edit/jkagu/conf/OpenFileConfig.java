@@ -3,11 +3,14 @@ package com.kagu.edit.jkagu.conf;
 import com.kagu.edit.jkagu.conf.model.Row;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
+import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.stage.FileChooser;
 
 import java.io.BufferedReader;
@@ -43,14 +46,38 @@ public record OpenFileConfig(ProgressBar progressBar, Label statusMessage,
             }
         });
 
-        listView.setOnDragDropped(event -> {
-            System.out.println("Drad event!!");
-            Dragboard db = event.getDragboard();
-            if(event.getDragboard().hasFiles()){
-                File fileToLoad = db.getFiles().get(0); //get files from dragboard
-                loadFile(fileToLoad);
+        listView.setOnDragOver(new EventHandler<DragEvent>() {
+
+            @Override
+            public void handle(DragEvent event) {
+                if (event.getGestureSource() != listView
+                        && event.getDragboard().hasFiles()) {
+                    /* allow for both copying and moving, whatever user chooses */
+                    event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                }
+                event.consume();
             }
         });
+
+        listView.setOnDragDropped(new EventHandler<DragEvent>() {
+
+            @Override
+            public void handle(DragEvent event) {
+                Dragboard db = event.getDragboard();
+                boolean success = false;
+                if (db.hasFiles()) {
+                    File fileToLoad = db.getFiles().get(0); //get files from dragboard
+                    loadFile(fileToLoad);
+                    success = true;
+                }
+                /* let the source know whether the string was successfully
+                 * transferred and used */
+                event.setDropCompleted(success);
+
+                event.consume();
+            }
+        });
+
     }
 
     private void loadFile(File fileToLoad) {
