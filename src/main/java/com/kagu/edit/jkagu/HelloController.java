@@ -182,80 +182,58 @@ public class HelloController implements Serializable, Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        SwitchSearchConfig switchSearchConfig = new SwitchSearchConfig(searchBox, searchMultilineBox, search, searchMultiline, statusMessage);
-        switchSearchConfig.configure();
 
-        SwitchReplaceTemplateConfig switchReplaceTemplateConfig = new SwitchReplaceTemplateConfig(findReplaceBox,
-                templateIncrementBox,
-                findAndReplace,
-                templateCounter,
-                statusMessage);
-        switchReplaceTemplateConfig.configure();
+        List<ComponentConf> configurationList = new ArrayList<>();
 
-        FilterContentMultilineConfig filterContentMultilineConfig = new FilterContentMultilineConfig(useWholeFileMultiline,
-                useSelectedLinesMultiline,
-                searchButtonMultiline,
-                observableList,
-                initialList,
-                searchFieldFrom,
-                searchFieldUntil,
-                statusMessage,
-                fromLabel,
-                untilLabel);
-        filterContentMultilineConfig.configure();
+        configurationList.add(new SwitchSearchConfig(searchBox, searchMultilineBox, search, searchMultiline, statusMessage));
 
+        configurationList.add(new SwitchReplaceTemplateConfig(findReplaceBox, templateIncrementBox, findAndReplace, templateCounter, statusMessage));
 
-        FilterContentConfig filterContentConfig = new FilterContentConfig(useWholeFile,
-                useSelectedLines,
-                useAdvancedSelect,
-                searchButton,
-                observableList,
-                initialList,
-                searchField,
-                statusMessage);
-        filterContentConfig.configure();
+        configurationList.add(new FilterContentMultilineConfig(useWholeFileMultiline,
+                                                                useSelectedLinesMultiline,
+                                                                searchButtonMultiline,
+                                                                observableList,
+                                                                initialList,
+                                                                searchFieldFrom,
+                                                                searchFieldUntil,
+                                                                statusMessage,
+                                                                fromLabel,
+                                                                untilLabel));
 
-        AppendContentConfig openContentConfig = new AppendContentConfig(progressBar, statusMessage, appendFile, listView, observableList, initialList);
-        openContentConfig.configure();
+        configurationList.add(new FilterContentConfig(useWholeFile,
+                                                    useSelectedLines,
+                                                    useAdvancedSelect,
+                                                    searchButton,
+                                                    observableList,
+                                                    initialList,
+                                                    searchField,
+                                                    statusMessage));
 
-        SaveContentConfig saveContentConfig = new SaveContentConfig(observableList, saveFile, statusMessage);
-        saveContentConfig.configure();
+        configurationList.add(new AppendContentConfig(progressBar, statusMessage, appendFile, listView, observableList, initialList));
 
-        PasteContentConfig pasteContentConfig = new PasteContentConfig(pasteText, observableList, statusMessage, initialList, listView);
-        pasteContentConfig.configure();
+        configurationList.add(new SaveContentConfig(observableList, saveFile, statusMessage));
 
-        CopyContentConfig copyContentConfig = new CopyContentConfig(copyText, observableList, statusMessage);
-        copyContentConfig.configure();
+        configurationList.add(new PasteContentConfig(pasteText, observableList, statusMessage, initialList, listView));
 
-        CopySelectedTextContentConfig copySelectedTextContentConfig = new CopySelectedTextContentConfig(copySelectedText, statusMessage, listView);
-        copySelectedTextContentConfig.configure();
+        configurationList.add(new CopyContentConfig(copyText, observableList, statusMessage));
 
-        FindReplaceContentConfig findReplaceContentConfig = new FindReplaceContentConfig(observableList, replaceWhere, changeFrom, changeTo, buttonRefactor, statusMessage, caseSensitive);
-        findReplaceContentConfig.configure();
+        configurationList.add(new CopySelectedTextContentConfig(copySelectedText, statusMessage, listView));
 
+        configurationList.add(new FindReplaceContentConfig(observableList, replaceWhere, changeFrom, changeTo, buttonRefactor, statusMessage, caseSensitive));
 
-        TemplateIncrementConfig templateIncrementConfig = new TemplateIncrementConfig(templateValue,
-                initialValue,
-                increment,
-                observableList,
-                buttonRefactorTemplateInc,
-                statusMessage);
-        templateIncrementConfig.configure();
+        configurationList.add(new TemplateIncrementConfig(templateValue, initialValue, increment, observableList, buttonRefactorTemplateInc, statusMessage));
 
-        UndoConfig undoConfig = new UndoConfig(undo, statusMessage);
-        undoConfig.configure();
+        configurationList.add(new UndoConfig(undo, statusMessage));
 
-        CloseAppConfig closeAppConfig = new CloseAppConfig(closeApp);
-        closeAppConfig.configure();
+        configurationList.add(new CloseAppConfig(closeApp));
 
-        ViewThemeConfig viewThemeConfig = new ViewThemeConfig(defaultTheme, darkTheme, statusMessage);
-        viewThemeConfig.configure();
+        configurationList.add(new ViewThemeConfig(defaultTheme, darkTheme, statusMessage));
 
-        ViewTextSizeConfig ViewTextSizeConfig = new ViewTextSizeConfig(defaultTextSize, bigTextSize, statusMessage);
-        ViewTextSizeConfig.configure();
+        configurationList.add(new ViewTextSizeConfig(defaultTextSize, bigTextSize, statusMessage));
 
-        CustomCellFactoryConfig customCellFactoryConfig = new CustomCellFactoryConfig(listView, rootContainer, observableList);
-        customCellFactoryConfig.configure();
+        configurationList.add(new CustomCellFactoryConfig(listView, rootContainer, observableList));
+
+        configurationList.forEach( c -> c.configure() );
     }
 
 

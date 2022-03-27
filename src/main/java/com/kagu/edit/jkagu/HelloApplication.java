@@ -10,13 +10,10 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
 
-    public static final double APP_WIDTH = 1200;
-    public static final double APP_HEIGHT = 900;
-
     public static final String APP_FXML_FILE_PATH = "hello-view.fxml";
     public static final String APP_CSS_FILE_PATH = "style.css";
     public static final String APP_CSS_DEFAULT_TEXT_FILE_PATH = "default-text.css";
-    public static final String APP_TITLE = "JKagu v2.0";
+    public static final String APP_TITLE = "JKagu v3.0";
 
     @Override
     public void start(Stage stage) throws IOException {
