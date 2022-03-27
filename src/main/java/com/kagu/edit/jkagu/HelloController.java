@@ -153,6 +153,9 @@ public class HelloController implements Serializable, Initializable {
     @FXML
     public MenuItem about;
 
+    @FXML
+    public CheckBox caseSensitive;
+
 
     // Use Java Collections to create the List.
     private final List<Row> initialList = new ArrayList<>();
@@ -211,7 +214,7 @@ public class HelloController implements Serializable, Initializable {
         CopyContentConfig copyContentConfig = new CopyContentConfig(copyText, observableList, statusMessage);
         copyContentConfig.configure();
 
-        FindReplaceContentConfig findReplaceContentConfig = new FindReplaceContentConfig(observableList, replaceWhere, changeFrom, changeTo, buttonRefactor, statusMessage);
+        FindReplaceContentConfig findReplaceContentConfig = new FindReplaceContentConfig(observableList, replaceWhere, changeFrom, changeTo, buttonRefactor, statusMessage, caseSensitive);
         findReplaceContentConfig.configure();
 
 

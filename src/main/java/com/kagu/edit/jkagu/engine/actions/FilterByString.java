@@ -4,7 +4,6 @@ import com.kagu.edit.jkagu.conf.model.Row;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

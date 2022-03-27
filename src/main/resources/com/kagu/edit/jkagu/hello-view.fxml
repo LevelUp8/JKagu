@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -172,7 +173,8 @@
                            </children>
                         </VBox>
                         <ProgressBar fx:id="progressBar" layoutX="14.0" layoutY="71.0" prefWidth="100.0" progress="0.0" />
-                        <Label fx:id="statusMessage" layoutX="132.0" layoutY="71.0" prefHeight="15.0" prefWidth="1147.0" text="Checking" />
+                        <CheckBox selected="true" fx:id="caseSensitive" layoutX="121.0" layoutY="72.0" mnemonicParsing="false" text="Case Sensitive" />
+                        <Label fx:id="statusMessage" layoutX="261.0" layoutY="73.0" prefHeight="15.0" prefWidth="928.0" text="Status message" />
                      </children>
                   </Pane>
                </children>

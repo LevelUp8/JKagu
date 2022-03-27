@@ -5,10 +5,7 @@ import com.kagu.edit.jkagu.engine.actions.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,6 +36,7 @@ public class FindReplaceContentConfig implements ComponentConf {
     private final TextField changeFrom;
     private final TextField changeTo;
     private final Button buttonRefactor;
+    private final CheckBox caseSensitive;
 
     private ObservableList<Row> observableList;
     private String currentSelected;
@@ -46,49 +44,8 @@ public class FindReplaceContentConfig implements ComponentConf {
 
     private Map<String, BiFunction<String, String, Boolean>> selectionActionMap = new HashMap<>();
 
-    {
-        selectionActionMap.put(ALL_OCCURRENCES, (target, replacement) -> {
-            ReplaceAll replace = new ReplaceAll(this.observableList, target, replacement, statusMessage);
-            return replace.execute();
-        });
+    private Map<String, Class<? extends Command>> classRelationActionMap = new HashMap<>();
 
-        selectionActionMap.put(FIRST_OCCURRENCE, (target, replacement) -> {
-            ReplaceFirst replace = new ReplaceFirst(this.observableList, target, replacement, statusMessage);
-            return replace.execute();
-        });
-
-        selectionActionMap.put(LAST_OCCURRENCE, (target, replacement) -> {
-            ReplaceLast replace = new ReplaceLast(this.observableList, target, replacement, statusMessage);
-            return replace.execute();
-        });
-
-        selectionActionMap.put(WHOLE_ROW_WITH_OCCURRENCES, (target, replacement) -> {
-            ReplaceLineContainingElement replace = new ReplaceLineContainingElement(this.observableList, target, replacement, statusMessage);
-            return replace.execute();
-        });
-
-
-        selectionActionMap.put(WITH_NEW_LINE, (target, replacement) -> {
-            ReplaceWithNewLine replace = new ReplaceWithNewLine(this.observableList, target, replacement, statusMessage);
-            return replace.execute();
-        });
-
-        selectionActionMap.put(NEW_LINE_WITH_ELEMENT, (target, replacement) -> {
-            ReplaceLineWithElement replace = new ReplaceLineWithElement(this.observableList, replacement, statusMessage);
-            return replace.execute();
-        });
-
-        selectionActionMap.put(ADD_TO_BEGINNING_OF_THE_ROW, (target, replacement) -> {
-            AddBeginningOfTheRow replace = new AddBeginningOfTheRow(this.observableList, replacement, statusMessage);
-            return replace.execute();
-        });
-
-        selectionActionMap.put(ADD_TO_END_OF_THE_ROW, (target, replacement) -> {
-            AddEndOfTheRow replace = new AddEndOfTheRow(this.observableList, replacement, statusMessage);
-            return replace.execute();
-        });
-
-    }
 
 
     public FindReplaceContentConfig(ObservableList<Row> observableList,
@@ -96,13 +53,74 @@ public class FindReplaceContentConfig implements ComponentConf {
                                     TextField changeFrom,
                                     TextField changeTo,
                                     Button buttonRefactor,
-                                    Label statusMessage) {
+                                    Label statusMessage,
+                                    CheckBox caseSensitive) {
         this.replaceWhere = replaceWhere;
         this.changeFrom = changeFrom;
         this.changeTo = changeTo;
         this.buttonRefactor = buttonRefactor;
         this.observableList = observableList;
         this.statusMessage = statusMessage;
+        this.caseSensitive = caseSensitive;
+
+
+        selectionActionMap.put(ALL_OCCURRENCES, (target, replacement) -> {
+            ReplaceAll replace = new ReplaceAll(this.observableList, target, replacement, statusMessage, caseSensitive);
+            return replace.execute();
+        });
+
+        classRelationActionMap.put(ALL_OCCURRENCES, ReplaceAll.class);
+
+        selectionActionMap.put(FIRST_OCCURRENCE, (target, replacement) -> {
+            ReplaceFirst replace = new ReplaceFirst(this.observableList, target, replacement, statusMessage);
+            return replace.execute();
+        });
+
+        classRelationActionMap.put(FIRST_OCCURRENCE, ReplaceFirst.class);
+
+        selectionActionMap.put(LAST_OCCURRENCE, (target, replacement) -> {
+            ReplaceLast replace = new ReplaceLast(this.observableList, target, replacement, statusMessage);
+            return replace.execute();
+        });
+
+        classRelationActionMap.put(LAST_OCCURRENCE, ReplaceLast.class);
+
+        selectionActionMap.put(WHOLE_ROW_WITH_OCCURRENCES, (target, replacement) -> {
+            ReplaceLineContainingElement replace = new ReplaceLineContainingElement(this.observableList, target, replacement, statusMessage);
+            return replace.execute();
+        });
+
+        classRelationActionMap.put(WHOLE_ROW_WITH_OCCURRENCES, ReplaceLineContainingElement.class);
+
+
+        selectionActionMap.put(WITH_NEW_LINE, (target, replacement) -> {
+            ReplaceWithNewLine replace = new ReplaceWithNewLine(this.observableList, target, replacement, statusMessage);
+            return replace.execute();
+        });
+
+        classRelationActionMap.put(WITH_NEW_LINE, ReplaceWithNewLine.class);
+
+        selectionActionMap.put(NEW_LINE_WITH_ELEMENT, (target, replacement) -> {
+            ReplaceLineWithElement replace = new ReplaceLineWithElement(this.observableList, replacement, statusMessage);
+            return replace.execute();
+        });
+
+        classRelationActionMap.put(NEW_LINE_WITH_ELEMENT, ReplaceLineWithElement.class);
+
+        selectionActionMap.put(ADD_TO_BEGINNING_OF_THE_ROW, (target, replacement) -> {
+            AddBeginningOfTheRow replace = new AddBeginningOfTheRow(this.observableList, replacement, statusMessage);
+            return replace.execute();
+        });
+
+        classRelationActionMap.put(ADD_TO_BEGINNING_OF_THE_ROW, AddBeginningOfTheRow.class);
+
+        selectionActionMap.put(ADD_TO_END_OF_THE_ROW, (target, replacement) -> {
+            AddEndOfTheRow replace = new AddEndOfTheRow(this.observableList, replacement, statusMessage);
+            return replace.execute();
+        });
+
+        classRelationActionMap.put(ADD_TO_END_OF_THE_ROW, AddEndOfTheRow.class);
+
     }
 
     @Override
@@ -114,10 +132,21 @@ public class FindReplaceContentConfig implements ComponentConf {
         // add a listener
         replaceWhere.getSelectionModel().selectedIndexProperty().addListener((ov, value, newValue) ->
         {
-
             // set the text for the label to the selected item
             //l1.setText(st[new_value.intValue()] + " selected");
             currentSelected = st[newValue.intValue()];
+
+            Class<? extends Command> relatedActionClazz = classRelationActionMap.get(currentSelected);
+            if(null != relatedActionClazz && CaseSensitiveCommand.class.isAssignableFrom(relatedActionClazz))
+            {
+                caseSensitive.setDisable(false);
+            }
+            else
+            {
+                caseSensitive.setDisable(true);
+                caseSensitive.setSelected(false);
+            }
+
             //System.out.println(st[newValue.intValue()]);
             if(currentSelected.equals(NEW_LINE_WITH_ELEMENT) || currentSelected.equals(ADD_TO_BEGINNING_OF_THE_ROW) || currentSelected.equals(ADD_TO_END_OF_THE_ROW))
             {
