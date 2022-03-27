@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 
+import java.util.EventListener;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
@@ -42,9 +43,9 @@ public class FindReplaceContentConfig implements ComponentConf {
     private String currentSelected;
     private Label statusMessage = null;
 
-    private Map<String, BiFunction<String, String, Boolean>> selectionActionMap = new HashMap<>();
+    private static final Map<String, BiFunction<String, String, Boolean>> selectionActionMap = new HashMap<>();
 
-    private Map<String, Class<? extends Command>> classRelationActionMap = new HashMap<>();
+    private static final Map<String, Class<? extends Command>> classRelationActionMap = new HashMap<>();
 
 
 
@@ -173,4 +174,5 @@ public class FindReplaceContentConfig implements ComponentConf {
                 }
         );
     }
+
 }

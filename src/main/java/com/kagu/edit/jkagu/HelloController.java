@@ -187,7 +187,7 @@ public class HelloController implements Serializable, Initializable {
 
         configurationList.add(new SwitchSearchConfig(searchBox, searchMultilineBox, search, searchMultiline, statusMessage));
 
-        configurationList.add(new SwitchReplaceTemplateConfig(findReplaceBox, templateIncrementBox, findAndReplace, templateCounter, statusMessage));
+        configurationList.add(new SwitchReplaceTemplateConfig(findReplaceBox, templateIncrementBox, findAndReplace, templateCounter, statusMessage, replaceWhere, caseSensitive));
 
         configurationList.add(new FilterContentMultilineConfig(useWholeFileMultiline,
                                                                 useSelectedLinesMultiline,
