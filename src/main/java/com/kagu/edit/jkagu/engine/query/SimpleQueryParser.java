@@ -2,23 +2,25 @@ package com.kagu.edit.jkagu.engine.query;
 
 import javafx.scene.control.Label;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class SimpleQueryParser implements QueryParser {
 
+    public static final String UNIQUE = "unique";
     public static final String WHERE = "where";
     public static final String SELECT = "select";
     public static final String REMOVE = "remove";
+    private final boolean unique;
     private Integer additionalRowCounter = 0;
     private List<String> keyWords;
     private Integer selectedAdditionalRows;
     private Label statusMessage;
     private String originalQuery;
+    private Set<String> uniqueSetRow = new LinkedHashSet<>();
 
     public SimpleQueryParser(String query, Label statusMessage) {
         this.keyWords = parseQuery(query);
+        this.unique = parseUnique(query);
         this.selectedAdditionalRows = selectPartParser(query);
         this.statusMessage = statusMessage;
         originalQuery = query;
@@ -32,13 +34,28 @@ public class SimpleQueryParser implements QueryParser {
 
         if(originalQuery.startsWith(SELECT))
         {
-            Optional<String> keyWordNotFoundOnRow = keyWords.stream().filter(w -> !row.contains(w)).findFirst();
 
-            if (keyWordNotFoundOnRow.isEmpty()) {
-                if (additionalRowCounter < selectedAdditionalRows) {
-                    additionalRowCounter = selectedAdditionalRows;
+            if(unique)
+            {
+                if(uniqueSetRow.add(row))
+                {
+                    return Optional.of(row);
                 }
-                return Optional.of(row);
+                else
+                {
+                    return Optional.empty();
+                }
+            }
+            else
+            {
+                Optional<String> keyWordNotFoundOnRow = keyWords.stream().filter(w -> !row.contains(w)).findFirst();
+
+                if (keyWordNotFoundOnRow.isEmpty()) {
+                    if (additionalRowCounter < selectedAdditionalRows) {
+                        additionalRowCounter = selectedAdditionalRows;
+                    }
+                    return Optional.of(row);
+                }
             }
         }
         else if(originalQuery.startsWith(REMOVE))
@@ -61,8 +78,26 @@ public class SimpleQueryParser implements QueryParser {
         return Optional.empty();
     }
 
-    private List<String> parseQuery(String query) {
+    private boolean parseUnique(String query)
+    {
+        int indexOfUnique = query.indexOf(UNIQUE);
         int indexOfWhere = query.indexOf(WHERE);
+        if (indexOfUnique != -1 && indexOfWhere == -1) {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private List<String> parseQuery(String query) {
+        int indexOfUnique = query.indexOf(UNIQUE);
+        int indexOfWhere = query.indexOf(WHERE);
+        if (indexOfUnique != -1 && indexOfWhere == -1) {
+            return Collections.emptyList();
+        }
+
         if (indexOfWhere == -1) {
             throw new IllegalStateException("the query must have Where clause");
         }
@@ -106,7 +141,18 @@ public class SimpleQueryParser implements QueryParser {
 
     private Integer selectPartParser(String query) {
         int indexOfWhere = query.indexOf(WHERE);
-        String selectQueryPart = query.substring(0, indexOfWhere);
+        int indexOfUnique = query.indexOf(UNIQUE);
+
+        String selectQueryPart;
+        if(indexOfWhere == -1)
+        {
+            selectQueryPart = query.substring(0, indexOfUnique);
+        }
+        else
+        {
+            selectQueryPart = query.substring(0, indexOfWhere);
+        }
+
         Integer selectedAdditionalRows = 0;
 
         String selected;

@@ -20,20 +20,27 @@ public record PasteContentConfig(MenuItem pasteText,
             final Clipboard clipboard = Clipboard.getSystemClipboard();
             final String text = clipboard.getString();
 
-            initialList.clear();
-            observableList.clear();
-            String[] lines = text.split("\\r?\\n");
-            long rowNumber = 0;
-            for (String line : lines) {
-                rowNumber++;
-                Row row = new Row(rowNumber, line);
-                observableList.add(row);
-                initialList.add(row);
+            if(text == null)
+            {
+                statusMessage.setText("Paste is empty!");
             }
+            else
+            {
+                initialList.clear();
+                observableList.clear();
+                String[] lines = text.split("\\r?\\n");
+                long rowNumber = 0;
+                for (String line : lines) {
+                    rowNumber++;
+                    Row row = new Row(rowNumber, line);
+                    observableList.add(row);
+                    initialList.add(row);
+                }
 
-            listView.setItems(observableList);
+                listView.setItems(observableList);
 
-            statusMessage.setText("Paste successfully done!");
+                statusMessage.setText("Paste successfully done!");
+            }
         });
     }
 

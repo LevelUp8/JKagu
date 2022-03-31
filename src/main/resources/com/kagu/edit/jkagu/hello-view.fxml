@@ -155,7 +155,7 @@
                                     </HBox>
                                     <HBox fx:id="findReplaceBox" prefHeight="38.0" prefWidth="658.0" visible="false">
                                        <children>
-                                          <ChoiceBox fx:id="replaceWhere" prefHeight="24.0" prefWidth="205.0">
+                                          <ChoiceBox fx:id="replaceWhere" prefHeight="24.0" prefWidth="235.0">
                                              <HBox.margin>
                                                 <Insets left="10.0" />
                                              </HBox.margin>

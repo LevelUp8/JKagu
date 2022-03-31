@@ -18,20 +18,23 @@ public class FindReplaceContentConfig implements ComponentConf {
     public static final String ALL_OCCURRENCES = "All occurrences";
     public static final String FIRST_OCCURRENCE = "First occurrence";
     public static final String LAST_OCCURRENCE = "Last occurrence";
-    public static final String WHOLE_ROW_WITH_OCCURRENCES = "Whole row containing";
-    public static final String WITH_NEW_LINE = "With new line";
-    public static final String NEW_LINE_WITH_ELEMENT = "New line with element";
-    public static final String ADD_TO_BEGINNING_OF_THE_ROW = "Add to start";
-    public static final String ADD_TO_END_OF_THE_ROW = "Add to end";
+    public static final String FROM_START_UNTIL_END = "Remove start to end of row";
+    public static final String WHOLE_ROW_WITH_OCCURRENCES = "Change row containing";
+    public static final String WITH_NEW_LINE ="All content in one line";
+    public static final String NEW_LINE_WITH_ELEMENT = "Split to new lines";
+    public static final String ADD_TO_BEGINNING_OF_THE_ROW = "Add to start of each row";
+    public static final String ADD_TO_END_OF_THE_ROW = "Add to end of each row";
+
     // string array
     private static final String st[] = { ALL_OCCURRENCES,
-            FIRST_OCCURRENCE,
-            LAST_OCCURRENCE,
-            WHOLE_ROW_WITH_OCCURRENCES,
-            WITH_NEW_LINE,
-            NEW_LINE_WITH_ELEMENT,
-            ADD_TO_BEGINNING_OF_THE_ROW,
-            ADD_TO_END_OF_THE_ROW };
+                                        FIRST_OCCURRENCE,
+                                        LAST_OCCURRENCE,
+                                        FROM_START_UNTIL_END,
+                                        WHOLE_ROW_WITH_OCCURRENCES,
+                                        WITH_NEW_LINE,
+                                        NEW_LINE_WITH_ELEMENT,
+                                        ADD_TO_BEGINNING_OF_THE_ROW,
+                                        ADD_TO_END_OF_THE_ROW };
 
     private final ChoiceBox<String> replaceWhere;
     private final TextField changeFrom;
@@ -85,6 +88,13 @@ public class FindReplaceContentConfig implements ComponentConf {
         });
 
         classRelationActionMap.put(LAST_OCCURRENCE, ReplaceLast.class);
+
+
+        selectionActionMap.put(FROM_START_UNTIL_END, (start, end) -> {
+            RemoveFromStartUntilEnd remove = new RemoveFromStartUntilEnd(this.observableList, start, end, statusMessage);
+            return remove.execute();
+        });
+
 
         selectionActionMap.put(WHOLE_ROW_WITH_OCCURRENCES, (target, replacement) -> {
             ReplaceLineContainingElement replace = new ReplaceLineContainingElement(this.observableList, target, replacement, statusMessage);
