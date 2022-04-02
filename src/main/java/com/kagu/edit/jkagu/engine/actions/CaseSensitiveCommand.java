@@ -19,7 +19,7 @@ public abstract class CaseSensitiveCommand extends Command {
      * @return
      */
     @Override
-    public boolean execute() {
+    public final boolean execute() {
         if (caseSensitive.isSelected())
         {
            return executeCaseSensitive();

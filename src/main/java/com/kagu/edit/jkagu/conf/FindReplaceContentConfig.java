@@ -65,19 +65,19 @@ public class FindReplaceContentConfig implements ComponentConf {
         selectionActionMap.put(ALL_OCCURRENCES, (target, replacement) -> new ReplaceAll(this.observableList, target, replacement, statusMessage, caseSensitive));
         classRelationActionMap.put(ALL_OCCURRENCES, ReplaceAll.class);
 
-        selectionActionMap.put(FIRST_OCCURRENCE, (target, replacement) -> new ReplaceFirst(this.observableList, target, replacement, statusMessage));
+        selectionActionMap.put(FIRST_OCCURRENCE, (target, replacement) -> new ReplaceFirst(this.observableList, target, replacement, statusMessage, caseSensitive));
         classRelationActionMap.put(FIRST_OCCURRENCE, ReplaceFirst.class);
 
-        selectionActionMap.put(LAST_OCCURRENCE, (target, replacement) -> new ReplaceLast(this.observableList, target, replacement, statusMessage));
+        selectionActionMap.put(LAST_OCCURRENCE, (target, replacement) -> new ReplaceLast(this.observableList, target, replacement, statusMessage, caseSensitive));
         classRelationActionMap.put(LAST_OCCURRENCE, ReplaceLast.class);
 
         selectionActionMap.put(FROM_START_UNTIL_END, (start, end) -> new RemoveFromStartUntilEnd(this.observableList, start, end, statusMessage));
         classRelationActionMap.put(FROM_START_UNTIL_END, RemoveFromStartUntilEnd.class);
 
-        selectionActionMap.put(WHOLE_ROW_WITH_OCCURRENCES, (target, replacement) -> new ReplaceWholeRowContainingElement(this.observableList, target, replacement, statusMessage));
+        selectionActionMap.put(WHOLE_ROW_WITH_OCCURRENCES, (target, replacement) -> new ReplaceWholeRowContainingElement(this.observableList, target, replacement, statusMessage, caseSensitive));
         classRelationActionMap.put(WHOLE_ROW_WITH_OCCURRENCES, ReplaceWholeRowContainingElement.class);
 
-        selectionActionMap.put(SPLIT_TO_NEW_ROWS_ON_WORD, (target, replacement) -> new SplitToRowsBasedOnWord(this.observableList, target, replacement, statusMessage));
+        selectionActionMap.put(SPLIT_TO_NEW_ROWS_ON_WORD, (target, replacement) -> new SplitToRowsBasedOnWord(this.observableList, target, replacement, statusMessage, caseSensitive));
         classRelationActionMap.put(SPLIT_TO_NEW_ROWS_ON_WORD, SplitToRowsBasedOnWord.class);
 
         selectionActionMap.put(ALL_CONTENT_IN_ONE_ROW, (target, replacement) -> new AllContentInOneRow(this.observableList, replacement, statusMessage));
