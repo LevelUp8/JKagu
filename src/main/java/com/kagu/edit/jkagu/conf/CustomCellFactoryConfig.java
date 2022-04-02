@@ -67,7 +67,7 @@ public class CustomCellFactoryConfig implements ComponentConf {
                 };
                 editField.focusedProperty().addListener(focusListener);
                 // code to edit item...
-                System.out.println("code to edit item...");
+                // System.out.println("code to edit item...");
             });
 
             MenuItem copyItem = new MenuItem();
@@ -81,7 +81,7 @@ public class CustomCellFactoryConfig implements ComponentConf {
                 content.putString(text);
                 clipboard.setContent(content);
 
-                System.out.println("code to copy item...");
+                // System.out.println("code to copy item...");
             });
 
 

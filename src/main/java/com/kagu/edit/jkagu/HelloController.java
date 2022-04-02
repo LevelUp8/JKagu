@@ -23,10 +23,10 @@ public class HelloController implements Serializable, Initializable {
     @FXML
     private Menu file;
 
-    //-- Search functionality
     @FXML
-    public RadioButton useWholeFile;
+    public Button searchButton;
 
+    //-- Search single line functionality
     @FXML
     public RadioButton useSelectedLines;
 
@@ -34,26 +34,14 @@ public class HelloController implements Serializable, Initializable {
     public RadioButton useAdvancedSelect;
 
     @FXML
-    public Button searchButton;
-
-    @FXML
     public TextField searchField;
 
     @FXML
-    public HBox searchBox;
-
-    @FXML
-    public MenuItem search;
+    public HBox searchFieldContainer;
 
     //--- Search functionality from until
     @FXML
-    public MenuItem searchMultiline;
-
-    @FXML
-    public HBox searchMultilineBox;
-
-    @FXML
-    public RadioButton useWholeFileMultiline;
+    public HBox searchFromUntilContainer;
 
     @FXML
     public RadioButton useSelectedLinesMultiline;
@@ -64,8 +52,6 @@ public class HelloController implements Serializable, Initializable {
     @FXML
     public TextField searchFieldUntil;
 
-    @FXML
-    public Button searchButtonMultiline;
 
     //--- Information functionality
     @FXML
@@ -93,6 +79,9 @@ public class HelloController implements Serializable, Initializable {
 
     @FXML
     public MenuItem undo;
+
+    @FXML
+    public MenuItem restoreInitialText;
 
     //-- Tools button
     @FXML
@@ -154,12 +143,6 @@ public class HelloController implements Serializable, Initializable {
     public Button buttonRefactorTemplateInc;
 
     @FXML
-    public Label fromLabel;
-
-    @FXML
-    public Label untilLabel;
-
-    @FXML
     public MenuItem about;
 
     @FXML
@@ -172,12 +155,8 @@ public class HelloController implements Serializable, Initializable {
     public AnchorPane rootContainer;
 
 
-    // Use Java Collections to create the List.
     private final List<Row> initialList = new ArrayList<>();
-
-    // Use Java Collections to create the List.
     private final List<Row> list = new ArrayList<>();
-
     // Now add observability by wrapping it with ObservableList.
     private final ObservableList<Row> observableList = FXCollections.observableList(list);
 
@@ -187,31 +166,11 @@ public class HelloController implements Serializable, Initializable {
 
         List<ComponentConf> configurationList = new ArrayList<>();
 
-        configurationList.add(new SwitchSearchConfig(searchBox, searchMultilineBox, search, searchMultiline, statusMessage));
-
         configurationList.add(new SwitchReplaceTemplateConfig(findReplaceBox, templateIncrementBox, findAndReplace, templateCounter, statusMessage, replaceWhere, caseSensitive));
 
-        configurationList.add(new FilterContentMultilineConfig(useWholeFileMultiline,
-                                                                useSelectedLinesMultiline,
-                                                                searchButtonMultiline,
-                                                                observableList,
-                                                                initialList,
-                                                                searchFieldFrom,
-                                                                searchFieldUntil,
-                                                                statusMessage,
-                                                                fromLabel,
-                                                                untilLabel,
-                                                                caseSensitiveSearch));
-
-        configurationList.add(new FilterContentConfig(useWholeFile,
-                                                    useSelectedLines,
-                                                    useAdvancedSelect,
-                                                    searchButton,
-                                                    observableList,
-                                                    initialList,
-                                                    searchField,
-                                                    statusMessage,
-                                                    caseSensitiveSearch));
+        SingleLineSearchContext singleLineSearchContext = new SingleLineSearchContext(useSelectedLines,useAdvancedSelect, searchField, searchFieldContainer);
+        MuliLineSearchContext muliLineSearchContext = new MuliLineSearchContext(useSelectedLinesMultiline, searchFieldFrom, searchFieldUntil, searchFromUntilContainer);
+        configurationList.add(new SearchContentConfig(singleLineSearchContext, muliLineSearchContext, searchButton, observableList, initialList, searchField, statusMessage, caseSensitiveSearch));
 
         configurationList.add(new OpenFileConfig(progressBar, statusMessage, appendFile, listView, observableList, initialList));
 
@@ -229,6 +188,8 @@ public class HelloController implements Serializable, Initializable {
 
         configurationList.add(new UndoConfig(undo, statusMessage));
 
+        configurationList.add(new RestoreInitialTextConfig(observableList, initialList, statusMessage, restoreInitialText));
+
         configurationList.add(new CloseAppConfig(closeApp));
 
         configurationList.add(new ViewThemeConfig(defaultTheme, darkTheme, statusMessage));
@@ -245,10 +206,9 @@ public class HelloController implements Serializable, Initializable {
 
         RefactorButtons refactorButtons = new RefactorButtons(buttonRefactor, buttonRefactorTemplateInc, findAndReplace, templateCounter);
         InputOutputButtons inputOutputButtons = new InputOutputButtons(file, appendFile, saveFile, copyText, pasteText);
-        SearchButtons searchButtons = new SearchButtons(searchButton, search, searchButtonMultiline, searchMultiline);
         ThemeButtons themeButtons = new ThemeButtons(defaultTheme, darkTheme);
 
-        SceneConfigurator sceneConfigurator = new SceneConfigurator(scene, refactorButtons, inputOutputButtons, searchButtons, themeButtons, undo, closeApp);
+        SceneConfigurator sceneConfigurator = new SceneConfigurator(scene, refactorButtons, inputOutputButtons, themeButtons, undo, closeApp);
         sceneConfigurator.configure();
 
     }

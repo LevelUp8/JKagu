@@ -3,7 +3,7 @@
 current_dir=$(pwd)
 search=change_path
 
-echo $current_dir
+echo "$current_dir"
 echo $search
 
 if [[ $search != "" && $current_dir != "" ]]; then

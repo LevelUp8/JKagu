@@ -44,7 +44,6 @@ public class FindReplaceContentConfig implements ComponentConf {
 
     private ObservableList<Row> observableList;
     private String currentSelected;
-    private Label statusMessage = null;
 
     private static final Map<String, BiFunction<String, String, Boolean>> selectionActionMap = new HashMap<>();
 
@@ -64,7 +63,6 @@ public class FindReplaceContentConfig implements ComponentConf {
         this.changeTo = changeTo;
         this.buttonRefactor = buttonRefactor;
         this.observableList = observableList;
-        this.statusMessage = statusMessage;
         this.caseSensitive = caseSensitive;
 
 

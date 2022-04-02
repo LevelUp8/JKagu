@@ -25,4 +25,17 @@ public class Utils {
         return result;
     }
 
+
+    public static boolean isStringNOTEmpty(String s)
+    {
+        if(s != null && !s.trim().isEmpty())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 }
