@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ReplaceLineWithElement extends Command {
+public class AllContentInOneRow extends Command {
 
     private String replacement;
     private Label statusMessage;
 
-    public ReplaceLineWithElement(ObservableList<Row> observableList, String replacement, Label statusMessage) {
+    public AllContentInOneRow(ObservableList<Row> observableList, String replacement, Label statusMessage) {
         super(observableList);
         this.replacement = replacement;
         this.statusMessage = statusMessage;

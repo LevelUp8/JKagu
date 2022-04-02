@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ReplaceWithNewLine extends Command {
+public class SplitToRowsBasedOnWord extends Command {
 
     private String target;
     private Label statusMessage;
     private String replacement;
 
-    public ReplaceWithNewLine(ObservableList<Row> observableList, String target, String replacement, Label statusMessage) {
+    public SplitToRowsBasedOnWord(ObservableList<Row> observableList, String target, String replacement, Label statusMessage) {
         super(observableList);
         this.target = target;
         this.replacement = replacement;

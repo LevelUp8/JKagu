@@ -7,7 +7,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 
-import java.util.EventListener;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
@@ -15,15 +14,15 @@ import java.util.function.BiFunction;
 
 public class FindReplaceContentConfig implements ComponentConf {
 
-    public static final String ALL_OCCURRENCES = "All occurrences";
-    public static final String FIRST_OCCURRENCE = "First occurrence";
-    public static final String LAST_OCCURRENCE = "Last occurrence";
-    public static final String FROM_START_UNTIL_END = "Remove start to end of row";
-    public static final String WHOLE_ROW_WITH_OCCURRENCES = "Change row containing";
-    public static final String WITH_NEW_LINE ="All content in one line";
-    public static final String NEW_LINE_WITH_ELEMENT = "Split to new lines";
-    public static final String ADD_TO_BEGINNING_OF_THE_ROW = "Add to start of each row";
-    public static final String ADD_TO_END_OF_THE_ROW = "Add to end of each row";
+    private static final String ALL_OCCURRENCES = "All word occurrences";
+    private static final String FIRST_OCCURRENCE = "First word occurrence";
+    private static final String LAST_OCCURRENCE = "Last word occurrence";
+    private static final String FROM_START_UNTIL_END = "Remove start to end of row";
+    private static final String WHOLE_ROW_WITH_OCCURRENCES = "Change row containing";
+    private static final String SPLIT_TO_NEW_ROWS_ON_WORD ="Split to new rows on word";
+    private static final String ALL_CONTENT_IN_ONE_ROW = "All content in one row";
+    private static final String ADD_TO_BEGINNING_OF_THE_ROW = "Add to start of each row";
+    private static final String ADD_TO_END_OF_THE_ROW = "Add to end of each row";
 
     // string array
     private static final String st[] = { ALL_OCCURRENCES,
@@ -31,8 +30,8 @@ public class FindReplaceContentConfig implements ComponentConf {
                                         LAST_OCCURRENCE,
                                         FROM_START_UNTIL_END,
                                         WHOLE_ROW_WITH_OCCURRENCES,
-                                        WITH_NEW_LINE,
-                                        NEW_LINE_WITH_ELEMENT,
+                                        SPLIT_TO_NEW_ROWS_ON_WORD,
+                                        ALL_CONTENT_IN_ONE_ROW,
                                         ADD_TO_BEGINNING_OF_THE_ROW,
                                         ADD_TO_END_OF_THE_ROW };
 
@@ -45,11 +44,8 @@ public class FindReplaceContentConfig implements ComponentConf {
     private ObservableList<Row> observableList;
     private String currentSelected;
 
-    private static final Map<String, BiFunction<String, String, Boolean>> selectionActionMap = new HashMap<>();
-
+    private static final Map<String, BiFunction<String, String, Command>> selectionActionMap = new HashMap<>();
     private static final Map<String, Class<? extends Command>> classRelationActionMap = new HashMap<>();
-
-
 
     public FindReplaceContentConfig(ObservableList<Row> observableList,
                                     ChoiceBox<String> replaceWhere,
@@ -66,68 +62,31 @@ public class FindReplaceContentConfig implements ComponentConf {
         this.caseSensitive = caseSensitive;
 
 
-        selectionActionMap.put(ALL_OCCURRENCES, (target, replacement) -> {
-            ReplaceAll replace = new ReplaceAll(this.observableList, target, replacement, statusMessage, caseSensitive);
-            return replace.execute();
-        });
-
+        selectionActionMap.put(ALL_OCCURRENCES, (target, replacement) -> new ReplaceAll(this.observableList, target, replacement, statusMessage, caseSensitive));
         classRelationActionMap.put(ALL_OCCURRENCES, ReplaceAll.class);
 
-        selectionActionMap.put(FIRST_OCCURRENCE, (target, replacement) -> {
-            ReplaceFirst replace = new ReplaceFirst(this.observableList, target, replacement, statusMessage);
-            return replace.execute();
-        });
-
+        selectionActionMap.put(FIRST_OCCURRENCE, (target, replacement) -> new ReplaceFirst(this.observableList, target, replacement, statusMessage));
         classRelationActionMap.put(FIRST_OCCURRENCE, ReplaceFirst.class);
 
-        selectionActionMap.put(LAST_OCCURRENCE, (target, replacement) -> {
-            ReplaceLast replace = new ReplaceLast(this.observableList, target, replacement, statusMessage);
-            return replace.execute();
-        });
-
+        selectionActionMap.put(LAST_OCCURRENCE, (target, replacement) -> new ReplaceLast(this.observableList, target, replacement, statusMessage));
         classRelationActionMap.put(LAST_OCCURRENCE, ReplaceLast.class);
 
+        selectionActionMap.put(FROM_START_UNTIL_END, (start, end) -> new RemoveFromStartUntilEnd(this.observableList, start, end, statusMessage));
+        classRelationActionMap.put(FROM_START_UNTIL_END, RemoveFromStartUntilEnd.class);
 
-        selectionActionMap.put(FROM_START_UNTIL_END, (start, end) -> {
-            RemoveFromStartUntilEnd remove = new RemoveFromStartUntilEnd(this.observableList, start, end, statusMessage);
-            return remove.execute();
-        });
+        selectionActionMap.put(WHOLE_ROW_WITH_OCCURRENCES, (target, replacement) -> new ReplaceWholeRowContainingElement(this.observableList, target, replacement, statusMessage));
+        classRelationActionMap.put(WHOLE_ROW_WITH_OCCURRENCES, ReplaceWholeRowContainingElement.class);
 
+        selectionActionMap.put(SPLIT_TO_NEW_ROWS_ON_WORD, (target, replacement) -> new SplitToRowsBasedOnWord(this.observableList, target, replacement, statusMessage));
+        classRelationActionMap.put(SPLIT_TO_NEW_ROWS_ON_WORD, SplitToRowsBasedOnWord.class);
 
-        selectionActionMap.put(WHOLE_ROW_WITH_OCCURRENCES, (target, replacement) -> {
-            ReplaceLineContainingElement replace = new ReplaceLineContainingElement(this.observableList, target, replacement, statusMessage);
-            return replace.execute();
-        });
+        selectionActionMap.put(ALL_CONTENT_IN_ONE_ROW, (target, replacement) -> new AllContentInOneRow(this.observableList, replacement, statusMessage));
+        classRelationActionMap.put(ALL_CONTENT_IN_ONE_ROW, AllContentInOneRow.class);
 
-        classRelationActionMap.put(WHOLE_ROW_WITH_OCCURRENCES, ReplaceLineContainingElement.class);
-
-
-        selectionActionMap.put(WITH_NEW_LINE, (target, replacement) -> {
-            ReplaceWithNewLine replace = new ReplaceWithNewLine(this.observableList, target, replacement, statusMessage);
-            return replace.execute();
-        });
-
-        classRelationActionMap.put(WITH_NEW_LINE, ReplaceWithNewLine.class);
-
-        selectionActionMap.put(NEW_LINE_WITH_ELEMENT, (target, replacement) -> {
-            ReplaceLineWithElement replace = new ReplaceLineWithElement(this.observableList, replacement, statusMessage);
-            return replace.execute();
-        });
-
-        classRelationActionMap.put(NEW_LINE_WITH_ELEMENT, ReplaceLineWithElement.class);
-
-        selectionActionMap.put(ADD_TO_BEGINNING_OF_THE_ROW, (target, replacement) -> {
-            AddBeginningOfTheRow replace = new AddBeginningOfTheRow(this.observableList, replacement, statusMessage);
-            return replace.execute();
-        });
-
+        selectionActionMap.put(ADD_TO_BEGINNING_OF_THE_ROW, (target, replacement) -> new AddBeginningOfTheRow(this.observableList, replacement, statusMessage));
         classRelationActionMap.put(ADD_TO_BEGINNING_OF_THE_ROW, AddBeginningOfTheRow.class);
 
-        selectionActionMap.put(ADD_TO_END_OF_THE_ROW, (target, replacement) -> {
-            AddEndOfTheRow replace = new AddEndOfTheRow(this.observableList, replacement, statusMessage);
-            return replace.execute();
-        });
-
+        selectionActionMap.put(ADD_TO_END_OF_THE_ROW, (target, replacement) -> new AddEndOfTheRow(this.observableList, replacement, statusMessage));
         classRelationActionMap.put(ADD_TO_END_OF_THE_ROW, AddEndOfTheRow.class);
 
     }
@@ -157,7 +116,7 @@ public class FindReplaceContentConfig implements ComponentConf {
             }
 
             //System.out.println(st[newValue.intValue()]);
-            if(currentSelected.equals(NEW_LINE_WITH_ELEMENT) || currentSelected.equals(ADD_TO_BEGINNING_OF_THE_ROW) || currentSelected.equals(ADD_TO_END_OF_THE_ROW))
+            if(currentSelected.equals(ALL_CONTENT_IN_ONE_ROW) || currentSelected.equals(ADD_TO_BEGINNING_OF_THE_ROW) || currentSelected.equals(ADD_TO_END_OF_THE_ROW))
             {
                 changeFrom.setDisable(true);
             }
@@ -171,10 +130,11 @@ public class FindReplaceContentConfig implements ComponentConf {
                     String target = this.changeFrom.getText();
                     String replacement = this.changeTo.getText();
 
-                    BiFunction<String, String, Boolean> currentAction = selectionActionMap.get(currentSelected);
+                    BiFunction<String, String, Command> currentAction = selectionActionMap.get(currentSelected);
 
                     if (currentAction != null) {
-                        currentAction.apply(target, replacement);
+                        Command command = currentAction.apply(target, replacement);
+                        command.execute();
                     } else {
                         throw new UnsupportedOperationException("Does not support currentSelected: " + currentSelected);
                     }
