@@ -18,7 +18,7 @@ The program was created with Java and Java FX and for the building it was used A
 <h2>Set up for Ubuntu 20.04:</h2>
 <p>
  To start it please use <b>JKagu/bin/start</b>
-This file must have permission to be executed as a program. In the terminal you have to execute: chmod +x /path/to/jkagu/JKagu/bin/start
+This file must have permission to be executed as a program. In the terminal you have to execute: <b> chmod +x /path/to/jkagu/JKagu/bin/start </b>
 
  If you want, you can create a shortcut with <b>JKagu/bin/create_shortcut.sh</b>
 This file also must have permission to be executed as a program.
