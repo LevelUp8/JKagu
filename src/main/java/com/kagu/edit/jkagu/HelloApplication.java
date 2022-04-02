@@ -15,6 +15,12 @@ public class HelloApplication extends Application {
     public static final String APP_CSS_DEFAULT_TEXT_FILE_PATH = "default-text.css";
     public static final String APP_TITLE = "JKagu v3.0";
 
+    public static HelloApplication helloApplication;
+    public HelloApplication()
+    {
+        helloApplication = this;
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(APP_FXML_FILE_PATH));
@@ -25,7 +31,6 @@ public class HelloApplication extends Application {
 
         String cssTextDefaultFile = this.getClass().getResource(APP_CSS_DEFAULT_TEXT_FILE_PATH).toString();
         scene.getStylesheets().add(cssTextDefaultFile);
-
 
         stage.setTitle(APP_TITLE);
 
@@ -41,5 +46,10 @@ public class HelloApplication extends Application {
 
     public static void main(String[] args) {
         launch();
+    }
+
+    public static HelloApplication getApplication()
+    {
+        return helloApplication;
     }
 }

@@ -1,7 +1,8 @@
 package com.kagu.edit.jkagu.conf;
 
 import com.kagu.edit.jkagu.HelloApplication;
-import com.kagu.edit.jkagu.RowListViewCell;
+import com.kagu.edit.jkagu.HelloController;
+import com.kagu.edit.jkagu.HelpController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
@@ -24,9 +25,8 @@ public class HelpConfig implements ComponentConf {
 
     @Override
     public void configure() {
-
-        about.setOnAction(
-                actionEvent -> {
+        about.setOnAction( actionEvent ->
+        {
                     aboutLoader = new FXMLLoader(HelloApplication.class.getResource("help-popup.fxml"));
                     Scene scene = null;
                     try {
@@ -53,6 +53,6 @@ public class HelpConfig implements ComponentConf {
                     dialog.initOwner(primaryStage);
                     dialog.setScene(scene);
                     dialog.show();
-                });
+        });
     }
 }
