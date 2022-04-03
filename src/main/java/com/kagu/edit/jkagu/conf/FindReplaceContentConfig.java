@@ -17,7 +17,7 @@ public class FindReplaceContentConfig implements ComponentConf {
     private static final String ALL_OCCURRENCES = "All word occurrences";
     private static final String FIRST_OCCURRENCE = "First word occurrence";
     private static final String LAST_OCCURRENCE = "Last word occurrence";
-    private static final String FROM_START_UNTIL_END = "Remove start to end of row";
+    private static final String REMOVE_FROM_START_UNTIL_END = "Remove start to end of row";
     private static final String WHOLE_ROW_WITH_OCCURRENCES = "Change row containing";
     private static final String SPLIT_TO_NEW_ROWS_ON_WORD ="Split to new rows on word";
     private static final String ALL_CONTENT_IN_ONE_ROW = "All content in one row";
@@ -28,7 +28,7 @@ public class FindReplaceContentConfig implements ComponentConf {
     private static final String st[] = { ALL_OCCURRENCES,
                                         FIRST_OCCURRENCE,
                                         LAST_OCCURRENCE,
-                                        FROM_START_UNTIL_END,
+                                        REMOVE_FROM_START_UNTIL_END,
                                         WHOLE_ROW_WITH_OCCURRENCES,
                                         SPLIT_TO_NEW_ROWS_ON_WORD,
                                         ALL_CONTENT_IN_ONE_ROW,
@@ -71,8 +71,8 @@ public class FindReplaceContentConfig implements ComponentConf {
         selectionActionMap.put(LAST_OCCURRENCE, (target, replacement) -> new ReplaceLast(this.observableList, target, replacement, statusMessage, caseSensitive));
         classRelationActionMap.put(LAST_OCCURRENCE, ReplaceLast.class);
 
-        selectionActionMap.put(FROM_START_UNTIL_END, (start, end) -> new RemoveFromStartUntilEnd(this.observableList, start, end, statusMessage));
-        classRelationActionMap.put(FROM_START_UNTIL_END, RemoveFromStartUntilEnd.class);
+        selectionActionMap.put(REMOVE_FROM_START_UNTIL_END, (start, end) -> new RemoveFromStartUntilEnd(this.observableList, start, end, statusMessage));
+        classRelationActionMap.put(REMOVE_FROM_START_UNTIL_END, RemoveFromStartUntilEnd.class);
 
         selectionActionMap.put(WHOLE_ROW_WITH_OCCURRENCES, (target, replacement) -> new ReplaceWholeRowContainingElement(this.observableList, target, replacement, statusMessage, caseSensitive));
         classRelationActionMap.put(WHOLE_ROW_WITH_OCCURRENCES, ReplaceWholeRowContainingElement.class);

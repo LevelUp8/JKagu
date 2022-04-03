@@ -12,13 +12,11 @@ import java.util.stream.Collectors;
 
 public class FilterByQuery extends Command {
 
-    private final List<Row> initialList;
     private String query;
     private Label statusMessage;
 
-    public FilterByQuery(ObservableList<Row> observableList, List<Row> initialList, String query, Label statusMessage) {
+    public FilterByQuery(ObservableList<Row> observableList, String query, Label statusMessage) {
         super(observableList);
-        this.initialList = initialList;
         this.query = query;
         this.statusMessage = statusMessage;
     }

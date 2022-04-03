@@ -1,5 +1,6 @@
 package com.kagu.edit.jkagu.engine.query;
 
+import com.kagu.edit.jkagu.Utils;
 import javafx.scene.control.Label;
 
 import java.util.*;
@@ -12,11 +13,12 @@ public class SimpleQueryParser implements QueryParser {
     public static final String REMOVE = "remove";
     private final boolean unique;
     private Integer additionalRowCounter = 0;
-    private List<String> keyWords;
-    private Integer selectedAdditionalRows;
-    private Label statusMessage;
-    private String originalQuery;
-    private Set<String> uniqueSetRow = new LinkedHashSet<>();
+    private final List<String> keyWords;
+    private final Integer selectedAdditionalRows;
+    private final Label statusMessage;
+    private final String originalQuery;
+    private final Set<String> uniqueSetRow = new LinkedHashSet<>();
+    private String keywordType;
 
     public SimpleQueryParser(String query, Label statusMessage) {
         this.keyWords = parseQuery(query);
@@ -48,26 +50,86 @@ public class SimpleQueryParser implements QueryParser {
             }
             else
             {
-                Optional<String> keyWordNotFoundOnRow = keyWords.stream().filter(w -> !row.contains(w)).findFirst();
+                if(keywordType.equals("has"))
+                {
+                    Optional<String> keyWordNotFoundOnRow = keyWords.stream().filter(w -> !row.contains(w)).findFirst();
 
-                if (keyWordNotFoundOnRow.isEmpty()) {
+                    if (keyWordNotFoundOnRow.isEmpty()) {
+                        if (additionalRowCounter < selectedAdditionalRows) {
+                            additionalRowCounter = selectedAdditionalRows;
+                        }
+                        return Optional.of(row);
+                    }
+                }
+                else if(keywordType.equals("start"))
+                {
+                    Optional<String> keyWordNotFoundOnRow = keyWords.stream().filter(w -> !row.startsWith(w)).findFirst();
+
+                    if (keyWordNotFoundOnRow.isEmpty()) {
+                        if (additionalRowCounter < selectedAdditionalRows) {
+                            additionalRowCounter = selectedAdditionalRows;
+                        }
+                        return Optional.of(row);
+                    }
+                }
+                else if(keywordType.equals("end"))
+                {
+                    Optional<String> keyWordNotFoundOnRow = keyWords.stream().filter(w -> !row.endsWith(w)).findFirst();
+
+                    if (keyWordNotFoundOnRow.isEmpty()) {
+                        if (additionalRowCounter < selectedAdditionalRows) {
+                            additionalRowCounter = selectedAdditionalRows;
+                        }
+                        return Optional.of(row);
+                    }
+                }
+                else
+                {
+                    throw new UnsupportedOperationException("Not supported operation for keywordType: " + keywordType);
+                }
+
+            }
+        }
+        else if(originalQuery.startsWith(REMOVE))
+        {
+            if(keywordType.equals("has"))
+            {
+                Optional<String> keyWordFoundOnRow = keyWords.stream().filter(w -> row.contains(w)).findFirst();
+
+                if (keyWordFoundOnRow.isEmpty()) {
                     if (additionalRowCounter < selectedAdditionalRows) {
                         additionalRowCounter = selectedAdditionalRows;
                     }
                     return Optional.of(row);
                 }
             }
-        }
-        else if(originalQuery.startsWith(REMOVE))
-        {
-            Optional<String> keyWordFoundOnRow = keyWords.stream().filter(w -> row.contains(w)).findFirst();
+            else if(keywordType.equals("start"))
+            {
+                Optional<String> keyWordFoundOnRow = keyWords.stream().filter(w -> row.startsWith(w)).findFirst();
 
-            if (keyWordFoundOnRow.isEmpty()) {
-                if (additionalRowCounter < selectedAdditionalRows) {
-                    additionalRowCounter = selectedAdditionalRows;
+                if (keyWordFoundOnRow.isEmpty()) {
+                    if (additionalRowCounter < selectedAdditionalRows) {
+                        additionalRowCounter = selectedAdditionalRows;
+                    }
+                    return Optional.of(row);
                 }
-                return Optional.of(row);
             }
+            else if(keywordType.equals("end"))
+            {
+                Optional<String> keyWordFoundOnRow = keyWords.stream().filter(w -> row.endsWith(w)).findFirst();
+
+                if (keyWordFoundOnRow.isEmpty()) {
+                    if (additionalRowCounter < selectedAdditionalRows) {
+                        additionalRowCounter = selectedAdditionalRows;
+                    }
+                    return Optional.of(row);
+                }
+            }
+            else
+            {
+                throw new UnsupportedOperationException("Not supported operation for keywordType: " + keywordType);
+            }
+
         }
         else
         {
@@ -99,12 +161,13 @@ public class SimpleQueryParser implements QueryParser {
         }
 
         if (indexOfWhere == -1) {
-            throw new IllegalStateException("the query must have Where clause");
+            this.statusMessage.setText("ERROR! The query must have where clause");
+            return Collections.emptyList();
         }
         String selectQueryPart = query.substring(0, indexOfWhere);
         if (!selectQueryPart.startsWith(SELECT) && !selectQueryPart.startsWith(REMOVE)) {
-            this.statusMessage.setText("the query must start with select or remove");
-            throw new IllegalStateException("the query must start with select or remove");
+            this.statusMessage.setText("ERROR! The query must start with select or remove");
+            return Collections.emptyList();
         }
 
         String whereQueryPart = query.substring(indexOfWhere + WHERE.length());
@@ -112,21 +175,38 @@ public class SimpleQueryParser implements QueryParser {
 
         int firstRowIndex = whereQueryPart.indexOf("row");
         int firstHasIndex = whereQueryPart.indexOf("has");
+        int firstStartIndex = whereQueryPart.indexOf("start");
+        int firstEndIndex = whereQueryPart.indexOf("end");
 
-        if (firstRowIndex == -1 || firstHasIndex == -1) {
-            this.statusMessage.setText("where clause must has: row has");
-            throw new IllegalStateException("where clause must has: row has");
+        int startOfQuotesIndex = whereQueryPart.indexOf("'");
+
+        if(firstRowIndex == -1 || startOfQuotesIndex < firstRowIndex)
+        {
+            this.statusMessage.setText("ERROR! Where clause must has row keyword");
+            return Collections.emptyList();
+        }
+
+        if(firstHasIndex > firstRowIndex && firstHasIndex != -1 && startOfQuotesIndex > firstHasIndex)
+        {
+            keywordType = "has";
+        }
+        else if(firstStartIndex > firstRowIndex && firstStartIndex != -1 && startOfQuotesIndex > firstStartIndex)
+        {
+            keywordType = "start";
+        }
+        else if(firstEndIndex > firstRowIndex && firstEndIndex != -1 && startOfQuotesIndex > firstEndIndex)
+        {
+            keywordType = "end";
+        }
+        else
+        {
+            this.statusMessage.setText("ERROR! Where clause must has: row has, row start, row end");
+            return Collections.emptyList();
         }
 
         List<String> keyWords = new ArrayList<>();
 
         while (whereQueryPart.contains("'")) {
-            int startOfQuotesIndex = whereQueryPart.indexOf("'");
-
-            if (firstRowIndex > firstHasIndex) {
-                this.statusMessage.setText("where clause must has: row has");
-                throw new IllegalStateException("where clause must has: row has");
-            }
 
             int endOfQuotesIndex = whereQueryPart.indexOf("'", startOfQuotesIndex + 1);
 
@@ -134,6 +214,12 @@ public class SimpleQueryParser implements QueryParser {
             keyWords.add(searchKeyword);
 
             whereQueryPart = whereQueryPart.substring(endOfQuotesIndex + 1);
+        }
+
+        if(keyWords.size() > 1 && (keywordType.equals("start") || keywordType.equals("end")))
+        {
+            this.statusMessage.setText("ERROR! Where clause must have only one search word when row start or row end command");
+            return Collections.emptyList();
         }
 
         return keyWords;

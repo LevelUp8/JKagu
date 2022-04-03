@@ -149,7 +149,7 @@ public class SearchContentConfig implements ComponentConf {
         String query = searchField.getText();
         if (Utils.isStringNOTEmpty(query))
         {
-            FilterByQuery filterByQuery = new FilterByQuery(this.observableList, this.initialList, query, this.statusMessage);
+            FilterByQuery filterByQuery = new FilterByQuery(this.observableList, query, this.statusMessage);
             filterByQuery.execute();
         } else {
             this.statusMessage.setText("The search field is empty. Search will not be performed!");

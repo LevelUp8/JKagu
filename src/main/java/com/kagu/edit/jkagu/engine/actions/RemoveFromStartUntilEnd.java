@@ -31,7 +31,7 @@ public class RemoveFromStartUntilEnd extends Command {
                     String str = row.content();
                     if(firstOccurrenceIndex != -1 && lastOccurrenceIndex != -1 )
                     {
-                        str = str.substring(0, firstOccurrenceIndex) + str.substring(lastOccurrenceIndex + end.length() + 1);
+                        str = str.substring(0, firstOccurrenceIndex) + str.substring(lastOccurrenceIndex + end.length());
                     }
                     return new Row(row.rowNumber(), str);
                 }).collect(Collectors.toList());
