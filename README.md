@@ -1,42 +1,30 @@
 # JKagu
 
-JKagu is a software which maybe will help you when you need to search and replace text with special requirments.
+<p>JKagu is a search replace software with GUI interface. It works based on rows of the text file. It can be very effective with large text files containing rows which are not relevant for the user or the user need to perform automatic operation on many rows. Such files can be for example source code or log files.</p>
 
- <p>The idea is for you to first select the document that you want to edit. If you open several text files at once, they will be appended to one another.</p>
+<h2>Functionalities:</h2>
 
-<p>Then you select the filtering operation. There are several options for now:</p>
-<ul>
-  <li>Use the whole file(s) text</li>
-  <li>Select only the rows that contain a certain word</li>
-  <li>Advanced search. Use something like "select row+3 where row has 'aaa' 'bbb' 'ccc' " -> which will result in selecting the row which contains aaa, bbb, ccc and the next 3 rows below</li>
-  <li>Use Search from keyword until another keyword functionality which will select the row that has the first keyword then all the other rows until the row which has the last keyword or the end of the file</li>
-</ul>
+<p>The application has Select area where user can perform normal select, query select and from until select. The idea is to filter out the rows of the text which are not important. After that there is replace area which has drop down and many functionalities like replace all occurrences of a word in each row, split row based on separators or adding to the beginning/end of each row a string. For the full list of possibilities please see Replace. At the bottom there is the text itself. User can copy it or can save it as txt file. The application is not created as normal editor with purpose to be as light as possible. It can show hundred of thousands of rows without problem.</p>
 
-<p>Then you can use the copy, save or replace functionality. For the replace functionality you have:</p>
-<ul>
-  <li>Normal find word replace by another word.</li>
-  <li>Find each first occurrence of the word for replacement on the row and replace it</li>
-  <li>Find each last occurrence of the word for replacement on the row and replace it</li>
-  <li>Find a word which you will replace with an incrementing number. Also you have to set here the incrementation step and the beginning number</li>
-</ul>
-The program was created with Java and Java FX and for the building it was used Amazon Correto 17 and Open JDK 17
+The program was created with Java and Java FX and for the building it was used Amazon Correto 17 (build for Ubuntu) and Open JDK 17 (build for Windows).
 
 <h2>
- Website:
+ Additinal information:
 </h2>
 <p>
- For more information you can visit <a href="http://www.jkagu.tk/#/home">jkagu.tk</a> 
+ For more information please can visit <a href="https://github.com/LevelUp8/JKagu/wiki">jkagu wiki</a> and <a href="http://www.jkagu.tk/#/home">jkagu.tk</a> 
 </p>
  
 <h2>Set up for Ubuntu 20.04:</h2>
 <p>
  To start it please use <b>JKagu/bin/start</b>
-This file must have permission to be executed as a program
+This file must have permission to be executed as a program. In the terminal you have to execute: <b> chmod +x /path/to/jkagu/JKagu/bin/start </b>
 
  If you want, you can create a shortcut with <b>JKagu/bin/create_shortcut.sh</b>
 This file also must have permission to be executed as a program.
- It will get the current folder of JKagu and it will change it into <b>JKagu/bin/JKagu.desktop</b>
+ It will get the current folder of JKagu and it will add it into <b>JKagu/bin/JKagu.desktop</b>
  After that it will copy JKagu/bin/JKagu.desktop to <b>~/.local/share/applications/JKagu.desktop</b>
+ Now you should find it when you search in the applications by JKagu name.
 </p>
 
 <h2>Set up for Windows 11:</h2>
