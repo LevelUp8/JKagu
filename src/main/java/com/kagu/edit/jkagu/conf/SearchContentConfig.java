@@ -2,6 +2,7 @@ package com.kagu.edit.jkagu.conf;
 
 import com.kagu.edit.jkagu.Utils;
 import com.kagu.edit.jkagu.conf.model.MuliLineSearchContext;
+import com.kagu.edit.jkagu.conf.model.QuerySearchContext;
 import com.kagu.edit.jkagu.conf.model.Row;
 import com.kagu.edit.jkagu.conf.model.SingleLineSearchContext;
 import com.kagu.edit.jkagu.engine.actions.FilterByFromUntilString;
@@ -25,6 +26,7 @@ public class SearchContentConfig implements ComponentConf {
     private final ObservableList<Row> observableList;
     private final List<Row> initialList;
     private final TextField searchField;
+    private final ComboBox<String> searchComboBox;
 
     private final Label statusMessage;
     private final CheckBox caseSensitiveSearch;
@@ -34,9 +36,11 @@ public class SearchContentConfig implements ComponentConf {
 
     private final HBox searchFieldContainer;
     private final HBox searchFromUntilContainer;
+    private final HBox searchComboBoxContainer;
 
 
     public SearchContentConfig(SingleLineSearchContext singleLineSearchContext,
+                               QuerySearchContext querySearchContext,
                                MuliLineSearchContext muliLineSearchContext,
                                Button searchButton,
                                ObservableList<Row> observableList,
@@ -47,7 +51,7 @@ public class SearchContentConfig implements ComponentConf {
 
         muliLineSearchContext.useSelectedLinesMultiline().setToggleGroup(toggleGroup);
         singleLineSearchContext.useSelectedLines().setToggleGroup(toggleGroup);
-        singleLineSearchContext.useAdvancedSelect().setToggleGroup(toggleGroup);
+        querySearchContext.useAdvancedSelect().setToggleGroup(toggleGroup);
 
         this.searchButton = searchButton;
         this.observableList = observableList;
@@ -61,9 +65,11 @@ public class SearchContentConfig implements ComponentConf {
 
         this.searchFieldFrom = muliLineSearchContext.searchFieldFrom();
         this.searchFieldUntil = muliLineSearchContext.searchFieldUntil();
+        this.searchComboBox = querySearchContext.searchComboBox();
 
         this.searchFieldContainer = singleLineSearchContext.searchFieldContainer();
         this.searchFromUntilContainer = muliLineSearchContext.searchFromUntilContainer();
+        this.searchComboBoxContainer = querySearchContext.searchComboBoxContainer();
     }
 
 
@@ -72,6 +78,15 @@ public class SearchContentConfig implements ComponentConf {
 
         searchFieldContainer.managedProperty().bind(searchFieldContainer.visibleProperty());
         searchFromUntilContainer.managedProperty().bind(searchFromUntilContainer.visibleProperty());
+        searchComboBoxContainer.managedProperty().bind(searchComboBoxContainer.visibleProperty());
+
+        searchComboBox.setEditable(true);
+        searchComboBox.getItems().addAll(
+                            "select row where row has 'A' 'B' 'C' -- row must have this 3 words",
+                                "select row+2 where row has 'A' -- show row + 2 rows below that have 'A'",
+                                "remove row where row has 'A' 'B' 'C' -- show row that does not have all 3 words",
+                                "select row where row start 'A' -- trimmed row must start with A ",
+                                "remove row where row end 'A' -- trimmed row must not end with A ");
 
 
         toggleGroup.selectedToggleProperty()
@@ -108,7 +123,9 @@ public class SearchContentConfig implements ComponentConf {
     }
 
     private void setupQuerySelect() {
-        this.searchFieldContainer.setVisible(true);
+
+        this.searchComboBoxContainer.setVisible(true);
+        this.searchFieldContainer.setVisible(false);
         this.searchFromUntilContainer.setVisible(false);
 
         this.caseSensitiveSearch.setDisable(true);
@@ -119,6 +136,7 @@ public class SearchContentConfig implements ComponentConf {
         this.caseSensitiveSearch.setDisable(true);
         this.caseSensitiveSearch.setSelected(true);
 
+        this.searchComboBoxContainer.setVisible(false);
         this.searchFieldContainer.setVisible(false);
         this.searchFromUntilContainer.setVisible(true);
 
@@ -129,6 +147,7 @@ public class SearchContentConfig implements ComponentConf {
     private void setupSingleLineSelect() {
         this.caseSensitiveSearch.setDisable(false);
 
+        this.searchComboBoxContainer.setVisible(false);
         this.searchFieldContainer.setVisible(true);
         this.searchFromUntilContainer.setVisible(false);
     }
@@ -146,7 +165,8 @@ public class SearchContentConfig implements ComponentConf {
     }
 
     private void querySearch() {
-        String query = searchField.getText();
+        //String query = searchField.getText();
+        String query = searchComboBox.getEditor().getText();
         if (Utils.isStringNOTEmpty(query))
         {
             FilterByQuery filterByQuery = new FilterByQuery(this.observableList, query, this.statusMessage);

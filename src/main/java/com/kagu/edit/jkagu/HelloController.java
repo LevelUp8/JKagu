@@ -31,13 +31,20 @@ public class HelloController implements Serializable, Initializable {
     public RadioButton useSelectedLines;
 
     @FXML
-    public RadioButton useAdvancedSelect;
-
-    @FXML
     public TextField searchField;
 
     @FXML
     public HBox searchFieldContainer;
+
+    //--- Search functionality query
+    @FXML
+    public RadioButton useAdvancedSelect;
+
+    @FXML
+    public HBox searchComboBoxContainer;
+
+    @FXML
+    public ComboBox<String> searchComboBox;
 
     //--- Search functionality from until
     @FXML
@@ -168,9 +175,10 @@ public class HelloController implements Serializable, Initializable {
 
         configurationList.add(new SwitchReplaceTemplateConfig(findReplaceBox, templateIncrementBox, findAndReplace, templateCounter, statusMessage, replaceWhere, caseSensitive));
 
-        SingleLineSearchContext singleLineSearchContext = new SingleLineSearchContext(useSelectedLines,useAdvancedSelect, searchField, searchFieldContainer);
+        SingleLineSearchContext singleLineSearchContext = new SingleLineSearchContext(useSelectedLines, searchField, searchFieldContainer);
         MuliLineSearchContext muliLineSearchContext = new MuliLineSearchContext(useSelectedLinesMultiline, searchFieldFrom, searchFieldUntil, searchFromUntilContainer);
-        configurationList.add(new SearchContentConfig(singleLineSearchContext, muliLineSearchContext, searchButton, observableList, initialList, searchField, statusMessage, caseSensitiveSearch));
+        QuerySearchContext querySearchContext = new QuerySearchContext(useAdvancedSelect, searchComboBoxContainer, searchComboBox);
+        configurationList.add(new SearchContentConfig(singleLineSearchContext, querySearchContext, muliLineSearchContext, searchButton, observableList, initialList, searchField, statusMessage, caseSensitiveSearch));
 
         configurationList.add(new OpenFileConfig(progressBar, statusMessage, appendFile, listView, observableList, initialList));
 
