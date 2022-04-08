@@ -13,7 +13,7 @@ public class HelloApplication extends Application {
     public static final String APP_FXML_FILE_PATH = "hello-view.fxml";
     public static final String APP_CSS_FILE_PATH = "style.css";
     public static final String APP_CSS_DEFAULT_TEXT_FILE_PATH = "default-text.css";
-    public static final String APP_TITLE = "JKagu v4.1.0";
+    public static final String APP_TITLE = "JKagu v5.0.0";
 
     public static HelloApplication helloApplication;
     public HelloApplication()
