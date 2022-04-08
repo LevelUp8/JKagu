@@ -63,7 +63,7 @@ public class SimpleQueryParser implements QueryParser {
                 }
                 else if(keywordType.equals("start"))
                 {
-                    Optional<String> keyWordNotFoundOnRow = keyWords.stream().filter(w -> !row.startsWith(w)).findFirst();
+                    Optional<String> keyWordNotFoundOnRow = keyWords.stream().filter(w -> !row.strip().startsWith(w)).findFirst();
 
                     if (keyWordNotFoundOnRow.isEmpty()) {
                         if (additionalRowCounter < selectedAdditionalRows) {
@@ -74,7 +74,7 @@ public class SimpleQueryParser implements QueryParser {
                 }
                 else if(keywordType.equals("end"))
                 {
-                    Optional<String> keyWordNotFoundOnRow = keyWords.stream().filter(w -> !row.endsWith(w)).findFirst();
+                    Optional<String> keyWordNotFoundOnRow = keyWords.stream().filter(w -> !row.strip().endsWith(w)).findFirst();
 
                     if (keyWordNotFoundOnRow.isEmpty()) {
                         if (additionalRowCounter < selectedAdditionalRows) {
@@ -105,7 +105,7 @@ public class SimpleQueryParser implements QueryParser {
             }
             else if(keywordType.equals("start"))
             {
-                Optional<String> keyWordFoundOnRow = keyWords.stream().filter(w -> row.startsWith(w)).findFirst();
+                Optional<String> keyWordFoundOnRow = keyWords.stream().filter(w -> row.strip().startsWith(w)).findFirst();
 
                 if (keyWordFoundOnRow.isEmpty()) {
                     if (additionalRowCounter < selectedAdditionalRows) {
@@ -116,7 +116,7 @@ public class SimpleQueryParser implements QueryParser {
             }
             else if(keywordType.equals("end"))
             {
-                Optional<String> keyWordFoundOnRow = keyWords.stream().filter(w -> row.endsWith(w)).findFirst();
+                Optional<String> keyWordFoundOnRow = keyWords.stream().filter(w -> row.strip().endsWith(w)).findFirst();
 
                 if (keyWordFoundOnRow.isEmpty()) {
                     if (additionalRowCounter < selectedAdditionalRows) {
