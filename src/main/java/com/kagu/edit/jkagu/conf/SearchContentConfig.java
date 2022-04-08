@@ -86,7 +86,8 @@ public class SearchContentConfig implements ComponentConf {
                                 "select row+2 where row has 'A' -- show row + 2 rows below that have 'A'",
                                 "remove row where row has 'A' 'B' 'C' -- show row that does not have all 3 words",
                                 "select row where row start 'A' -- trimmed row must start with A ",
-                                "remove row where row end 'A' -- trimmed row must not end with A ");
+                                "remove row where row end 'A' -- trimmed row must not end with A ",
+                                "select row unique -- get the unique rows");
 
 
         toggleGroup.selectedToggleProperty()
