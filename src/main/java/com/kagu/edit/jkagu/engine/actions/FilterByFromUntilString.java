@@ -31,41 +31,54 @@ public class FilterByFromUntilString extends Command {
         observableList.addAll(initialList);
 
         List<Row> rows = new ArrayList<>();
+        List<Row> tempRows = new ArrayList<>();
 
         int counter = 0;
         for (Row row : observableList) {
-            int startUntil = row.content().indexOf(until);
-            int startFrom = row.content().indexOf(from);
+            int until = row.getContent().indexOf(this.until);
+            int startFrom = row.getContent().indexOf(from);
             if (startFrom != -1) {
                 counter++;
                 if (counter == 1) {
-                    String contentFrom = row.content().substring(startFrom);
-                    int startUntilOnSameRow = contentFrom.indexOf(until);
+                    String contentFrom = row.getContent().substring(startFrom);
+                    int startUntilOnSameRow = contentFrom.indexOf(this.until);
 
                     if (startUntilOnSameRow != -1) {
-                        contentFrom = contentFrom.substring(0, startUntilOnSameRow + until.length());
+                        contentFrom = contentFrom.substring(0, startUntilOnSameRow + this.until.length());
                         counter--;
+                        rows.add(new Row(row.getRowNumber(), contentFrom));
                     }
-                    rows.add(new Row(row.rowNumber(), contentFrom));
+                    else
+                    {
+                        tempRows.add(new Row(row.getRowNumber(), contentFrom));
+                    }
                 } else {
                     if (counter > 0) {
-                        rows.add(row);
+                        tempRows.add(row);
+                        //rows.add(row);
                     }
                 }
-            } else if (startUntil != -1) {
+            } else if (until != -1) {
                 counter--;
 
                 if (counter > 0) {
-                    rows.add(row);
+                    tempRows.add(row);
+                    //rows.add(row);
+                    rows.addAll(tempRows);
+                    tempRows = new ArrayList<>();
                 }
 
                 if (counter == 0) {
-                    String endContentUntil = row.content().substring(0, startUntil + until.length());
-                    rows.add(new Row(row.rowNumber(), endContentUntil));
+                    String endContentUntil = row.getContent().substring(0, until + this.until.length());
+                    Row untilRow = new Row(row.getRowNumber(), endContentUntil);
+                    tempRows.add(untilRow);
+                    rows.addAll(tempRows);
+                    tempRows = new ArrayList<>();
                 }
             } else {
                 if (counter > 0) {
-                    rows.add(row);
+                    //rows.add(row);
+                    tempRows.add(row);
                 }
             }
 
