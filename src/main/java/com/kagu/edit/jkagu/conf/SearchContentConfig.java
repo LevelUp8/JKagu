@@ -5,9 +5,8 @@ import com.kagu.edit.jkagu.conf.model.MuliLineSearchContext;
 import com.kagu.edit.jkagu.conf.model.QuerySearchContext;
 import com.kagu.edit.jkagu.conf.model.Row;
 import com.kagu.edit.jkagu.conf.model.SingleLineSearchContext;
-import com.kagu.edit.jkagu.engine.actions.FilterByFromUntilString;
-import com.kagu.edit.jkagu.engine.actions.FilterByQuery;
-import com.kagu.edit.jkagu.engine.actions.FilterByString;
+import com.kagu.edit.jkagu.engine.actions.*;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -16,11 +15,6 @@ import java.util.List;
 
 public class SearchContentConfig implements ComponentConf {
 
-    public static final String USE_SELECTED_LINES = "useSelectedLines";
-    public static final String USE_ADVANCED_SELECT = "useAdvancedSelect";
-    public static final String USE_SELECTED_LINES_MULTILINE = "useSelectedLinesMultiline";
-    private final RadioButton useSelectedLines;
-    private final ToggleGroup toggleGroup = new ToggleGroup();
     private final Button searchButton;
 
     private final ObservableList<Row> observableList;
@@ -38,8 +32,24 @@ public class SearchContentConfig implements ComponentConf {
     private final HBox searchFromUntilContainer;
     private final HBox searchComboBoxContainer;
 
+    private ChoiceBox<String> selectedStrategyBox;
 
-    public SearchContentConfig(SingleLineSearchContext singleLineSearchContext,
+    private static final String SELECT_LINE = "Select Line";
+    private static final String ADVANCED_SELECT = "Advanced Select";
+    private static final String SELECT_LINES = "Select Lines";
+    private static final String REMOVE_LINES = "Remove Lines";
+
+    private String currentSelected;
+
+    // string array
+    private static final String st[] = { SELECT_LINE,
+            ADVANCED_SELECT,
+            SELECT_LINES,
+            REMOVE_LINES};
+
+
+    public SearchContentConfig(ChoiceBox<String> selectedStrategyBox,
+                               SingleLineSearchContext singleLineSearchContext,
                                QuerySearchContext querySearchContext,
                                MuliLineSearchContext muliLineSearchContext,
                                Button searchButton,
@@ -49,17 +59,13 @@ public class SearchContentConfig implements ComponentConf {
                                Label statusMessage,
                                CheckBox caseSensitiveSearch) {
 
-        muliLineSearchContext.useSelectedLinesMultiline().setToggleGroup(toggleGroup);
-        singleLineSearchContext.useSelectedLines().setToggleGroup(toggleGroup);
-        querySearchContext.useAdvancedSelect().setToggleGroup(toggleGroup);
+        this.selectedStrategyBox = selectedStrategyBox;
 
         this.searchButton = searchButton;
         this.observableList = observableList;
         this.initialList = initialList;
         this.searchField = searchField;
         this.statusMessage = statusMessage;
-
-        this.useSelectedLines = singleLineSearchContext.useSelectedLines();
 
         this.caseSensitiveSearch = caseSensitiveSearch;
 
@@ -82,45 +88,48 @@ public class SearchContentConfig implements ComponentConf {
 
         searchComboBox.setEditable(true);
         searchComboBox.getItems().addAll(
-                            "select row where row has 'A' 'B' 'C' --row must have this 3 words",
-                                "select row+2 where row has 'AAA' --row + 2 rows below that have AAA",
-                                "remove row where row has 'A' 'B' 'C' --row that does not have all 3 words",
-                                "select row where row start 'AAA' --trimmed row must start with AAA",
-                                "remove row where row end 'AAA' --trimmed row must not end with AAA",
-                                "select row unique --get the unique rows");
+                "select row where row has 'A' 'B' 'C' --row must have this 3 words",
+                "select row+2 where row has 'AAA' --row + 2 rows below that have AAA",
+                "remove row where row has 'A' 'B' 'C' --row that does not have all 3 words",
+                "select row where row start 'AAA' --trimmed row must start with AAA",
+                "remove row where row end 'AAA' --trimmed row must not end with AAA",
+                "select row unique --get the unique rows");
 
 
-        toggleGroup.selectedToggleProperty()
-                .addListener((observable, oldVal, newVal) -> {
-                    // System.out.println(newVal + " was selected");
+        selectedStrategyBox.setItems(FXCollections.observableArrayList(st));
 
-                    Toggle t = toggleGroup.getSelectedToggle();
-                    RadioButton rb = (RadioButton) t;
+        selectedStrategyBox.setValue(st[0]);
+        currentSelected = st[0];
+        setupSingleLineSelect();
+        // add a listener
+        selectedStrategyBox.getSelectionModel().selectedIndexProperty().addListener((ov, value, newValue) ->
+        {
+            // set the text for the label to the selected item
+            //l1.setText(st[new_value.intValue()] + " selected");
+            currentSelected = st[newValue.intValue()];
 
-                    String radioButtonID = rb.getId();
-                    switch (radioButtonID) {
-                        case USE_SELECTED_LINES -> setupSingleLineSelect();
-                        case USE_ADVANCED_SELECT -> setupQuerySelect();
-                        case USE_SELECTED_LINES_MULTILINE -> setupMultiLineSelect();
-                        default -> throw new UnsupportedOperationException("Not supported logic for: " + radioButtonID);
-                    }
-                });
+            switch (currentSelected) {
+                case SELECT_LINE -> setupSingleLineSelect();
+                case ADVANCED_SELECT -> setupQuerySelect();
+                case SELECT_LINES, REMOVE_LINES -> setupMultiLine();
+                default -> throw new UnsupportedOperationException("Not supported logic for: " + currentSelected);
+            }
+        });
+
+
 
         this.searchButton.setOnAction(e -> {
-            Toggle t = toggleGroup.getSelectedToggle();
-            RadioButton rb = (RadioButton) t;
-
-            String radioButtonID = rb.getId();
-            switch (radioButtonID) {
-                case USE_SELECTED_LINES -> singleLineSearch();
-                case USE_ADVANCED_SELECT -> querySearch();
-                case USE_SELECTED_LINES_MULTILINE -> multiLineSearch();
-                default -> throw new UnsupportedOperationException("Not supported logic for: " + radioButtonID);
+            switch (currentSelected) {
+                case SELECT_LINE -> singleLineSearch();
+                case ADVANCED_SELECT -> querySearch();
+                case SELECT_LINES -> multiLineSearch();
+                case REMOVE_LINES -> multilineRemove();
+                default -> throw new UnsupportedOperationException("Not supported logic for: " + currentSelected);
             }
             
         });
 
-        toggleGroup.selectToggle(useSelectedLines);
+        //toggleGroup.selectToggle(useSelectedLines);
     }
 
     private void setupQuerySelect() {
@@ -133,7 +142,7 @@ public class SearchContentConfig implements ComponentConf {
         this.caseSensitiveSearch.setSelected(true);
     }
 
-    private void setupMultiLineSelect() {
+    private void setupMultiLine() {
         this.caseSensitiveSearch.setDisable(true);
         this.caseSensitiveSearch.setSelected(true);
 
@@ -162,6 +171,18 @@ public class SearchContentConfig implements ComponentConf {
             filterByFromUntilString.execute();
         } else {
             this.statusMessage.setText("The search fields are empty. Search will not be performed!");
+        }
+    }
+
+    private void multilineRemove() {
+        String fromText = searchFieldFrom.getText();
+        String untilText = searchFieldUntil.getText();
+        if (Utils.isStringNOTEmpty(fromText) && Utils.isStringNOTEmpty(untilText))
+        {
+            RemoveByFromUntilString removeByFromUntilString = new RemoveByFromUntilString(this.observableList, this.initialList, fromText, untilText, this.statusMessage);
+            removeByFromUntilString.execute();
+        } else {
+            this.statusMessage.setText("The remove fields are empty. Remove will not be performed!");
         }
     }
 

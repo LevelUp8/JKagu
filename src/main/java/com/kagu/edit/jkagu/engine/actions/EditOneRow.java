@@ -22,12 +22,11 @@ public class EditOneRow extends Command {
     @Override
     public boolean execute() {
 
-        Long rowNumber =  selectedRow.rowNumber();
+        Long rowNumber = selectedRow.rowNumber();
         List<Row> replaced = observableList.stream()
                 .map(row -> {
-                    if(rowNumber.equals(row.rowNumber()))
-                    {
-                        String forReplacement =  editField.getText();
+                    if (rowNumber.equals(row.rowNumber())) {
+                        String forReplacement = editField.getText();
                         return new Row(row.rowNumber(), forReplacement);
                     }
                     return new Row(row.rowNumber(), row.content());

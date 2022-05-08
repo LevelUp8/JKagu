@@ -25,34 +25,34 @@ public class HelpConfig implements ComponentConf {
 
     @Override
     public void configure() {
-        about.setOnAction( actionEvent ->
+        about.setOnAction(actionEvent ->
         {
-                    aboutLoader = new FXMLLoader(HelloApplication.class.getResource("help-popup.fxml"));
-                    Scene scene = null;
-                    try {
-                        scene = new Scene(aboutLoader.load(), 300, 200);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    String cssFile = HelloApplication.class.getResource(APP_CSS_FILE_PATH).toString();
-                    scene.getStylesheets().add(cssFile);
+            aboutLoader = new FXMLLoader(HelloApplication.class.getResource("help-popup.fxml"));
+            Scene scene = null;
+            try {
+                scene = new Scene(aboutLoader.load(), 300, 200);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            String cssFile = HelloApplication.class.getResource(APP_CSS_FILE_PATH).toString();
+            scene.getStylesheets().add(cssFile);
 
-                    String selectedTheme = ViewThemeConfig.getSelectedTheme();
-                    if ("DARK".equals(selectedTheme)) {
-                        String cssFileTheme = HelloApplication.class.getResource("dark-theme.css").toString();
-                        scene.getStylesheets().add(cssFileTheme);
-                    } else if ("DEFAULT".equals(selectedTheme)) {
-                        String cssFileTheme = HelloApplication.class.getResource("dark-theme.css").toString();
-                        scene.getStylesheets().remove(cssFileTheme);
-                    } else {
-                        throw new IllegalStateException("The theme is not recognized: " + selectedTheme);
-                    }
+            String selectedTheme = ViewThemeConfig.getSelectedTheme();
+            if ("DARK".equals(selectedTheme)) {
+                String cssFileTheme = HelloApplication.class.getResource("dark-theme.css").toString();
+                scene.getStylesheets().add(cssFileTheme);
+            } else if ("DEFAULT".equals(selectedTheme)) {
+                String cssFileTheme = HelloApplication.class.getResource("dark-theme.css").toString();
+                scene.getStylesheets().remove(cssFileTheme);
+            } else {
+                throw new IllegalStateException("The theme is not recognized: " + selectedTheme);
+            }
 
-                    final Stage dialog = new Stage();
-                    dialog.initModality(Modality.APPLICATION_MODAL);
-                    dialog.initOwner(primaryStage);
-                    dialog.setScene(scene);
-                    dialog.show();
+            final Stage dialog = new Stage();
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.initOwner(primaryStage);
+            dialog.setScene(scene);
+            dialog.show();
         });
     }
 }

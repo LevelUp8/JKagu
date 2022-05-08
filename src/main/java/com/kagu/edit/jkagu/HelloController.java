@@ -26,9 +26,11 @@ public class HelloController implements Serializable, Initializable {
     @FXML
     public Button searchButton;
 
-    //-- Search single line functionality
+
+    //-- Search functionality
+
     @FXML
-    public RadioButton useSelectedLines;
+    public ChoiceBox<String> selectedStrategyBox;
 
     @FXML
     public TextField searchField;
@@ -37,8 +39,6 @@ public class HelloController implements Serializable, Initializable {
     public HBox searchFieldContainer;
 
     //--- Search functionality query
-    @FXML
-    public RadioButton useAdvancedSelect;
 
     @FXML
     public HBox searchComboBoxContainer;
@@ -49,9 +49,6 @@ public class HelloController implements Serializable, Initializable {
     //--- Search functionality from until
     @FXML
     public HBox searchFromUntilContainer;
-
-    @FXML
-    public RadioButton useSelectedLinesMultiline;
 
     @FXML
     public TextField searchFieldFrom;
@@ -175,10 +172,10 @@ public class HelloController implements Serializable, Initializable {
 
         configurationList.add(new SwitchReplaceTemplateConfig(findReplaceBox, templateIncrementBox, findAndReplace, templateCounter, statusMessage, replaceWhere, caseSensitive));
 
-        SingleLineSearchContext singleLineSearchContext = new SingleLineSearchContext(useSelectedLines, searchField, searchFieldContainer);
-        MuliLineSearchContext muliLineSearchContext = new MuliLineSearchContext(useSelectedLinesMultiline, searchFieldFrom, searchFieldUntil, searchFromUntilContainer);
-        QuerySearchContext querySearchContext = new QuerySearchContext(useAdvancedSelect, searchComboBoxContainer, searchComboBox);
-        configurationList.add(new SearchContentConfig(singleLineSearchContext, querySearchContext, muliLineSearchContext, searchButton, observableList, initialList, searchField, statusMessage, caseSensitiveSearch));
+        SingleLineSearchContext singleLineSearchContext = new SingleLineSearchContext(searchField, searchFieldContainer);
+        MuliLineSearchContext muliLineSearchContext = new MuliLineSearchContext(searchFieldFrom, searchFieldUntil, searchFromUntilContainer);
+        QuerySearchContext querySearchContext = new QuerySearchContext(searchComboBoxContainer, searchComboBox);
+        configurationList.add(new SearchContentConfig(selectedStrategyBox, singleLineSearchContext, querySearchContext, muliLineSearchContext, searchButton, observableList, initialList, searchField, statusMessage, caseSensitiveSearch));
 
         configurationList.add(new OpenFileConfig(progressBar, statusMessage, appendFile, listView, observableList, initialList));
 

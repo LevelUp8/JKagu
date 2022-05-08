@@ -40,7 +40,7 @@ public class ReplaceAll extends CaseSensitiveCommand {
     public boolean executeCaseInsensitive() {
         List<Row> replaced = observableList.stream()
                 .map(row -> {
-                    String newContent = row.content().replaceAll("(?i)"+ Pattern.quote(this.target), this.replacement);;
+                    String newContent = row.content().replaceAll("(?i)" + Pattern.quote(this.target), this.replacement);
                     return new Row(row.rowNumber(), newContent);
                 }).toList();
 

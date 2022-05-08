@@ -77,25 +77,22 @@
                                  <children>
                                     <HBox fx:id="searchBox" prefHeight="38.0" prefWidth="658.0">
                                        <children>
-
-                                          <RadioButton fx:id="useSelectedLines" prefHeight="27.0" prefWidth="132.0" style="-fx-padding: 5px;" text="Select Line">
+                                          <ChoiceBox fx:id="selectedStrategyBox" prefHeight="24.0" prefWidth="235.0">
                                              <HBox.margin>
-                                                <Insets left="5.0" />
+                                                <Insets left="10.0" right="10.0" />
                                              </HBox.margin>
-                                          </RadioButton>
-                                          <RadioButton fx:id="useAdvancedSelect" prefHeight="27.0" prefWidth="165.0" style="-fx-padding: 5px;" text="Advanced Select" />
-                                          <RadioButton fx:id="useSelectedLinesMultiline" prefHeight="27.0" prefWidth="132.0" style="-fx-padding: 5px;" text="Select Lines" />
-                                          <HBox fx:id="searchComboBoxContainer" prefWidth="660.0">
+                                          </ChoiceBox>
+                                          <HBox fx:id="searchComboBoxContainer" prefWidth="840.0">
                                              <children>
-                                                <ComboBox fx:id="searchComboBox" minWidth="660.0" prefHeight="24.0" prefWidth="660.0" HBox.hgrow="ALWAYS" />
+                                                <ComboBox fx:id="searchComboBox" minWidth="840.0" prefHeight="24.0" prefWidth="840.0" HBox.hgrow="ALWAYS" />
                                              </children>
                                           </HBox>
-                                          <HBox fx:id="searchFieldContainer" prefWidth="660.0">
+                                          <HBox fx:id="searchFieldContainer" prefWidth="840.0">
                                              <children>
-                                                <TextField fx:id="searchField" minWidth="660.0" prefHeight="24.0" prefWidth="660.0" HBox.hgrow="ALWAYS" />
+                                                <TextField fx:id="searchField" minWidth="840.0" prefHeight="24.0" prefWidth="840.0" HBox.hgrow="ALWAYS" />
                                              </children>
                                           </HBox>
-                                          <HBox fx:id="searchFromUntilContainer" prefWidth="660.0">
+                                          <HBox fx:id="searchFromUntilContainer" prefWidth="840.0">
                                              <children>
                                                 <Label fx:id="fromLabel" prefHeight="26.0" prefWidth="62.0" styleClass="header-section" text="From:" />
                                                 <TextField fx:id="searchFieldFrom" minWidth="200.0" prefHeight="24.0" HBox.hgrow="ALWAYS">

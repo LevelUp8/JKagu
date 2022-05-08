@@ -27,8 +27,8 @@ public class FilterByFromUntilString extends Command {
 
     @Override
     public boolean execute() {
-        observableList.clear();
-        observableList.addAll(initialList);
+        //observableList.clear();
+        //observableList.addAll(initialList);
 
         List<Row> rows = new ArrayList<>();
         List<Row> tempRows = new ArrayList<>();
@@ -47,9 +47,7 @@ public class FilterByFromUntilString extends Command {
                         contentFrom = contentFrom.substring(0, startUntilOnSameRow + this.until.length());
                         counter--;
                         rows.add(new Row(row.rowNumber(), contentFrom));
-                    }
-                    else
-                    {
+                    } else {
                         tempRows.add(new Row(row.rowNumber(), contentFrom));
                     }
                 } else {
@@ -86,7 +84,7 @@ public class FilterByFromUntilString extends Command {
 
         observableList.clear();
         observableList.addAll(rows);
-        statusMessage.setText("Performing search from until");
+        statusMessage.setText("Performing select from until");
         return true;
     }
 }

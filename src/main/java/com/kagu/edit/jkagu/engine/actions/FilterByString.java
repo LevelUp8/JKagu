@@ -26,8 +26,8 @@ public class FilterByString extends CaseSensitiveCommand {
 
     @Override
     public boolean executeCaseSensitive() {
-       // observableList.clear();
-       // observableList.addAll(initialList);
+        // observableList.clear();
+        // observableList.addAll(initialList);
 
         List<Row> filteredList = observableList.stream()
                 .filter(r -> r.content().contains(this.filter))
@@ -40,8 +40,8 @@ public class FilterByString extends CaseSensitiveCommand {
 
     @Override
     public boolean executeCaseInsensitive() {
-       // observableList.clear();
-       // observableList.addAll(initialList);
+        // observableList.clear();
+        // observableList.addAll(initialList);
 
         String filterToLowercase = this.filter.toLowerCase();
         List<Row> filteredList = observableList.stream()

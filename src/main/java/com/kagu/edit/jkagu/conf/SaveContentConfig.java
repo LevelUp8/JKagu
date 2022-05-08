@@ -50,5 +50,4 @@ public record SaveContentConfig(ObservableList<Row> observableList,
         }
     }
 
-
 }

@@ -16,17 +16,15 @@ public abstract class CaseSensitiveCommand extends Command {
 
     /**
      * If CaseSensitiveCommand then executeCaseSensitive() and executeCaseInsensitive() must be implemented
+     *
      * @return
      */
     @Override
     public final boolean execute() {
-        if (caseSensitive.isSelected())
-        {
-           return executeCaseSensitive();
-        }
-        else
-        {
-           return executeCaseInsensitive();
+        if (caseSensitive.isSelected()) {
+            return executeCaseSensitive();
+        } else {
+            return executeCaseInsensitive();
         }
     }
 

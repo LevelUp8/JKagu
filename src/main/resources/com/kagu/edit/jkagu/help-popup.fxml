@@ -7,7 +7,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200" prefWidth="300" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kagu.edit.jkagu.HelpController">
    <children>
-      <Label layoutX="39.0" layoutY="14.0" prefHeight="16.0" prefWidth="280" text="JKagu version 5.0.0">
+      <Label layoutX="39.0" layoutY="14.0" prefHeight="16.0" prefWidth="280" text="JKagu version 6.0.0">
          <font>
             <Font size="18.0" />
          </font>

@@ -23,8 +23,8 @@ public class FilterByQuery extends Command {
 
     @Override
     public boolean execute() {
-       // observableList.clear();
-       // observableList.addAll(initialList);
+        // observableList.clear();
+        // observableList.addAll(initialList);
 
         QueryParser parser = new SimpleQueryParser(query, statusMessage);
         List<Row> filteredList = observableList.stream()
