@@ -51,6 +51,7 @@
     -fx-font-weight: none;
 }
 
+
 .list-cell:even,
 .list-cell:odd,
 .table-row-cell:even,
@@ -67,4 +68,21 @@
 .table-row-cell{
     -fx-border-color: transparent;
     -fx-table-cell-border-color:transparent;
+}
+
+
+.list-view .list-cell:even {
+    -fx-background-color: #444C53;
+    -fx-control-inner-background-alt: derive(-fx-control-inner-background, 50%);
+    -fx-text-fill: white;
+}
+.list-view .list-cell:odd {
+    -fx-background-color: #373e43;
+    -fx-control-inner-background-alt: derive(-fx-control-inner-background, 50%);
+    -fx-text-fill: white;
+}
+
+.list-view .list-cell:selected:odd,
+.list-view .list-cell:selected:even {
+    -fx-background-color: #0059b3;
 }

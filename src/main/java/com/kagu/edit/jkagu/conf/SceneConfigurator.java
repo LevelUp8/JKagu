@@ -39,6 +39,10 @@ public class SceneConfigurator implements ComponentConf {
             inputOutputButtons.openFile().setAccelerator(kc);
         }
         {
+            KeyCombination kc = new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN);
+            inputOutputButtons.openFile().setAccelerator(kc);
+        }
+        {
             KeyCombination kc = new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN);
             inputOutputButtons.saveFile().setAccelerator(kc);
         }
@@ -62,7 +66,7 @@ public class SceneConfigurator implements ComponentConf {
 
 
         {
-            KeyCombination kc = new KeyCodeCombination(KeyCode.U, KeyCombination.CONTROL_DOWN);
+            KeyCombination kc = new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN);
             undo.setAccelerator(kc);
         }
 

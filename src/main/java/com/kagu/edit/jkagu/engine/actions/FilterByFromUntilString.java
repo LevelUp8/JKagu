@@ -35,22 +35,22 @@ public class FilterByFromUntilString extends Command {
 
         int counter = 0;
         for (Row row : observableList) {
-            int until = row.getContent().indexOf(this.until);
-            int startFrom = row.getContent().indexOf(from);
+            int until = row.content().indexOf(this.until);
+            int startFrom = row.content().indexOf(from);
             if (startFrom != -1) {
                 counter++;
                 if (counter == 1) {
-                    String contentFrom = row.getContent().substring(startFrom);
+                    String contentFrom = row.content().substring(startFrom);
                     int startUntilOnSameRow = contentFrom.indexOf(this.until);
 
                     if (startUntilOnSameRow != -1) {
                         contentFrom = contentFrom.substring(0, startUntilOnSameRow + this.until.length());
                         counter--;
-                        rows.add(new Row(row.getRowNumber(), contentFrom));
+                        rows.add(new Row(row.rowNumber(), contentFrom));
                     }
                     else
                     {
-                        tempRows.add(new Row(row.getRowNumber(), contentFrom));
+                        tempRows.add(new Row(row.rowNumber(), contentFrom));
                     }
                 } else {
                     if (counter > 0) {
@@ -69,8 +69,8 @@ public class FilterByFromUntilString extends Command {
                 }
 
                 if (counter == 0) {
-                    String endContentUntil = row.getContent().substring(0, until + this.until.length());
-                    Row untilRow = new Row(row.getRowNumber(), endContentUntil);
+                    String endContentUntil = row.content().substring(0, until + this.until.length());
+                    Row untilRow = new Row(row.rowNumber(), endContentUntil);
                     tempRows.add(untilRow);
                     rows.addAll(tempRows);
                     tempRows = new ArrayList<>();

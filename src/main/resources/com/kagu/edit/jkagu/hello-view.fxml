@@ -78,7 +78,7 @@
                                     <HBox fx:id="searchBox" prefHeight="38.0" prefWidth="658.0">
                                        <children>
 
-                                          <RadioButton fx:id="useSelectedLines" prefHeight="27.0" prefWidth="132.0" style="-fx-padding: 5px;" text="Select Lines">
+                                          <RadioButton fx:id="useSelectedLines" prefHeight="27.0" prefWidth="132.0" style="-fx-padding: 5px;" text="Select Line">
                                              <HBox.margin>
                                                 <Insets left="5.0" />
                                              </HBox.margin>
@@ -111,7 +111,7 @@
                                                 </TextField>
                                              </children>
                                           </HBox>
-                                          <Button fx:id="searchButton" prefHeight="24.0" prefWidth="74.0" text="Search">
+                                          <Button fx:id="searchButton" prefHeight="24.0" prefWidth="74.0" text="Select">
                                              <HBox.margin>
                                                 <Insets left="20.0" right="10.0" />
                                              </HBox.margin>
@@ -198,7 +198,7 @@
                                           <Insets left="10.0" right="10.0" top="5.0" />
                                        </HBox.margin>
                                     </ProgressBar>
-                                    <CheckBox fx:id="caseSensitiveSearch" mnemonicParsing="false" prefHeight="18.0" prefWidth="220.0" text="Case Sensitive Search">
+                                    <CheckBox fx:id="caseSensitiveSearch" mnemonicParsing="false" prefHeight="18.0" prefWidth="220.0" text="Case Sensitive Select">
                                        <HBox.margin>
                                           <Insets right="10.0" top="5.0" />
                                        </HBox.margin>
