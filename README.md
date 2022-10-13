@@ -12,7 +12,7 @@ The program was created with Java and Java FX and for the building it was used A
  Additinal information:
 </h2>
 <p>
- For more information please can visit <a href="https://github.com/LevelUp8/JKagu/wiki">jkagu wiki</a> and <a href="http://www.jkagu.tk/#/home">jkagu.tk</a> 
+ For more information please can visit <a href="https://github.com/LevelUp8/JKagu/wiki">jkagu wiki</a>
 </p>
  
 <h2>Set up for Ubuntu 20.04:</h2>
